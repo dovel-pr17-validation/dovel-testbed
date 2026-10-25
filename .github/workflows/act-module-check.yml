@@ -1,0 +1,142 @@
+name: act module check
+# Runs the product's act CI module (packages/part-a/src/replay/actCi) end to end on the act spike's
+# repositories: selectCiJobs chooses the jobs, runCiJob runs each on the unmodified upstream checkout and on a
+# no-op candidate (an empty commit), compareRuns judges. The product comes from the private snapshot repository
+# via a job that runs no repository code; the jobs that run repository code hold no secret.
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: Product snapshot (short sha, branch snap-<sha>)
+        required: true
+      only:
+        description: Comma-separated repository names from actcheck/repos.json (empty runs all)
+        default: ''
+      act_variant:
+        description: patched (v0.2.89 + host-mode patch, built by provisionAct) or release
+        default: patched
+      limit:
+        description: Jobs per repository (selectCiJobs limit)
+        default: '3'
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - id: plan
+        env: { ONLY: '${{ inputs.only }}' }
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          only = [x.strip() for x in os.environ['ONLY'].split(',') if x.strip()]
+          e = [x for x in json.load(open('actcheck/repos.json')) if not only or x['name'] in only]
+          print('matrix=' + json.dumps(e))
+          PY
+
+  prepare-product:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      sha256: ${{ steps.pack.outputs.sha256 }}
+    steps:
+      - id: pack
+        env:
+          PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product"
+          rm -rf "$RUNNER_TEMP/product/.git"
+          mkdir -p "$RUNNER_TEMP/handoff"
+          tar -C "$RUNNER_TEMP/product" -czf "$RUNNER_TEMP/handoff/product.tar.gz" .
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff/product.tar.gz
+          retention-days: 1
+
+  check:
+    needs: [plan, prepare-product]
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    # No secret: this job runs the repositories' code (act host mode, as the runner user with sudo).
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        include: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false, path: testbed }
+      - uses: actions/download-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - name: Unpack the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/product" && tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product" && rm -rf "$RUNNER_TEMP/handoff"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
+          corepack pnpm build
+      - name: Clone the repository at the spike's commit
+        env:
+          SRC: ${{ matrix.source }}
+          SHA: ${{ matrix.sha }}
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          set -euo pipefail
+          git clone -q --filter=blob:none --no-checkout "https://github.com/$SRC.git" "$HOME/repo"
+          git -C "$HOME/repo" -c advice.detachedHead=false checkout -q -B "$BRANCH" "$SHA"
+          if [ -f "$HOME/repo/.gitmodules" ]; then git -C "$HOME/repo" submodule update -q --init --recursive || echo "::warning::submodules"; fi
+          git -C "$HOME/repo" log -1 --format='%H %s'
+          df -h / | tail -1
+      - name: Run the act module
+        env:
+          ACT_VARIANT: ${{ inputs.act_variant }}
+          JOB_LIMIT: ${{ inputs.limit }}
+        run: |
+          # runCiJob gives act an allowlisted environment: no job token or runner-internal variable reaches the jobs.
+          node testbed/actcheck/driver.mjs "$RUNNER_TEMP/product" "$HOME/repo" "$GITHUB_WORKSPACE/out/${{ matrix.name }}" 2>&1 | tee "$RUNNER_TEMP/driver.log"
+          cp "$RUNNER_TEMP/driver.log" "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log" || true
+          df -h / | tail -1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: check-${{ matrix.name }}
+          path: out/
+          retention-days: 14
+
+  summary:
+    needs: check
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: check-*
+          path: results
+          merge-multiple: true
+      - run: python3 actcheck/summarize.py results | tee -a "$GITHUB_STEP_SUMMARY"

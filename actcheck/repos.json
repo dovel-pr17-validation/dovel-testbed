@@ -1,0 +1,164 @@
+[
+ {
+  "name": "AstrBot",
+  "source": "AstrBotDevs/AstrBot",
+  "sha": "5d36ad23474516180aa013ef90d2348521431d6e",
+  "branch": "master"
+ },
+ {
+  "name": "ComposeCookBook",
+  "source": "Gurupreet/ComposeCookBook",
+  "sha": "565690c3efa54e0fc45a4c1ca8d3ee2c85de8cb5",
+  "branch": "master"
+ },
+ {
+  "name": "WhisperLiveKit",
+  "source": "QuentinFuxa/WhisperLiveKit",
+  "sha": "eb92c115ee7abc1e161b0b2159da31785b0f5566",
+  "branch": "main"
+ },
+ {
+  "name": "pocketpal-ai",
+  "source": "a-ghorbani/pocketpal-ai",
+  "sha": "4ef1600cc9062984cf69e2f1974e881e0b10e990",
+  "branch": "main"
+ },
+ {
+  "name": "BongoCat",
+  "source": "ayangweb/BongoCat",
+  "sha": "30d0c34f557a76e7f265befa94e71704c813f8a9",
+  "branch": "master"
+ },
+ {
+  "name": "frigate",
+  "source": "blakeblackshear/frigate",
+  "sha": "91e91c68efe504e17b7fd3fb437b34068b4387ca",
+  "branch": "dev"
+ },
+ {
+  "name": "memray",
+  "source": "bloomberg/memray",
+  "sha": "f33242337e1a95606ba6f0533fbbf2be98900647",
+  "branch": "main"
+ },
+ {
+  "name": "draper",
+  "source": "drapergem/draper",
+  "sha": "7fc015f80ccb1f0aa7b8ffaa7a50db76d0cc946c",
+  "branch": "master"
+ },
+ {
+  "name": "gradio",
+  "source": "gradio-app/gradio",
+  "sha": "15199c0faf5fa2a477ab9cf25178010ce8bc480e",
+  "branch": "main"
+ },
+ {
+  "name": "HanLP",
+  "source": "hankcs/HanLP",
+  "sha": "cce313c0be09190beeec2e874b2016e64950f2d0",
+  "branch": "master"
+ },
+ {
+  "name": "helm",
+  "source": "helm/helm",
+  "sha": "0b9f6ea527cb9f504d6f8d9b0a328a4151229d04",
+  "branch": "main"
+ },
+ {
+  "name": "wechat-miniapp-radar",
+  "source": "justjavac/wechat-miniapp-radar",
+  "sha": "fd7363bee3bb0e458d9b6a9f5f2305092a751865",
+  "branch": "main"
+ },
+ {
+  "name": "mockk",
+  "source": "mockk/mockk",
+  "sha": "ca0a0451b3c4fb5928a5c4b8960fa4d55d6b3ed6",
+  "branch": "master"
+ },
+ {
+  "name": "navidrome",
+  "source": "navidrome/navidrome",
+  "sha": "56cc32aedea8dcb28919adbdcfc1f51294df2e5f",
+  "branch": "master"
+ },
+ {
+  "name": "nezha",
+  "source": "nezhahq/nezha",
+  "sha": "15fa673c745005d0fef5d6d031fe77351d28bcbb",
+  "branch": "master"
+ },
+ {
+  "name": "scalene",
+  "source": "plasma-umass/scalene",
+  "sha": "6d0081b49c41e1eabcc6ff22cb0337a70901e6fe",
+  "branch": "master"
+ },
+ {
+  "name": "postal",
+  "source": "postalserver/postal",
+  "sha": "d96eddbadeda600595d6247486f9ceb8e99cbc15",
+  "branch": "main"
+ },
+ {
+  "name": "rollup",
+  "source": "rollup/rollup",
+  "sha": "7726f83543bd20a0e153ae42e423c53095a875d5",
+  "branch": "master"
+ },
+ {
+  "name": "select2",
+  "source": "select2/select2",
+  "sha": "186551e2cc8a63ed76698b3e63b9e6524dc50567",
+  "branch": "develop"
+ },
+ {
+  "name": "hyperfine",
+  "source": "sharkdp/hyperfine",
+  "sha": "c5161524980522320c7d3425e714cc0965a869a5",
+  "branch": "master"
+ },
+ {
+  "name": "solidtime",
+  "source": "solidtime-io/solidtime",
+  "sha": "93eb93f1dc2de0d50849ce7883a601dd76691df1",
+  "branch": "main"
+ },
+ {
+  "name": "solidus",
+  "source": "solidusio/solidus",
+  "sha": "6f5b2b9db66ddcd7a21a789bbcd31f9c4857519e",
+  "branch": "main"
+ },
+ {
+  "name": "speechbrain",
+  "source": "speechbrain/speechbrain",
+  "sha": "c0241278f93ef02cd5191f03caf4e5f8e1292bf6",
+  "branch": "develop"
+ },
+ {
+  "name": "stripe-python",
+  "source": "stripe/stripe-python",
+  "sha": "29363094b09a67f8b1b50f577b463edbbb27ec9a",
+  "branch": "master"
+ },
+ {
+  "name": "tailscale",
+  "source": "tailscale/tailscale",
+  "sha": "a6cffd0a6d11ef8aa3a0ca0ddc15879d0845605d",
+  "branch": "main"
+ },
+ {
+  "name": "tmuxinator",
+  "source": "tmuxinator/tmuxinator",
+  "sha": "d380a341b709ea7c4229a5b4e8b50ed972af302b",
+  "branch": "master"
+ },
+ {
+  "name": "CowAgent",
+  "source": "zhayujie/CowAgent",
+  "sha": "d50bfa7943bc3149c18201aed3b8373d8b103457",
+  "branch": "master"
+ }
+]
