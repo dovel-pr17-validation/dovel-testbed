@@ -62,13 +62,19 @@ jobs:
         env:
           PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
           PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/product"
-          printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
-          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" \
-            -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
-          rm -f "$RUNNER_TEMP/product.key"
+          # A snapshot from the private snapshot repository (branch snap-<sha>); the encrypted file is the fallback.
+          if git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product-clone" 2>/dev/null; then
+            rm -rf "$RUNNER_TEMP/product-clone/.git"; cp -r "$RUNNER_TEMP/product-clone/." "$RUNNER_TEMP/product/"; rm -rf "$RUNNER_TEMP/product-clone"
+          else
+            printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" \
+              -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+            rm -f "$RUNNER_TEMP/product.key"
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -152,11 +158,17 @@ jobs:
         env:
           PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
           PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/product"; printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
-          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
-          rm -f "$RUNNER_TEMP/product.key"
+          mkdir -p "$RUNNER_TEMP/product"
+          if git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product-clone" 2>/dev/null; then
+            rm -rf "$RUNNER_TEMP/product-clone/.git"; cp -r "$RUNNER_TEMP/product-clone/." "$RUNNER_TEMP/product/"; rm -rf "$RUNNER_TEMP/product-clone"
+          else
+            printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+            rm -f "$RUNNER_TEMP/product.key"
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 24
