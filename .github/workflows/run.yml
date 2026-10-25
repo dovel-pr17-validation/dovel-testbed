@@ -98,6 +98,11 @@ jobs:
             GIT_LFS_SKIP_SMUDGE=1 git clone -q --branch "$BRANCH" "https://x-access-token:${MIRRORS_TOKEN}@github.com/${MIRROR}.git" "$RUNNER_TEMP/repo" && break
             rm -rf "$RUNNER_TEMP/repo"; [ "$attempt" -lt 3 ] || exit 91; sleep 20
           done
+          # Submodules as the repository's own CI checkout fetches them (actions/checkout submodules: recursive);
+          # their URLs are the upstream ones, fetched without the token.
+          if [ -f "$RUNNER_TEMP/repo/.gitmodules" ]; then
+            git -C "$RUNNER_TEMP/repo" -c credential.helper= submodule update --init --recursive --depth 1 || echo "::warning::some submodules could not be fetched"
+          fi
           git -C "$RUNNER_TEMP/repo" remote set-url origin "https://github.com/${MIRROR}.git"
           git -C "$RUNNER_TEMP/repo" config user.name "Dovel Labs"
           git -C "$RUNNER_TEMP/repo" config user.email "dovel@users.noreply.github.com"
