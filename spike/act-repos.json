@@ -144,7 +144,7 @@
   "job": "rspec",
   "matrix": [
    "ruby=3.4",
-   "rails=8.0"
+   "rails=8"
   ],
   "event": "push",
   "mode": "host",
@@ -160,7 +160,7 @@
   "job": "rspec",
   "matrix": [
    "ruby=3.4",
-   "rails=8.0"
+   "rails=8"
   ],
   "event": "push",
   "mode": "container",
@@ -574,5 +574,36 @@
   "mode": "host",
   "checkrun": "",
   "services": false
+ },
+ {
+  "id": "11-gradio-test-bind",
+  "source": "gradio-app/gradio",
+  "sha": "15199c0faf5fa2a477ab9cf25178010ce8bc480e",
+  "branch": "main",
+  "workflow": ".github/workflows/tests-js.yml",
+  "job": "test",
+  "matrix": [],
+  "event": "push",
+  "mode": "host",
+  "checkrun": "js-test",
+  "services": false,
+  "bind": true
+ },
+ {
+  "id": "12-gradio-test-bind",
+  "source": "gradio-app/gradio",
+  "sha": "15199c0faf5fa2a477ab9cf25178010ce8bc480e",
+  "branch": "main",
+  "workflow": ".github/workflows/test-python.yml",
+  "job": "test",
+  "matrix": [
+   "os=ubuntu-latest",
+   "test-type=not flaky"
+  ],
+  "event": "push",
+  "mode": "host",
+  "checkrun": "test-ubuntu-latest-not-flaky",
+  "services": false,
+  "bind": true
  }
 ]

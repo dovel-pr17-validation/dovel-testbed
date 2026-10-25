@@ -2,7 +2,7 @@
 # Runs one repository job with nektos/act on this runner. Input: ENTRY (one JSON object of act-repos.json).
 set -uo pipefail
 J() { python3 -c 'import json,os,sys;v=json.loads(os.environ["ENTRY"])[sys.argv[1]];print(v if not isinstance(v,list) else "\n".join(v))' "$1"; }
-ID=$(J id); SRC=$(J source); SHA=$(J sha); BRANCH=$(J branch); WF=$(J workflow); JOB=$(J job); EVENT=$(J event); MODE=$(J mode)
+ID=$(J id); SRC=$(J source); SHA=$(J sha); BRANCH=$(J branch); WF=$(J workflow); JOB=$(J job); EVENT=$(J event); MODE=$(J mode); BIND=$(python3 -c 'import json,os;print("-b" if json.loads(os.environ["ENTRY"]).get("bind") else "")')
 OUT="$GITHUB_WORKSPACE/out/$ID"; mkdir -p "$OUT"
 echo "$ENTRY" > "$OUT/entry.json"
 SRCDIR="$HOME/spike-src"; rm -rf "$SRCDIR"
@@ -49,9 +49,9 @@ GHCFG=$(mktemp -d); ENVARGS+=("GH_CONFIG_DIR=$GHCFG")
 # runner image's preinstalled tool cache so setup-* actions find the same toolchains the real job finds.
 mkdir -p "$HOME/.cache/act"; [ -e "$HOME/.cache/act/tool_cache" ] || ln -s "${RUNNER_TOOL_CACHE:-/opt/hostedtoolcache}" "$HOME/.cache/act/tool_cache"
 printf '%s\n' "${ENVARGS[@]}" | cut -d= -f1 | sort > "$OUT/act-env-names.txt"
-echo "act $EVENT -W $WF -j $JOB ${MATRIX_ARGS[*]} ${PLAT[*]}" > "$OUT/cmd.txt"
+echo "act $EVENT $BIND -W $WF -j $JOB ${MATRIX_ARGS[*]} ${PLAT[*]}" > "$OUT/cmd.txt"
 env -i "${ENVARGS[@]}" timeout 105m act "$EVENT" -W "$WF" -j "$JOB" "${MATRIX_ARGS[@]}" "${PLAT[@]}" \
-  -e "$OUT/event.json" --json --artifact-server-path "$HOME/act-artifacts" \
+  -e "$OUT/event.json" $BIND --json --artifact-server-path "$HOME/act-artifacts" \
   --action-cache-path "$HOME/act-action-cache" \
   > "$OUT/act.jsonl" 2> "$OUT/act.stderr"
 rc=$?
