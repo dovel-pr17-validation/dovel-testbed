@@ -149,7 +149,8 @@
   "event": "push",
   "mode": "host",
   "checkrun": "rspec (3.4)",
-  "services": true
+  "services": true,
+  "services_shim": true
  },
  {
   "id": "10-draper-rspec-ctr",
@@ -605,5 +606,57 @@
   "checkrun": "test-ubuntu-latest-not-flaky",
   "services": false,
   "bind": true
+ },
+ {
+  "id": "29-solidtime-phpunit-hostsvc",
+  "source": "solidtime-io/solidtime",
+  "sha": "93eb93f1dc2de0d50849ce7883a601dd76691df1",
+  "branch": "main",
+  "workflow": ".github/workflows/phpunit.yml",
+  "job": "phpunit",
+  "matrix": [
+   "postgres_version=16"
+  ],
+  "event": "push",
+  "mode": "host",
+  "checkrun": "phpunit (16)",
+  "services": true,
+  "services_shim": true
+ },
+ {
+  "id": "34-tailscale-test-modcacherw",
+  "source": "tailscale/tailscale",
+  "sha": "a6cffd0a6d11ef8aa3a0ca0ddc15879d0845605d",
+  "branch": "main",
+  "workflow": ".github/workflows/test.yml",
+  "job": "test",
+  "matrix": [
+   "goarch=amd64",
+   "shard=__none__",
+   "buildflags=__none__"
+  ],
+  "event": "push",
+  "mode": "host",
+  "checkrun": "test (amd64)",
+  "services": false,
+  "env": [
+   "GOFLAGS=-modcacherw"
+  ]
+ },
+ {
+  "id": "35-tailscale-tailscale-go-modcacherw",
+  "source": "tailscale/tailscale",
+  "sha": "a6cffd0a6d11ef8aa3a0ca0ddc15879d0845605d",
+  "branch": "main",
+  "workflow": ".github/workflows/test.yml",
+  "job": "tailscale_go",
+  "matrix": [],
+  "event": "push",
+  "mode": "host",
+  "checkrun": "tailscale_go",
+  "services": false,
+  "env": [
+   "GOFLAGS=-modcacherw"
+  ]
  }
 ]

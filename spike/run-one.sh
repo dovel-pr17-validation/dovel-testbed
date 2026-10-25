@@ -33,6 +33,11 @@ PY
 MATRIX_ARGS=(); while IFS= read -r m; do [ -n "$m" ] && MATRIX_ARGS+=(--matrix "${m/=/:}"); done < <(J matrix)
 if [ "$MODE" = container ]; then IMG=catthehacker/ubuntu:act-24.04; else IMG=-self-hosted; fi
 PLAT=(); for l in ubuntu-latest ubuntu-24.04 ubuntu-22.04 ubuntu-20.04; do PLAT+=(-P "$l=$IMG"); done
+if python3 -c 'import json,os,sys;sys.exit(0 if json.loads(os.environ["ENTRY"]).get("services_shim") else 1)'; then
+  python3 -c "import yaml" 2>/dev/null || pip3 install -q pyyaml 2>/dev/null || sudo apt-get install -y -q python3-yaml >/dev/null
+  python3 "$GITHUB_WORKSPACE/spike/services-shim.py" "$WF" "$JOB" "$(J matrix | paste -sd, -)" > "$OUT/services.log" 2>&1 || echo "services shim failed" >> "$OUT/services.log"
+fi
+EXTRA_ENV=(); while IFS= read -r v; do [ -n "$v" ] && EXTRA_ENV+=(--env "$v"); done < <(python3 -c 'import json,os;[print(x) for x in json.loads(os.environ["ENTRY"]).get("env",[])]')
 # Environment for act: the runner image's environment minus anything credential-like or runner-internal.
 ENVARGS=()
 while IFS= read -r kv; do ENVARGS+=("$kv"); done < <(python3 - <<'PY'
@@ -51,7 +56,7 @@ mkdir -p "$HOME/.cache/act"; [ -e "$HOME/.cache/act/tool_cache" ] || ln -s "${RU
 printf '%s\n' "${ENVARGS[@]}" | cut -d= -f1 | sort > "$OUT/act-env-names.txt"
 echo "act $EVENT $BIND -W $WF -j $JOB ${MATRIX_ARGS[*]} ${PLAT[*]}" > "$OUT/cmd.txt"
 env -i "${ENVARGS[@]}" timeout 105m act "$EVENT" -W "$WF" -j "$JOB" "${MATRIX_ARGS[@]}" "${PLAT[@]}" \
-  -e "$OUT/event.json" $BIND --json --artifact-server-path "$HOME/act-artifacts" \
+  -e "$OUT/event.json" $BIND "${EXTRA_ENV[@]}" --json --artifact-server-path "$HOME/act-artifacts" \
   --action-cache-path "$HOME/act-action-cache" \
   > "$OUT/act.jsonl" 2> "$OUT/act.stderr"
 rc=$?
