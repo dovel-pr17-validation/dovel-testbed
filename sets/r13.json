@@ -1,0 +1,170 @@
+[
+ {
+  "index": 1,
+  "source": "websockets/ws",
+  "mirror": "dovel-pr17-validation/pr17r13-npm-ws",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "javascript-obfuscator/javascript-obfuscator",
+  "mirror": "dovel-pr17-validation/pr17r13-npm-javascript-obfuscator",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "copy/v86",
+  "mirror": "dovel-pr17-validation/pr17r13-npm-v86",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "mihomo-party-org/clash-party",
+  "mirror": "dovel-pr17-validation/pr17r13-npm-clash-party",
+  "branch": "smart_core",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "toss/es-toolkit",
+  "mirror": "dovel-pr17-validation/pr17r13-npm-es-toolkit",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "microsoft/magentic-ui",
+  "mirror": "dovel-pr17-validation/pr17r13-pypi-magentic-ui",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "QuentinFuxa/WhisperLiveKit",
+  "mirror": "dovel-pr17-validation/pr17r13-pypi-whisperlivekit",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "The-PR-Agent/pr-agent",
+  "mirror": "dovel-pr17-validation/pr17r13-pypi-pr-agent",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "keon/algorithms",
+  "mirror": "dovel-pr17-validation/pr17r13-pypi-algorithms",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "speechbrain/speechbrain",
+  "mirror": "dovel-pr17-validation/pr17r13-pypi-speechbrain",
+  "branch": "develop",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "bloomberg/memray",
+  "mirror": "dovel-pr17-validation/pr17r13-pypi-memray",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "nezhahq/nezha",
+  "mirror": "dovel-pr17-validation/pr17r13-go-nezha",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "google/cadvisor",
+  "mirror": "dovel-pr17-validation/pr17r13-go-cadvisor",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "riverqueue/river",
+  "mirror": "dovel-pr17-validation/pr17r13-go-river",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "redlib-org/redlib",
+  "mirror": "dovel-pr17-validation/pr17r13-cargo-redlib",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "rust-lang/regex",
+  "mirror": "dovel-pr17-validation/pr17r13-cargo-regex",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "alexpasmantier/television",
+  "mirror": "dovel-pr17-validation/pr17r13-cargo-television",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "immutables/immutables",
+  "mirror": "dovel-pr17-validation/pr17r13-maven-immutables",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "google/google-java-format",
+  "mirror": "dovel-pr17-validation/pr17r13-maven-google-java-format",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "resque/resque",
+  "mirror": "dovel-pr17-validation/pr17r13-gem-resque",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "troessner/reek",
+  "mirror": "dovel-pr17-validation/pr17r13-gem-reek",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "overtrue/easy-sms",
+  "mirror": "dovel-pr17-validation/pr17r13-composer-easy-sms",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "overtrue/pinyin",
+  "mirror": "dovel-pr17-validation/pr17r13-composer-pinyin",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "GitTools/GitVersion",
+  "mirror": "dovel-pr17-validation/pr17r13-nuget-gitversion",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]
