@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "release-it/release-it",
+  "mirror": "dovel-pr17-validation/pr17r14-npm-release-it",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "bvaughn/react-window",
+  "mirror": "dovel-pr17-validation/pr17r14-npm-react-window",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "pure-css/pure",
+  "mirror": "dovel-pr17-validation/pr17r14-npm-pure",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "pillarjs/path-to-regexp",
+  "mirror": "dovel-pr17-validation/pr17r14-npm-path-to-regexp",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "raineorshine/npm-check-updates",
+  "mirror": "dovel-pr17-validation/pr17r14-npm-npm-check-updates",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "Redocly/redoc",
+  "mirror": "dovel-pr17-validation/pr17r14-npm-redoc",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "mwaskom/seaborn",
+  "mirror": "dovel-pr17-validation/pr17r14-pypi-seaborn",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "openai/openai-agents-python",
+  "mirror": "dovel-pr17-validation/pr17r14-pypi-openai-agents-python",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "magic-wormhole/magic-wormhole",
+  "mirror": "dovel-pr17-validation/pr17r14-pypi-magic-wormhole",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "numba/numba",
+  "mirror": "dovel-pr17-validation/pr17r14-pypi-numba",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "lutris/lutris",
+  "mirror": "dovel-pr17-validation/pr17r14-pypi-lutris",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "falconry/falcon",
+  "mirror": "dovel-pr17-validation/pr17r14-pypi-falcon",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "shopspring/decimal",
+  "mirror": "dovel-pr17-validation/pr17r14-go-decimal",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "dop251/goja",
+  "mirror": "dovel-pr17-validation/pr17r14-go-goja",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "elastic/go-elasticsearch",
+  "mirror": "dovel-pr17-validation/pr17r14-go-go-elasticsearch",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "boa-dev/boa",
+  "mirror": "dovel-pr17-validation/pr17r14-cargo-boa",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "quinn-rs/quinn",
+  "mirror": "dovel-pr17-validation/pr17r14-cargo-quinn",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "oxipng/oxipng",
+  "mirror": "dovel-pr17-validation/pr17r14-cargo-oxipng",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "graphql-java/graphql-java",
+  "mirror": "dovel-pr17-validation/pr17r14-maven-graphql-java",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "alibaba/arthas",
+  "mirror": "dovel-pr17-validation/pr17r14-maven-arthas",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "jwt/ruby-jwt",
+  "mirror": "dovel-pr17-validation/pr17r14-gem-ruby-jwt",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "github/scientist",
+  "mirror": "dovel-pr17-validation/pr17r14-gem-scientist",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "dompdf/dompdf",
+  "mirror": "dovel-pr17-validation/pr17r14-composer-dompdf",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "larastan/larastan",
+  "mirror": "dovel-pr17-validation/pr17r14-composer-larastan",
+  "branch": "3.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "microsoft/kiota",
+  "mirror": "dovel-pr17-validation/pr17r14-nuget-kiota",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]
