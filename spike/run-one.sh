@@ -43,11 +43,16 @@ for k,v in os.environ.items():
         if '\n' not in v: print(f"{k}={v}")
 PY
 )
+# act falls back to `gh auth token` for GITHUB_TOKEN when gh is authenticated: point gh at an empty config.
+GHCFG=$(mktemp -d); ENVARGS+=("GH_CONFIG_DIR=$GHCFG")
+# act host mode uses ~/.cache/act/tool_cache as RUNNER_TOOL_CACHE (--env cannot override it); point it at the
+# runner image's preinstalled tool cache so setup-* actions find the same toolchains the real job finds.
+mkdir -p "$HOME/.cache/act"; [ -e "$HOME/.cache/act/tool_cache" ] || ln -s "${RUNNER_TOOL_CACHE:-/opt/hostedtoolcache}" "$HOME/.cache/act/tool_cache"
 printf '%s\n' "${ENVARGS[@]}" | cut -d= -f1 | sort > "$OUT/act-env-names.txt"
 echo "act $EVENT -W $WF -j $JOB ${MATRIX_ARGS[*]} ${PLAT[*]}" > "$OUT/cmd.txt"
 env -i "${ENVARGS[@]}" timeout 105m act "$EVENT" -W "$WF" -j "$JOB" "${MATRIX_ARGS[@]}" "${PLAT[@]}" \
   -e "$OUT/event.json" --json --artifact-server-path "$HOME/act-artifacts" \
-  --action-cache-path "$HOME/act-action-cache" --env RUNNER_TOOL_CACHE=/opt/hostedtoolcache \
+  --action-cache-path "$HOME/act-action-cache" \
   > "$OUT/act.jsonl" 2> "$OUT/act.stderr"
 rc=$?
 t2=$(date +%s)

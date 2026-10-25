@@ -9,7 +9,7 @@ jobs:
         run: |
           echo "pwd=$PWD workspace=$GITHUB_WORKSPACE tool_cache=$RUNNER_TOOL_CACHE temp=$RUNNER_TEMP home=$HOME user=$(id -un)"
           echo "token var: [${GITHUB_TOKEN:-unset}] [${ACTIONS_RUNTIME_TOKEN:-unset}] [${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-unset}]"
-          echo "github.token expr: [${{ github.token }}] secrets.GITHUB_TOKEN: [${{ secrets.GITHUB_TOKEN }}]"
+          T='${{ github.token }}'; S='${{ secrets.GITHUB_TOKEN }}'; echo "github.token length=${#T} secrets.GITHUB_TOKEN length=${#S}"
           echo "credential-like env values: $(env | grep -cE 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_' || true)"
           echo "env var names:"; env | cut -d= -f1 | sort | tr '\n' ' '; echo
           git config --list --show-origin | grep -iE 'extraheader|credential|url\.' || echo "no git credential config"
