@@ -1,0 +1,59 @@
+name: act spike
+# Feasibility measurement: run selected upstream CI jobs with nektos/act (host mode) on a GitHub-hosted runner.
+# No secrets are used; the job token is not passed to act (see spike/run-one.sh).
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: Comma-separated entry ids (or id prefixes) from spike/act-repos.json; empty runs all
+        default: ''
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - id: plan
+        env: { ONLY: '${{ inputs.only }}' }
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json,os
+          only=[x for x in os.environ['ONLY'].split(',') if x]
+          e=[x for x in json.load(open('spike/act-repos.json')) if not only or any(x['id'].startswith(o) for o in only)]
+          print('matrix='+json.dumps({'entry':e}))
+          PY
+  act:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    name: ${{ matrix.entry.id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Install act v0.2.89
+        run: |
+          curl -fsSL -o /tmp/act.tgz https://github.com/nektos/act/releases/download/v0.2.89/act_Linux_x86_64.tar.gz
+          echo "0191d6f1f3b716b5c55820032605d05fc3c1cdbf581ebeff655019e5dd1524c0  /tmp/act.tgz" | sha256sum -c -
+          sudo tar -xzf /tmp/act.tgz -C /usr/local/bin act && act --version
+          df -h / /mnt | tail -2
+      - name: Run job with act
+        env:
+          ENTRY: ${{ toJson(matrix.entry) }}
+        run: bash spike/run-one.sh
+      - name: Disk after
+        if: always()
+        run: df -h / | tail -1; du -sh ~/.cache/act ~/act-action-cache /opt/hostedtoolcache 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: act-${{ matrix.entry.id }}
+          path: out/
+          retention-days: 7

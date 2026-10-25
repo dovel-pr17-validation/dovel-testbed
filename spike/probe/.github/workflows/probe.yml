@@ -1,0 +1,29 @@
+name: probe
+on: push
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: env and credential check
+        run: |
+          echo "pwd=$PWD workspace=$GITHUB_WORKSPACE tool_cache=$RUNNER_TOOL_CACHE temp=$RUNNER_TEMP home=$HOME user=$(id -un)"
+          echo "token var: [${GITHUB_TOKEN:-unset}] [${ACTIONS_RUNTIME_TOKEN:-unset}] [${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-unset}]"
+          echo "github.token expr: [${{ github.token }}] secrets.GITHUB_TOKEN: [${{ secrets.GITHUB_TOKEN }}]"
+          echo "credential-like env values: $(env | grep -cE 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_' || true)"
+          echo "env var names:"; env | cut -d= -f1 | sort | tr '\n' ' '; echo
+          git config --list --show-origin | grep -iE 'extraheader|credential|url\.' || echo "no git credential config"
+          ls ~/.git-credentials 2>/dev/null || echo "no ~/.git-credentials"
+          curl -s https://api.github.com/rate_limit | python3 -c 'import json,sys;d=json.load(sys.stdin)["resources"]["core"];print("anonymous api core:",d)'
+          echo "FOO=bar-from-env" >> "$GITHUB_ENV"; mkdir -p /tmp/probebin; printf '#!/bin/sh\necho probe-path-ok\n' > /tmp/probebin/probetool; chmod +x /tmp/probebin/probetool; echo /tmp/probebin >> "$GITHUB_PATH"
+          echo "out=42" >> "$GITHUB_OUTPUT"
+        id: s1
+      - name: GITHUB_ENV/PATH/OUTPUT honored
+        run: |
+          test "$FOO" = bar-from-env && probetool && test "${{ steps.s1.outputs.out }}" = 42 && echo ALL-HONORED
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
+      - run: python --version; which python
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node --version; which node
