@@ -1,0 +1,212 @@
+[
+ {
+  "index": 1,
+  "source": "hexojs/hexo",
+  "mirror": "dovel-pr17-validation/pr17r11-npm-hexo",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "moment/moment",
+  "mirror": "dovel-pr17-validation/pr17r11-npm-moment",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "linshenkx/prompt-optimizer",
+  "mirror": "dovel-pr17-validation/pr17r11b-npm-prompt-optimizer",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "styled-components/styled-components",
+  "mirror": "dovel-pr17-validation/pr17r11-npm-styled-components",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "HKUDS/LightRAG",
+  "mirror": "dovel-pr17-validation/pr17r11-pypi-lightrag",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 6,
+  "source": "mitmproxy/mitmproxy",
+  "mirror": "dovel-pr17-validation/pr17r11-pypi-mitmproxy",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 7,
+  "source": "faif/python-patterns",
+  "mirror": "dovel-pr17-validation/pr17r11-pypi-python-patterns",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "hankcs/HanLP",
+  "mirror": "dovel-pr17-validation/pr17r11-pypi-hanlp",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "fyne-io/fyne",
+  "mirror": "dovel-pr17-validation/pr17r11-go-fyne",
+  "branch": "develop",
+  "ecosystem": "go"
+ },
+ {
+  "index": 10,
+  "source": "containerd/containerd",
+  "mirror": "dovel-pr17-validation/pr17r11-go-containerd",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 11,
+  "source": "tailscale/tailscale",
+  "mirror": "dovel-pr17-validation/pr17r11-go-tailscale",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 12,
+  "source": "sharkdp/hyperfine",
+  "mirror": "dovel-pr17-validation/pr17r11-cargo-hyperfine",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 13,
+  "source": "iced-rs/iced",
+  "mirror": "dovel-pr17-validation/pr17r11-cargo-iced",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 14,
+  "source": "bumptech/glide",
+  "mirror": "dovel-pr17-validation/pr17r11b-maven-glide",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 15,
+  "source": "tmuxinator/tmuxinator",
+  "mirror": "dovel-pr17-validation/pr17r11b-gem-tmuxinator",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 16,
+  "source": "serbanghita/Mobile-Detect",
+  "mirror": "dovel-pr17-validation/pr17r11-composer-mobile-detect",
+  "branch": "4.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 17,
+  "source": "walkor/workerman",
+  "mirror": "dovel-pr17-validation/pr17r11-composer-workerman",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 18,
+  "source": "MonoGame/MonoGame",
+  "mirror": "dovel-pr17-validation/pr17r11-nuget-monogame",
+  "branch": "develop",
+  "ecosystem": "nuget"
+ },
+ {
+  "index": 19,
+  "source": "ai/nanoid",
+  "mirror": "dovel-pr17-validation/pr17r6-npm-nanoid",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 20,
+  "source": "gchq/CyberChef",
+  "mirror": "dovel-pr17-validation/pr17r6-npm-cyberchef",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 21,
+  "source": "exo-explore/exo",
+  "mirror": "dovel-pr17-validation/pr17r6-pypi-exo",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 22,
+  "source": "gradio-app/gradio",
+  "mirror": "dovel-pr17-validation/pr17r6-pypi-gradio",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 23,
+  "source": "charmbracelet/crush",
+  "mirror": "dovel-pr17-validation/pr17r6-go-crush",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 24,
+  "source": "navidrome/navidrome",
+  "mirror": "dovel-pr17-validation/pr17r6-go-navidrome",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 25,
+  "source": "ayangweb/BongoCat",
+  "mirror": "dovel-pr17-validation/pr17r6-cargo-bongocat",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 26,
+  "source": "apache/dubbo",
+  "mirror": "dovel-pr17-validation/pr17r6-maven-dubbo",
+  "branch": "3.3",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 27,
+  "source": "drapergem/draper",
+  "mirror": "dovel-pr17-validation/pr17r6-gem-draper",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 28,
+  "source": "twigphp/Twig",
+  "mirror": "dovel-pr17-validation/pr17r6-composer-twig",
+  "branch": "3.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 29,
+  "source": "barryvdh/laravel-ide-helper",
+  "mirror": "dovel-pr17-validation/pr17r6-composer-laravel-ide-helper",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 30,
+  "source": "dotnet/orleans",
+  "mirror": "dovel-pr17-validation/pr17r6-nuget-orleans",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]

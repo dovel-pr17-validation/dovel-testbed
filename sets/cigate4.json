@@ -1,0 +1,30 @@
+[
+ {
+  "index": 14,
+  "source": "containerd/containerd",
+  "mirror": "dovel-pr17-validation/pr17ci-go-containerd",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "tailscale/tailscale",
+  "mirror": "dovel-pr17-validation/pr17ci-go-tailscale",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 20,
+  "source": "PhilJay/MPAndroidChart",
+  "mirror": "dovel-pr17-validation/pr17ci-maven-mpandroidchart",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 25,
+  "source": "MonoGame/MonoGame",
+  "mirror": "dovel-pr17-validation/pr17ci-nuget-monogame",
+  "branch": "develop",
+  "ecosystem": "nuget"
+ }
+]

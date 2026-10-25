@@ -1,0 +1,182 @@
+name: Dovel test run
+# One run of the Dovel flow per repository of a set, each on its own GitHub-hosted Ubuntu 24.04 runner (the
+# runner the repositories' own CI uses), then the product's own acceptance scorer over all of them.
+# The product is an encrypted snapshot (products/<sha>.tar.gz.enc, key in the PRODUCT_KEY secret).
+on:
+  workflow_dispatch:
+    inputs:
+      set:
+        description: Set file under sets/ (without .json)
+        required: true
+      product:
+        description: Product snapshot under products/ (short sha)
+        required: true
+      open_pr:
+        description: Open pull requests on the mirrors ('true') or only report ('false')
+        default: 'false'
+      ci_gate:
+        description: Let each mirror's own CI judge the pull requests ('true')
+        default: 'false'
+      only:
+        description: Comma-separated set indexes to run (empty runs all)
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: dovel-test-${{ inputs.set }}
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        env:
+          SET: ${{ inputs.set }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import json, os
+          entries = json.load(open(f"sets/{os.environ['SET']}.json"))
+          only = {int(x) for x in os.environ.get('ONLY', '').split(',') if x.strip()}
+          entries = [e for e in entries if not only or e['index'] in only]
+          print('matrix=' + json.dumps(entries))
+          EOF
+  run:
+    needs: plan
+    name: ${{ matrix.index }} ${{ matrix.source }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        include: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+      - name: Unpack the product snapshot
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          PRODUCT: ${{ inputs.product }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/product"
+          printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" \
+            -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+          rm -f "$RUNNER_TEMP/product.key"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
+          corepack pnpm build
+      - name: Clone the mirror
+        env:
+          MIRROR: ${{ matrix.mirror }}
+          BRANCH: ${{ matrix.branch }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          # The token is used for the clone only; the checkout keeps a tokenless origin.
+          for attempt in 1 2 3; do
+            GIT_LFS_SKIP_SMUDGE=1 git clone -q --branch "$BRANCH" "https://x-access-token:${MIRRORS_TOKEN}@github.com/${MIRROR}.git" "$RUNNER_TEMP/repo" && break
+            rm -rf "$RUNNER_TEMP/repo"; [ "$attempt" -lt 3 ] || exit 91; sleep 20
+          done
+          git -C "$RUNNER_TEMP/repo" remote set-url origin "https://github.com/${MIRROR}.git"
+          git -C "$RUNNER_TEMP/repo" config user.name "Dovel Labs"
+          git -C "$RUNNER_TEMP/repo" config user.email "dovel@users.noreply.github.com"
+      - name: Run the Dovel flow
+        env:
+          DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          DOVEL_INPUT_GITHUB: ${{ secrets.MIRRORS_TOKEN }}
+          MIRROR: ${{ matrix.mirror }}
+          OPEN_PR: ${{ inputs.open_pr }}
+          CI_GATE: ${{ inputs.ci_gate }}
+        run: |
+          set -uo pipefail
+          output="$RUNNER_TEMP/out"; mkdir -p "$output"
+          # As dovel-flow/action.yml does: the keys reach the flow over stdin, and every credential-shaped
+          # variable is unset before the flow replaces this shell, so repository code never reads one.
+          secrets="$(node -e '
+            const pairs = [["OPENROUTER_API_KEY", "DOVEL_INPUT_OPENROUTER"], ["GH_TOKEN", "DOVEL_INPUT_GITHUB"]];
+            process.stdout.write(JSON.stringify(Object.fromEntries(pairs.filter(([, from]) => process.env[from]).map(([to, from]) => [to, process.env[from]]))));
+          ')"
+          unset DOVEL_INPUT_OPENROUTER DOVEL_INPUT_GITHUB
+          shopt -s nocasematch
+          for variable in $(compgen -e); do
+            if [[ "$variable" =~ (token|secret|password|credential|api[_-]?key|private[_-]?key) && "$variable" != TIKTOKEN_CACHE_DIR ]]; then unset "$variable"; fi
+          done
+          shopt -u nocasematch
+          export TMPDIR="$RUNNER_TEMP/dovel-tmp"; mkdir -p "$TMPDIR"
+          cd "$RUNNER_TEMP/product"
+          REVIEWER_RUNTIME=openrouter node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/run-dovel-flow.mjs \
+            --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates 3 \
+            --open-pr "$OPEN_PR" --ci-gate "$CI_GATE" --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1
+          code=$?
+          printf '{"exitCode":%s,"source":"%s","mirror":"%s","runner":"github-hosted ubuntu-24.04"}\n' "$code" "${{ matrix.source }}" "$MIRROR" > "$output/run.json"
+          tail -40 "$output/flow.log"
+      - name: Keep the results (logs and receipts, not dependency trees)
+        if: always()
+        run: |
+          out="$RUNNER_TEMP/out"; [ -d "$out" ] || exit 0
+          chmod -R u+w "$out" 2>/dev/null || true
+          find "$out" -type d \( -name node_modules -o -name target -o -name .gradle -o -name .venv -o -name gomodcache -o -name .pnpm-store -o -name workspace \) -prune -exec rm -rf {} + 2>/dev/null || true
+          slug=$(printf '%02d' "${{ matrix.index }}")-$(echo "${{ matrix.source }}" | tr '/' '-')
+          mkdir -p "$RUNNER_TEMP/results/$slug" && cp -r "$out/." "$RUNNER_TEMP/results/$slug/"
+          echo "SLUG=$slug" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: result-${{ env.SLUG }}
+          path: ${{ runner.temp }}/results
+          retention-days: 30
+  score:
+    needs: run
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+      - name: Unpack the product snapshot
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          PRODUCT: ${{ inputs.product }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/product"; printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+          rm -f "$RUNNER_TEMP/product.key"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        run: corepack pnpm install --frozen-lockfile && corepack pnpm build
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: result-*
+          path: ${{ runner.temp }}/results
+          merge-multiple: true
+      - name: Score
+        working-directory: ${{ runner.temp }}/product
+        run: |
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/evaluate-acceptance.mjs "$RUNNER_TEMP/results" | tee "$RUNNER_TEMP/EVALUATION.txt"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/evaluate-acceptance.mjs "$RUNNER_TEMP/results" --json > "$RUNNER_TEMP/evaluation.json"
+          { echo '```'; cat "$RUNNER_TEMP/EVALUATION.txt"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evaluation
+          path: |
+            ${{ runner.temp }}/EVALUATION.txt
+            ${{ runner.temp }}/evaluation.json
