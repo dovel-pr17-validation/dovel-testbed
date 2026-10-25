@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "microsoft/playwright-mcp",
+  "mirror": "dovel-pr17-validation/pr17r12-npm-playwright-mcp",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "Unitech/pm2",
+  "mirror": "dovel-pr17-validation/pr17r12-npm-pm2",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "feder-cr/invisible_dots",
+  "mirror": "dovel-pr17-validation/pr17r12-npm-invisible_dots",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "rollup/rollup",
+  "mirror": "dovel-pr17-validation/pr17r12-npm-rollup",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "denysdovhan/wtfjs",
+  "mirror": "dovel-pr17-validation/pr17r12-npm-wtfjs",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "mifi/lossless-cut",
+  "mirror": "dovel-pr17-validation/pr17r12-npm-lossless-cut",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "bmad-code-org/BMAD-METHOD",
+  "mirror": "dovel-pr17-validation/pr17r12-pypi-bmad-method",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "hpcaitech/ColossalAI",
+  "mirror": "dovel-pr17-validation/pr17r12-pypi-colossalai",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "soxoj/maigret",
+  "mirror": "dovel-pr17-validation/pr17r12-pypi-maigret",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "helm/helm",
+  "mirror": "dovel-pr17-validation/pr17r12-go-helm",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 11,
+  "source": "zeromicro/go-zero",
+  "mirror": "dovel-pr17-validation/pr17r12-go-go-zero",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 12,
+  "source": "valeriansaliou/sonic",
+  "mirror": "dovel-pr17-validation/pr17r12-cargo-sonic",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 13,
+  "source": "helix-editor/helix",
+  "mirror": "dovel-pr17-validation/pr17r12-cargo-helix",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 14,
+  "source": "rui314/mold",
+  "mirror": "dovel-pr17-validation/pr17r12-cargo-mold",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 15,
+  "source": "Gurupreet/ComposeCookBook",
+  "mirror": "dovel-pr17-validation/pr17r12-maven-composecookbook",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 16,
+  "source": "mockk/mockk",
+  "mirror": "dovel-pr17-validation/pr17r12-maven-mockk",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 17,
+  "source": "solidusio/solidus",
+  "mirror": "dovel-pr17-validation/pr17r12-gem-solidus",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 18,
+  "source": "ruby-concurrency/concurrent-ruby",
+  "mirror": "dovel-pr17-validation/pr17r12-gem-concurrent-ruby",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 19,
+  "source": "solidtime-io/solidtime",
+  "mirror": "dovel-pr17-validation/pr17r12-composer-solidtime",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 20,
+  "source": "jellyfin/jellyfin",
+  "mirror": "dovel-pr17-validation/pr17r12-nuget-jellyfin",
+  "branch": "master",
+  "ecosystem": "nuget"
+ },
+ {
+  "index": 21,
+  "source": "plasma-umass/scalene",
+  "mirror": "dovel-pr17-validation/pr17r12-pypi-scalene",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 22,
+  "source": "MLEveryday/100-Days-Of-ML-Code",
+  "mirror": "dovel-pr17-validation/pr17r12-pypi-100-days-of-ml-code",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 23,
+  "source": "maurosoria/dirsearch",
+  "mirror": "dovel-pr17-validation/pr17r12-pypi-dirsearch",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 24,
+  "source": "lima-vm/lima",
+  "mirror": "dovel-pr17-validation/pr17r12-go-lima",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 25,
+  "source": "roots/bedrock",
+  "mirror": "dovel-pr17-validation/pr17r12-composer-bedrock",
+  "branch": "master",
+  "ecosystem": "composer"
+ }
+]
