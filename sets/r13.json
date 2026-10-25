@@ -7,6 +7,13 @@
   "ecosystem": "npm"
  },
  {
+  "index": 2,
+  "source": "a-ghorbani/pocketpal-ai",
+  "mirror": "dovel-pr17-validation/pr17r13-npm-pocketpal-ai",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
   "index": 3,
   "source": "javascript-obfuscator/javascript-obfuscator",
   "mirror": "dovel-pr17-validation/pr17r13-npm-javascript-obfuscator",
