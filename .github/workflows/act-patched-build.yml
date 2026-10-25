@@ -1,0 +1,116 @@
+name: act patched build
+# Builds nektos/act v0.2.89 with the product's host-mode patch (read-only scratch trees, symlink re-copy),
+# reproducibly (pinned Go, -trimpath, CGO off), on two runners, and checks with a reproduction that the stock
+# release has both bugs and the patched build has neither. The patch comes from the private product snapshot;
+# only the patch file is handed to the build jobs, which hold no secret.
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: Product snapshot (short sha, branch snap-<sha>) holding the patch
+        required: true
+permissions:
+  contents: read
+env:
+  GO_VERSION: '1.27.3'
+  GO_SHA256_AMD64: 65efbc80fdc1fa2cd2631cad5b481777a68e8725f34e89f50fc6ac714e379b40
+  ACT_TAG: v0.2.89
+  ACT_COMMIT: 4f411281417e88660bea1c1a1749aa71ae0bd60f
+  ACT_RELEASE_SHA256: 0191d6f1f3b716b5c55820032605d05fc3c1cdbf581ebeff655019e5dd1524c0
+  PATCH_PATH: packages/part-a/src/replay/actCi/act-v0.2.89-host-mode.patch
+jobs:
+  prepare-patch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      sha256: ${{ steps.pack.outputs.sha256 }}
+    steps:
+      - id: pack
+        env:
+          PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/p"
+          mkdir -p "$RUNNER_TEMP/handoff"; cp "$RUNNER_TEMP/p/$PATCH_PATH" "$RUNNER_TEMP/handoff/host-mode.patch"; rm -rf "$RUNNER_TEMP/p"
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/host-mode.patch" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: patch
+          path: ${{ runner.temp }}/handoff/host-mode.patch
+          retention-days: 1
+
+  build:
+    needs: prepare-patch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        copy: [a, b]
+    name: build ${{ matrix.copy }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@v4
+        with:
+          name: patch
+          path: ${{ runner.temp }}/handoff
+      - name: Build
+        env:
+          PATCH_SHA256: ${{ needs.prepare-patch.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          echo "$PATCH_SHA256  $RUNNER_TEMP/handoff/host-mode.patch" | sha256sum -c --quiet
+          W="$RUNNER_TEMP/w"; mkdir -p "$W" out
+          curl -fsSL -o "$W/go.tgz" "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz"
+          echo "$GO_SHA256_AMD64  $W/go.tgz" | sha256sum -c --quiet
+          tar -xzf "$W/go.tgz" -C "$W"
+          git -c advice.detachedHead=false clone -q --depth 1 --branch "$ACT_TAG" https://github.com/nektos/act.git "$W/act"
+          test "$(git -C "$W/act" rev-parse HEAD)" = "$ACT_COMMIT"
+          git -C "$W/act" apply "$RUNNER_TEMP/handoff/host-mode.patch"
+          for arch in amd64 arm64; do
+            ( cd "$W/act" && env -i PATH="$W/go/bin:/usr/bin:/bin" HOME="$W/home" GOPATH="$W/gopath" GOCACHE="$W/gocache" \
+                GOTOOLCHAIN=local GOFLAGS=-mod=readonly CGO_ENABLED=0 GOOS=linux GOARCH=$arch GOAMD64=v1 GOARM64=v8.0 \
+                go build -trimpath -buildvcs=false -ldflags="-s -w" -o "$GITHUB_WORKSPACE/out/act-linux-$arch" . )
+          done
+          chmod -R u+w "$W/gopath"
+          (cd out && sha256sum act-linux-* | tee sha256.txt)
+          ./out/act-linux-amd64 --version
+          echo "$W/go/bin" >> "$GITHUB_PATH"
+      - name: Stock release
+        run: |
+          set -euo pipefail
+          curl -fsSL -o "$RUNNER_TEMP/act.tgz" "https://github.com/nektos/act/releases/download/$ACT_TAG/act_Linux_x86_64.tar.gz"
+          echo "$ACT_RELEASE_SHA256  $RUNNER_TEMP/act.tgz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/stock" && tar -xzf "$RUNNER_TEMP/act.tgz" -C "$RUNNER_TEMP/stock" act
+      - name: Reproduce with stock and patched act
+        run: |
+          set -uo pipefail
+          bash actcheck/repro.sh "$RUNNER_TEMP/stock/act" "$RUNNER_TEMP/repro-stock" | tee out/repro-stock.txt
+          bash actcheck/repro.sh "$GITHUB_WORKSPACE/out/act-linux-amd64" "$RUNNER_TEMP/repro-patched" | tee out/repro-patched.txt
+          mkdir -p out/logs; for d in stock patched; do for f in "$RUNNER_TEMP/repro-$d"/*.jsonl "$RUNNER_TEMP/repro-$d"/*.stderr; do cp "$f" "out/logs/$d-$(basename "$f")"; done; done
+          ok=1
+          grep -q '^readonly bug-present' out/repro-stock.txt || { echo "::warning::stock act did not show the read-only bug"; }
+          grep -q '^symlink bug-present' out/repro-stock.txt || { echo "::warning::stock act did not show the symlink bug"; }
+          grep -q '^readonly bug-absent' out/repro-patched.txt || { echo "::error::patched act still has the read-only bug"; ok=0; }
+          grep -q '^symlink bug-absent' out/repro-patched.txt || { echo "::error::patched act still has the symlink bug"; ok=0; }
+          [ "$ok" = 1 ]
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: act-patched-${{ matrix.copy }}
+          path: out/
+          retention-days: 30
+
+  reproducible:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: act-patched-*
+      - run: |
+          set -euo pipefail
+          cat act-patched-a/sha256.txt act-patched-b/sha256.txt
+          diff act-patched-a/sha256.txt act-patched-b/sha256.txt && echo "both builds are byte-identical"
