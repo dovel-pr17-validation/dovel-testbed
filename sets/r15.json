@@ -1,152 +1,177 @@
 [
-  {
-    "index": 1,
-    "source": "mlc-ai/web-llm",
-    "mirror": "dovel-pr17-validation/pr17r15-npm-web-llm",
-    "branch": "main"
-  },
-  {
-    "index": 2,
-    "source": "ghostfolio/ghostfolio",
-    "mirror": "dovel-pr17-validation/pr17r15-npm-ghostfolio",
-    "branch": "main"
-  },
-  {
-    "index": 3,
-    "source": "kelektiv/node-cron",
-    "mirror": "dovel-pr17-validation/pr17r15-npm-node-cron",
-    "branch": "main"
-  },
-  {
-    "index": 4,
-    "source": "corsairdev/corsair",
-    "mirror": "dovel-pr17-validation/pr17r15-npm-corsair",
-    "branch": "main"
-  },
-  {
-    "index": 5,
-    "source": "kysely-org/kysely",
-    "mirror": "dovel-pr17-validation/pr17r15-npm-kysely",
-    "branch": "master"
-  },
-  {
-    "index": 6,
-    "source": "nanobrowser/nanobrowser",
-    "mirror": "dovel-pr17-validation/pr17r15-npm-nanobrowser",
-    "branch": "master"
-  },
-  {
-    "index": 7,
-    "source": "qubvel-org/segmentation_models.pytorch",
-    "mirror": "dovel-pr17-validation/pr17r15-pypi-segmentation_models.pytorch",
-    "branch": "main"
-  },
-  {
-    "index": 8,
-    "source": "Rapptz/discord.py",
-    "mirror": "dovel-pr17-validation/pr17r15-pypi-discord.py",
-    "branch": "master"
-  },
-  {
-    "index": 9,
-    "source": "py-pdf/pypdf",
-    "mirror": "dovel-pr17-validation/pr17r15-pypi-pypdf",
-    "branch": "main"
-  },
-  {
-    "index": 10,
-    "source": "giampaolo/psutil",
-    "mirror": "dovel-pr17-validation/pr17r15-pypi-psutil",
-    "branch": "master"
-  },
-  {
-    "index": 11,
-    "source": "python/mypy",
-    "mirror": "dovel-pr17-validation/pr17r15-pypi-mypy",
-    "branch": "master"
-  },
-  {
-    "index": 12,
-    "source": "laramies/theHarvester",
-    "mirror": "dovel-pr17-validation/pr17r15-pypi-theharvester",
-    "branch": "master"
-  },
-  {
-    "index": 13,
-    "source": "elazarl/goproxy",
-    "mirror": "dovel-pr17-validation/pr17r15-go-goproxy",
-    "branch": "master"
-  },
-  {
-    "index": 14,
-    "source": "darrenburns/posting",
-    "mirror": "dovel-pr17-validation/pr17r15-go-posting",
-    "branch": "main"
-  },
-  {
-    "index": 15,
-    "source": "Workiva/go-datastructures",
-    "mirror": "dovel-pr17-validation/pr17r15-go-go-datastructures",
-    "branch": "master"
-  },
-  {
-    "index": 16,
-    "source": "trifectatechfoundation/sudo-rs",
-    "mirror": "dovel-pr17-validation/pr17r15-cargo-sudo-rs",
-    "branch": "main"
-  },
-  {
-    "index": 17,
-    "source": "mimblewimble/grin",
-    "mirror": "dovel-pr17-validation/pr17r15-cargo-grin",
-    "branch": "master"
-  },
-  {
-    "index": 18,
-    "source": "gluesql/gluesql",
-    "mirror": "dovel-pr17-validation/pr17r15-cargo-gluesql",
-    "branch": "main"
-  },
-  {
-    "index": 19,
-    "source": "auth0/java-jwt",
-    "mirror": "dovel-pr17-validation/pr17r15-maven-java-jwt",
-    "branch": "master"
-  },
-  {
-    "index": 20,
-    "source": "react-native-async-storage/async-storage",
-    "mirror": "dovel-pr17-validation/pr17r15-maven-async-storage",
-    "branch": "main"
-  },
-  {
-    "index": 21,
-    "source": "shrinerb/shrine",
-    "mirror": "dovel-pr17-validation/pr17r15-gem-shrine",
-    "branch": "master"
-  },
-  {
-    "index": 22,
-    "source": "bensheldon/good_job",
-    "mirror": "dovel-pr17-validation/pr17r15-gem-good_job",
-    "branch": "main"
-  },
-  {
-    "index": 23,
-    "source": "laravel/horizon",
-    "mirror": "dovel-pr17-validation/pr17r15-composer-horizon",
-    "branch": "5.x"
-  },
-  {
-    "index": 24,
-    "source": "php-webdriver/php-webdriver",
-    "mirror": "dovel-pr17-validation/pr17r15-composer-php-webdriver",
-    "branch": "main"
-  },
-  {
-    "index": 25,
-    "source": "Pixeval/Pixeval",
-    "mirror": "dovel-pr17-validation/pr17r15-nuget-pixeval",
-    "branch": "main"
-  }
+ {
+  "index": 1,
+  "source": "mlc-ai/web-llm",
+  "mirror": "dovel-pr17-validation/pr17r15-npm-web-llm",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "ghostfolio/ghostfolio",
+  "mirror": "dovel-pr17-validation/pr17r15-npm-ghostfolio",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "kelektiv/node-cron",
+  "mirror": "dovel-pr17-validation/pr17r15-npm-node-cron",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "corsairdev/corsair",
+  "mirror": "dovel-pr17-validation/pr17r15-npm-corsair",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "kysely-org/kysely",
+  "mirror": "dovel-pr17-validation/pr17r15-npm-kysely",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "nanobrowser/nanobrowser",
+  "mirror": "dovel-pr17-validation/pr17r15-npm-nanobrowser",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "qubvel-org/segmentation_models.pytorch",
+  "mirror": "dovel-pr17-validation/pr17r15-pypi-segmentation_models.pytorch",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "Rapptz/discord.py",
+  "mirror": "dovel-pr17-validation/pr17r15-pypi-discord.py",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "py-pdf/pypdf",
+  "mirror": "dovel-pr17-validation/pr17r15-pypi-pypdf",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "giampaolo/psutil",
+  "mirror": "dovel-pr17-validation/pr17r15-pypi-psutil",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "python/mypy",
+  "mirror": "dovel-pr17-validation/pr17r15-pypi-mypy",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "laramies/theHarvester",
+  "mirror": "dovel-pr17-validation/pr17r15-pypi-theharvester",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "elazarl/goproxy",
+  "mirror": "dovel-pr17-validation/pr17r15-go-goproxy",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "darrenburns/posting",
+  "mirror": "dovel-pr17-validation/pr17r15-go-posting",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "Workiva/go-datastructures",
+  "mirror": "dovel-pr17-validation/pr17r15-go-go-datastructures",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "trifectatechfoundation/sudo-rs",
+  "mirror": "dovel-pr17-validation/pr17r15-cargo-sudo-rs",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "mimblewimble/grin",
+  "mirror": "dovel-pr17-validation/pr17r15-cargo-grin",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "gluesql/gluesql",
+  "mirror": "dovel-pr17-validation/pr17r15-cargo-gluesql",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "auth0/java-jwt",
+  "mirror": "dovel-pr17-validation/pr17r15-maven-java-jwt",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "react-native-async-storage/async-storage",
+  "mirror": "dovel-pr17-validation/pr17r15-maven-async-storage",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "shrinerb/shrine",
+  "mirror": "dovel-pr17-validation/pr17r15-gem-shrine",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "bensheldon/good_job",
+  "mirror": "dovel-pr17-validation/pr17r15-gem-good_job",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "laravel/horizon",
+  "mirror": "dovel-pr17-validation/pr17r15-composer-horizon",
+  "branch": "5.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "php-webdriver/php-webdriver",
+  "mirror": "dovel-pr17-validation/pr17r15-composer-php-webdriver",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "Pixeval/Pixeval",
+  "mirror": "dovel-pr17-validation/pr17r15-nuget-pixeval",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
 ]
