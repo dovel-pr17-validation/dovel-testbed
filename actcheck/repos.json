@@ -160,5 +160,17 @@
   "source": "zhayujie/CowAgent",
   "sha": "d50bfa7943bc3149c18201aed3b8373d8b103457",
   "branch": "master"
+ },
+ {
+  "name": "quinn",
+  "source": "quinn-rs/quinn",
+  "sha": "12fe8094b5e91068a1bf2c7de08286445c00c04f",
+  "branch": "main"
+ },
+ {
+  "name": "television",
+  "source": "alexpasmantier/television",
+  "sha": "67ddd3046f125cb8229af3de70c5b1e89af0a694",
+  "branch": "main"
  }
 ]

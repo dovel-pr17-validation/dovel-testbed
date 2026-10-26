@@ -18,6 +18,9 @@ on:
       limit:
         description: Jobs per repository (selectCiJobs limit)
         default: '3'
+      isolate:
+        description: Run act isolated from the host (runCiJob isolateHost; 'false' for the unisolated control)
+        default: 'true'
 permissions:
   contents: read
 jobs:
@@ -115,6 +118,7 @@ jobs:
         env:
           ACT_VARIANT: ${{ inputs.act_variant }}
           JOB_LIMIT: ${{ inputs.limit }}
+          ISOLATE: ${{ inputs.isolate }}
         run: |
           # runCiJob gives act an allowlisted environment: no job token or runner-internal variable reaches the jobs.
           # Written to a file, not piped: a process the job leaves running must not hold this step open.

@@ -10,6 +10,12 @@ import { pathToFileURL } from "node:url";
 import { gzipSync } from "node:zlib";
 import { readFileSync } from "node:fs";
 
+// What the host's toolchains look like: before and after every run (an act run must not change them).
+const hostProbe = () => {
+  const sh = command => { try { return execFileSync("/bin/sh", ["-c", command], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim(); } catch (error) { return `(${error.status ?? "failed"})`; } };
+  return { cargo: sh("command -v cargo"), rustup: sh("command -v rustup"), cargoBin: sh("ls ~/.cargo/bin 2>/dev/null | tr '\\n' ' '"), fd: sh("ls -l /usr/bin/fd 2>&1 | cut -c1-90"), rustDefault: sh("rustup default 2>&1 | head -1") };
+};
+
 const [productDir, repoDir, outDir] = process.argv.slice(2);
 const m = await import(pathToFileURL(path.join(productDir, "packages/part-a/dist/replay/actCi/index.js")).href);
 mkdirSync(outDir, { recursive: true });
@@ -37,6 +43,7 @@ log("selected", json(result.selection.selected.map(s => `${s.workflow} -j ${s.jo
 
 const brief = run => run === undefined ? undefined : {
   exitCode: run.exitCode, timedOut: run.timedOut, minutes: +(run.durationMs / 60000).toFixed(2), errors: run.summary.errors, notes: run.notes,
+  isolation: run.isolation, hostPath: run.hostPath, hostProbe: run.hostProbe,
   stderrTail: run.stderrTail.split("\n").slice(-15), services: run.services.map(s => `${s.spec.jobId}/${s.spec.id}: ${s.status}`), cleanupFailed: run.cleanup.failed,
   jobs: run.summary.jobs.map(job => ({ jobId: job.jobId, matrix: job.matrix, result: job.result, outputTail: job.result === "success" ? undefined : job.outputTail.slice(-10),
     steps: job.steps.filter(step => step.stage === "Main" && step.stepPath.length === 1).map(step => ({ stepId: step.stepId, name: step.name, result: step.result, test: step.isTestStep || undefined, testsRan: step.testsRan, testPackages: step.testPackages, injected: step.injected || undefined, minutes: step.durationMs === undefined ? undefined : +(step.durationMs / 60000).toFixed(2), tail: step.result === "failure" ? step.outputTail.slice(-25) : undefined })) })),
@@ -46,7 +53,11 @@ async function run(selected, phase, index) {
   log(`${phase} ${index}: ${selected.workflow} -j ${selected.job}`);
   let out;
   try {
-    out = await m.runCiJob({ repoDir, workflow: selected.workflow, job: selected.job, event: selected.event, selection: selected, timeoutMs: Number(process.env.JOB_TIMEOUT_MIN || 60) * 60000, actBinary: result.act.binary, cacheDir, keepRunDir: true });
+    const before = hostProbe();
+    out = await m.runCiJob({ repoDir, workflow: selected.workflow, job: selected.job, event: selected.event, selection: selected, timeoutMs: Number(process.env.JOB_TIMEOUT_MIN || 60) * 60000, actBinary: result.act.binary, cacheDir, keepRunDir: true, ...(process.env.ISOLATE === "false" ? { isolateHost: false } : {}) });
+    out.hostProbe = { before, after: hostProbe() };
+    log(`${phase} ${index}: host before ${JSON.stringify(before)}`);
+    log(`${phase} ${index}: host after  ${JSON.stringify(out.hostProbe.after)}`);
   } catch (error) { log(`${phase} ${index} threw`, error.stack); return { thrown: error.message }; }
   try {
     writeFileSync(path.join(outDir, `${phase}-${index}.act.jsonl.gz`), gzipSync(readFileSync(path.join(out.runDir, "act.jsonl"))));
