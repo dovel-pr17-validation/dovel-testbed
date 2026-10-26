@@ -163,3 +163,23 @@ commit "$R6"
 rc=$(run_act selfaction "$R6")
 if [ "$rc" = 0 ] && [ "$(job_result selfaction self)" = success ]; then s=bug-absent; else s=bug-present; fi
 echo "selfaction $s exit=$rc"
+
+# 7. A step that leaves a daemon running (docker/setup-docker-action's dockerd) must end when its process
+#    exits, as on GitHub, though the daemon still holds the step's output.
+R7="$OUT/repo-daemon"; mkrepo "$R7"
+cat > "$R7/.github/workflows/repro.yml" <<'YML'
+on: push
+jobs:
+  daemon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Leave a daemon holding the output
+        run: |
+          (sleep 240; echo late) &
+          echo started
+      - run: echo after
+YML
+echo hi > "$R7/README"; commit "$R7"
+started=$(date +%s); rc=$(run_act daemon "$R7"); took=$(( $(date +%s) - started ))
+if [ "$rc" = 0 ] && [ "$(job_result daemon daemon)" = success ] && [ "$took" -lt 120 ]; then s=bug-absent; else s=bug-present; fi
+echo "daemon $s exit=$rc seconds=$took"

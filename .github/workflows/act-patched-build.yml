@@ -101,6 +101,8 @@ jobs:
             grep -q "^$case bug-present" out/repro-stock.txt || echo "::warning::stock act did not show the $case bug"
             grep -q "^$case bug-absent" out/repro-patched.txt || { echo "::error::patched act still has the $case bug"; ok=0; }
           done
+          # Stock act runs steps on a terminal, so it does not wait on a daemon's output: only the patched build is checked.
+          grep -q "^daemon bug-absent" out/repro-patched.txt || { echo "::error::patched act waits on a daemon's output"; ok=0; }
           [ "$ok" = 1 ]
       - uses: actions/upload-artifact@v4
         if: always()
