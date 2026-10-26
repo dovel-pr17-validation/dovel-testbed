@@ -119,7 +119,7 @@ jobs:
           # runCiJob gives act an allowlisted environment: no job token or runner-internal variable reaches the jobs.
           # Written to a file, not piped: a process the job leaves running must not hold this step open.
           mkdir -p "$GITHUB_WORKSPACE/out/${{ matrix.name }}"
-          node testbed/actcheck/driver.mjs "$RUNNER_TEMP/product" "$HOME/repo" "$GITHUB_WORKSPACE/out/${{ matrix.name }}" > "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log" 2>&1 < /dev/null || echo "::warning::driver exit $?"
+          timeout 315m node testbed/actcheck/driver.mjs "$RUNNER_TEMP/product" "$HOME/repo" "$GITHUB_WORKSPACE/out/${{ matrix.name }}" > "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log" 2>&1 < /dev/null || echo "::warning::driver exit $?"
           cat "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log"
           df -h / | tail -1
       - uses: actions/upload-artifact@v4
