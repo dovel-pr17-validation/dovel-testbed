@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "redux-saga/redux-saga",
+  "mirror": "dovel-pr17-validation/pr17r17-npm-redux-saga",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "VSCodeVim/Vim",
+  "mirror": "dovel-pr17-validation/pr17r17-npm-vim",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "postcss/autoprefixer",
+  "mirror": "dovel-pr17-validation/pr17r17-npm-autoprefixer",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "jsdom/jsdom",
+  "mirror": "dovel-pr17-validation/pr17r17-npm-jsdom",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "Ripple-TS/ripple",
+  "mirror": "dovel-pr17-validation/pr17r17-npm-ripple",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "Tonejs/Tone.js",
+  "mirror": "dovel-pr17-validation/pr17r17-npm-tone.js",
+  "branch": "dev",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "drivendataorg/cookiecutter-data-science",
+  "mirror": "dovel-pr17-validation/pr17r17-pypi-cookiecutter-data-science",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "vega/altair",
+  "mirror": "dovel-pr17-validation/pr17r17-pypi-altair",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "semantica-agi/semantica",
+  "mirror": "dovel-pr17-validation/pr17r17-pypi-semantica",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "Kozea/WeasyPrint",
+  "mirror": "dovel-pr17-validation/pr17r17-pypi-weasyprint",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "DLR-RM/stable-baselines3",
+  "mirror": "dovel-pr17-validation/pr17r17-pypi-stable-baselines3",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "zhouxiaoka/autoclip",
+  "mirror": "dovel-pr17-validation/pr17r17-pypi-autoclip",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "uptrace/bun",
+  "mirror": "dovel-pr17-validation/pr17r17-go-bun",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "ffuf/ffuf",
+  "mirror": "dovel-pr17-validation/pr17r17-go-ffuf",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "Ne0nd0g/merlin",
+  "mirror": "dovel-pr17-validation/pr17r17-go-merlin",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "agentclientprotocol/agent-client-protocol",
+  "mirror": "dovel-pr17-validation/pr17r17-cargo-agent-client-protocol",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "pythops/bluetui",
+  "mirror": "dovel-pr17-validation/pr17r17-cargo-bluetui",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "emmett-framework/granian",
+  "mirror": "dovel-pr17-validation/pr17r17-cargo-granian",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "lysine-dev/okio",
+  "mirror": "dovel-pr17-validation/pr17r17-maven-okio",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "dreamhead/moco",
+  "mirror": "dovel-pr17-validation/pr17r17-maven-moco",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "realm/jazzy",
+  "mirror": "dovel-pr17-validation/pr17r17-gem-jazzy",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "padrino/padrino-framework",
+  "mirror": "dovel-pr17-validation/pr17r17-gem-padrino-framework",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "krayin/laravel-crm",
+  "mirror": "dovel-pr17-validation/pr17r17-composer-laravel-crm",
+  "branch": "2.2",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "doctrine-extensions/DoctrineExtensions",
+  "mirror": "dovel-pr17-validation/pr17r17-composer-doctrineextensions",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "Cysharp/MemoryPack",
+  "mirror": "dovel-pr17-validation/pr17r17-nuget-memorypack",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]

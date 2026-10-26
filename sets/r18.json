@@ -1,0 +1,170 @@
+[
+ {
+  "index": 1,
+  "source": "react-grid-layout/react-draggable",
+  "mirror": "dovel-pr17-validation/pr17r18-npm-react-draggable",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "react-bootstrap/react-bootstrap",
+  "mirror": "dovel-pr17-validation/pr17r18-npm-react-bootstrap",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "KaTeX/KaTeX",
+  "mirror": "dovel-pr17-validation/pr17r18-npm-katex",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "postcss/postcss",
+  "mirror": "dovel-pr17-validation/pr17r18-npm-postcss",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "firecrawl/firecrawl-mcp-server",
+  "mirror": "dovel-pr17-validation/pr17r18-npm-firecrawl-mcp-server",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "browserslist/browserslist",
+  "mirror": "dovel-pr17-validation/pr17r18-npm-browserslist",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "multimodal-art-projection/YuE",
+  "mirror": "dovel-pr17-validation/pr17r18-pypi-yue",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "verl-project/verl",
+  "mirror": "dovel-pr17-validation/pr17r18-pypi-verl",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "sqlfluff/sqlfluff",
+  "mirror": "dovel-pr17-validation/pr17r18-pypi-sqlfluff",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "aws/chalice",
+  "mirror": "dovel-pr17-validation/pr17r18-pypi-chalice",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "qutebrowser/qutebrowser",
+  "mirror": "dovel-pr17-validation/pr17r18-pypi-qutebrowser",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "MontFerret/ferret",
+  "mirror": "dovel-pr17-validation/pr17r18-go-ferret",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "kubernetes/kompose",
+  "mirror": "dovel-pr17-validation/pr17r18-go-kompose",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "dunglas/mercure",
+  "mirror": "dovel-pr17-validation/pr17r18-go-mercure",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "rusterlium/rustler",
+  "mirror": "dovel-pr17-validation/pr17r18-cargo-rustler",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "Canop/bacon",
+  "mirror": "dovel-pr17-validation/pr17r18-cargo-bacon",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "tealdeer-rs/tealdeer",
+  "mirror": "dovel-pr17-validation/pr17r18-cargo-tealdeer",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "apache/fesod",
+  "mirror": "dovel-pr17-validation/pr17r18-maven-fesod",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "DanielMartinus/Konfetti",
+  "mirror": "dovel-pr17-validation/pr17r18-maven-konfetti",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "thoughtbot/factory_bot",
+  "mirror": "dovel-pr17-validation/pr17r18-gem-factory_bot",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "shakacode/react_on_rails",
+  "mirror": "dovel-pr17-validation/pr17r18-gem-react_on_rails",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "symfony/maker-bundle",
+  "mirror": "dovel-pr17-validation/pr17r18-composer-maker-bundle",
+  "branch": "1.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "thephpleague/oauth2-server",
+  "mirror": "dovel-pr17-validation/pr17r18-composer-oauth2-server",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "Cysharp/UniTask",
+  "mirror": "dovel-pr17-validation/pr17r18-nuget-unitask",
+  "branch": "master",
+  "ecosystem": "nuget"
+ }
+]
