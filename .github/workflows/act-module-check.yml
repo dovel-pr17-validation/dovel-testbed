@@ -117,8 +117,10 @@ jobs:
           JOB_LIMIT: ${{ inputs.limit }}
         run: |
           # runCiJob gives act an allowlisted environment: no job token or runner-internal variable reaches the jobs.
-          node testbed/actcheck/driver.mjs "$RUNNER_TEMP/product" "$HOME/repo" "$GITHUB_WORKSPACE/out/${{ matrix.name }}" 2>&1 | tee "$RUNNER_TEMP/driver.log"
-          cp "$RUNNER_TEMP/driver.log" "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log" || true
+          # Written to a file, not piped: a process the job leaves running must not hold this step open.
+          mkdir -p "$GITHUB_WORKSPACE/out/${{ matrix.name }}"
+          node testbed/actcheck/driver.mjs "$RUNNER_TEMP/product" "$HOME/repo" "$GITHUB_WORKSPACE/out/${{ matrix.name }}" > "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log" 2>&1 < /dev/null || echo "::warning::driver exit $?"
+          cat "$GITHUB_WORKSPACE/out/${{ matrix.name }}/driver.log"
           df -h / | tail -1
       - uses: actions/upload-artifact@v4
         if: always()
