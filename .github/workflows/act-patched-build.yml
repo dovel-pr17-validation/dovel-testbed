@@ -97,6 +97,10 @@ jobs:
           grep -q '^symlink bug-absent' out/repro-patched.txt || { echo "::error::patched act still has the symlink bug"; ok=0; }
           grep -q '^tty bug-present' out/repro-stock.txt || { echo "::warning::stock act did not show the terminal bug"; }
           grep -q '^tty bug-absent' out/repro-patched.txt || { echo "::error::patched act still runs steps on a terminal"; ok=0; }
+          for case in actenv dockerstep selfaction; do
+            grep -q "^$case bug-present" out/repro-stock.txt || echo "::warning::stock act did not show the $case bug"
+            grep -q "^$case bug-absent" out/repro-patched.txt || { echo "::error::patched act still has the $case bug"; ok=0; }
+          done
           [ "$ok" = 1 ]
       - uses: actions/upload-artifact@v4
         if: always()

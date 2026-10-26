@@ -106,3 +106,60 @@ rc=$(run_act tty "$R3")
 prompt=$(job_result tty prompt)
 if [ "$rc" = 0 ] && [ "$prompt" = success ]; then s=bug-absent; else s=bug-present; fi
 echo "tty $s exit=$rc job=$prompt"
+
+# 4. ACT=true reaches every step's process (GitHub sets none; setup-php then takes the runner for self-hosted);
+#    expressions must still see it.
+R4="$OUT/repo-actenv"; mkrepo "$R4"
+cat > "$R4/.github/workflows/repro.yml" <<'YML'
+on: push
+jobs:
+  env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: The process has no ACT
+        run: test -z "${ACT:-}"
+      - name: Expressions still see ACT
+        if: ${{ env.ACT }}
+        run: echo "expression saw ACT"
+YML
+echo hi > "$R4/README"; commit "$R4"
+rc=$(run_act actenv "$R4")
+saw=$(grep -c "expression saw ACT" "$OUT/actenv.jsonl" 2>/dev/null || true)
+if [ "$rc" = 0 ] && [ "$(job_result actenv env)" = success ] && [ "${saw:-0}" -gt 0 ]; then s=bug-absent; else s=bug-present; fi
+echo "actenv $s exit=$rc expression-lines=${saw:-0}"
+
+# 5. A docker:// step in host mode joined the network of a job container that does not exist.
+R5="$OUT/repo-dockerstep"; mkrepo "$R5"
+cat > "$R5/.github/workflows/repro.yml" <<'YML'
+on: push
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://alpine:3.20
+        with: { args: "sh -c 'echo docker-step-ok; ls /github/workspace'" }
+YML
+echo hi > "$R5/README"; commit "$R5"
+rc=$(run_act dockerstep "$R5")
+seen=$(grep -c "README" "$OUT/dockerstep.jsonl" 2>/dev/null || true)
+if [ "$rc" = 0 ] && [ "$(job_result dockerstep docker)" = success ]; then s=bug-absent; else s=bug-present; fi
+echo "dockerstep $s exit=$rc workspace-visible=${seen:-0}"
+
+# 6. A local action in a job without a checkout (GitHub's $/, given to act as ./): act reads it from the job's
+#    checkout copy, which is empty.
+R6="$OUT/repo-selfaction"; mkrepo "$R6"
+mkdir -p "$R6/.github/actions/leaf"
+printf 'runs:\n  using: composite\n  steps:\n    - run: echo leaf-ok\n      shell: bash\n' > "$R6/.github/actions/leaf/action.yml"
+cat > "$R6/.github/workflows/repro.yml" <<'YML'
+on: push
+jobs:
+  self:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/leaf
+YML
+commit "$R6"
+rc=$(run_act selfaction "$R6")
+if [ "$rc" = 0 ] && [ "$(job_result selfaction self)" = success ]; then s=bug-absent; else s=bug-present; fi
+echo "selfaction $s exit=$rc"
