@@ -28,6 +28,9 @@ on:
       only:
         description: Comma-separated set indexes to run (empty runs all)
         default: ''
+      ci_runner:
+        description: How updates are judged - 'act' (the repository's own CI jobs, run with act) or 'emulate'
+        default: 'emulate'
 permissions:
   contents: read
 concurrency:
@@ -187,6 +190,8 @@ jobs:
           MIRROR: ${{ matrix.mirror }}
           OPEN_PR: ${{ inputs.open_pr }}
           CI_GATE: ${{ inputs.ci_gate }}
+          CI_RUNNER: ${{ inputs.ci_runner }}
+          SOURCE: ${{ matrix.source }}
         run: |
           set -uo pipefail
           output="$RUNNER_TEMP/out"; mkdir -p "$output"
@@ -209,8 +214,8 @@ jobs:
           REVIEWER_RUNTIME=openrouter node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/run-dovel-flow.mjs \
             --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates 3 \
             --open-pr "$OPEN_PR" --ci-gate "$CI_GATE" --publication-out "$RUNNER_TEMP/publications" --skip-ci-verdict-sweep \
-            --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1
-          code=$?
+            --ci-runner "$CI_RUNNER" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" --act-jobs 2 --act-job-timeout-minutes 30 \
+            --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
           printf '{"exitCode":%s,"source":"%s","mirror":"%s","runner":"github-hosted ubuntu-24.04"}\n' "$code" "${{ matrix.source }}" "$MIRROR" > "$output/run.json"
           tail -40 "$output/flow.log"
       - name: Keep the results (logs and receipts, not dependency trees)
