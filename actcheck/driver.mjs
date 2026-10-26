@@ -54,7 +54,7 @@ async function run(selected, phase, index) {
   let out;
   try {
     const before = hostProbe();
-    out = await m.runCiJob({ repoDir, workflow: selected.workflow, job: selected.job, event: selected.event, selection: selected, timeoutMs: Number(process.env.JOB_TIMEOUT_MIN || 60) * 60000, actBinary: result.act.binary, cacheDir, keepRunDir: true, ...(process.env.ISOLATE === "false" ? { isolateHost: false } : {}) });
+    out = await m.runCiJob({ repoDir, workflow: selected.workflow, job: selected.job, event: selected.event, selection: selected, timeoutMs: Number(process.env.JOB_TIMEOUT_MIN || 60) * 60000, actBinary: result.act.binary, cacheDir, keepRunDir: true, ...(process.env.ISOLATE === "false" ? { isolateHost: false } : {}), ...(process.env.EXTRA_ENV ? { extraEnv: JSON.parse(process.env.EXTRA_ENV) } : {}) });
     out.hostProbe = { before, after: hostProbe() };
     log(`${phase} ${index}: host before ${JSON.stringify(before)}`);
     log(`${phase} ${index}: host after  ${JSON.stringify(out.hostProbe.after)}`);

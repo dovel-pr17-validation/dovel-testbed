@@ -21,6 +21,9 @@ on:
       isolate:
         description: Run act isolated from the host (runCiJob isolateHost; 'false' for the unisolated control)
         default: 'true'
+      extra_env:
+        description: JSON object of extra variables for the jobs (runCiJob extraEnv), e.g. {"SETUP_PHP_TRACE":"1"}
+        default: ''
 permissions:
   contents: read
 jobs:
@@ -119,6 +122,7 @@ jobs:
           ACT_VARIANT: ${{ inputs.act_variant }}
           JOB_LIMIT: ${{ inputs.limit }}
           ISOLATE: ${{ inputs.isolate }}
+          EXTRA_ENV: ${{ inputs.extra_env }}
         run: |
           # runCiJob gives act an allowlisted environment: no job token or runner-internal variable reaches the jobs.
           # Written to a file, not piped: a process the job leaves running must not hold this step open.

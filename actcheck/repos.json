@@ -172,5 +172,23 @@
   "source": "alexpasmantier/television",
   "sha": "67ddd3046f125cb8229af3de70c5b1e89af0a694",
   "branch": "main"
+ },
+ {
+  "name": "php-webdriver",
+  "source": "php-webdriver/php-webdriver",
+  "sha": "ac0662863aa120b4f645869f584013e4c4dba46a",
+  "branch": "main"
+ },
+ {
+  "name": "horizon",
+  "source": "laravel/horizon",
+  "sha": "b15ba1d1a45416c3a73d734d702c6ac654808aa4",
+  "branch": "5.x"
+ },
+ {
+  "name": "kysely",
+  "source": "kysely-org/kysely",
+  "sha": "b506b6390a06f47410d359bf0f640a13251b28df",
+  "branch": "master"
  }
 ]
