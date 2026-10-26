@@ -95,6 +95,8 @@ jobs:
           grep -q '^symlink bug-present' out/repro-stock.txt || { echo "::warning::stock act did not show the symlink bug"; }
           grep -q '^readonly bug-absent' out/repro-patched.txt || { echo "::error::patched act still has the read-only bug"; ok=0; }
           grep -q '^symlink bug-absent' out/repro-patched.txt || { echo "::error::patched act still has the symlink bug"; ok=0; }
+          grep -q '^tty bug-present' out/repro-stock.txt || { echo "::warning::stock act did not show the terminal bug"; }
+          grep -q '^tty bug-absent' out/repro-patched.txt || { echo "::error::patched act still runs steps on a terminal"; ok=0; }
           [ "$ok" = 1 ]
       - uses: actions/upload-artifact@v4
         if: always()

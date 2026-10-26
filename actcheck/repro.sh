@@ -85,3 +85,24 @@ twice=$(job_result symlink twice)
 exists=$(grep -c "file exists" "$OUT/symlink.stderr" "$OUT/symlink.jsonl" 2>/dev/null | awk -F: '{s+=$NF} END {print s+0}')
 if [ "$rc" = 0 ] && [ "$twice" = success ]; then s=bug-absent; else s=bug-present; fi
 echo "symlink $s exit=$rc job=$twice file-exists-lines=$exists"
+
+# 3. Every step runs on a pseudo-terminal whose stdin never ends: a step that prompts only on a terminal
+#    (add-apt-repository without -y) waits forever. GitHub gives a step no terminal and an empty stdin.
+R3="$OUT/repo-tty"; mkrepo "$R3"
+cat > "$R3/.github/workflows/repro.yml" <<'YML'
+on: push
+jobs:
+  prompt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: No terminal, stdin at EOF
+        run: |
+          if [ -t 0 ] || [ -t 1 ]; then echo "on a terminal"; exit 1; fi
+          if timeout 10 sh -c 'read -r line'; then echo "read a line?"; else rc=$?; [ "$rc" = 124 ] && { echo "stdin never ended"; exit 1; }; fi
+          echo "no terminal, empty stdin"
+YML
+echo hi > "$R3/README"; commit "$R3"
+rc=$(run_act tty "$R3")
+prompt=$(job_result tty prompt)
+if [ "$rc" = 0 ] && [ "$prompt" = success ]; then s=bug-absent; else s=bug-present; fi
+echo "tty $s exit=$rc job=$prompt"
