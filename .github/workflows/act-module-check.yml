@@ -24,6 +24,9 @@ on:
       extra_env:
         description: JSON object of extra variables for the jobs (runCiJob extraEnv), e.g. {"SETUP_PHP_TRACE":"1"}
         default: ''
+      baselines:
+        description: "'select' (selectCiJobs + baseline/candidate) or 'measure' (the product's measureActBaselines, with its fallback)"
+        default: select
 permissions:
   contents: read
 jobs:
@@ -123,6 +126,8 @@ jobs:
           JOB_LIMIT: ${{ inputs.limit }}
           ISOLATE: ${{ inputs.isolate }}
           EXTRA_ENV: ${{ inputs.extra_env }}
+          BASELINES: ${{ inputs.baselines }}
+          SOURCE: ${{ matrix.source }}
         run: |
           # runCiJob gives act an allowlisted environment: no job token or runner-internal variable reaches the jobs.
           # Written to a file, not piped: a process the job leaves running must not hold this step open.

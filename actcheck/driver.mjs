@@ -33,6 +33,17 @@ try {
 result.act.provisionMs = Date.now() - t0;
 log("act", JSON.stringify(result.act));
 
+if (process.env.BASELINES === "measure") {
+  // The product's own baseline phase (measureActBaselines): which jobs and legs it tries, and in what order.
+  const lines = [];
+  const runner = m.createActJobRunner({ actBinary: result.act.binary, cacheDir, repository: process.env.SOURCE });
+  const measured = await m.measureActBaselines({ repoDir, runner, deadlineAt: Date.now() + 4 * 3600_000, limit: Number(process.env.JOB_LIMIT || 3),
+    jobTimeoutMs: Number(process.env.JOB_TIMEOUT_MIN || 60) * 60000, log: line => { lines.push(line); log(line); } });
+  result.measure = { log: lines, notes: measured.notes, baselines: measured.baselines.map(b => ({ workflow: b.job.workflow, job: b.job.job, matrix: b.job.matrix, usable: b.usable, reasons: b.unusableReasons, minutes: +(b.durationMs / 60000).toFixed(2) })) };
+  write("result.json", result);
+  log("done (measure)");
+  process.exit(0);
+}
 const selection = await m.selectCiJobs(repoDir, { limit: Number(process.env.JOB_LIMIT || 3) });
 write("selection.json", selection);
 result.selection = {
