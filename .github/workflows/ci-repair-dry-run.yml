@@ -1,0 +1,212 @@
+# Dovel CI repair, dry run on real pull requests (scripts/dovel-ci-repair.mjs).
+# Copy to the testbed as .github/workflows/ci-repair-dry-run.yml. It pushes, comments and edits NOTHING:
+# `scan` posts no claim, `work` has no GitHub token at all, `review` runs the publisher's checks and review
+# gate with dryRun and prints the exact diff it would push.
+#
+# The token split is the product's own: `scan` and `review` hold MIRRORS_TOKEN and run no repository code;
+# `work` runs the repositories' CI jobs with act (repository code, as root) and holds only the model key.
+#
+# Inputs (the acceptance set):
+#   product: the snapshot short sha (as run.yml)
+#   targets: [{"index":1,"mirror":"dovel-pr17-validation/pr17r18-cargo-bacon","source":"Canop/bacon","pr":2},
+#             {"index":2,"mirror":"dovel-pr17-validation/pr17r17-pypi-altair","source":"vega/altair","pr":4},
+#             {"index":3,"mirror":"dovel-pr17-validation/pr17r18-npm-postcss","source":"postcss/postcss","pr":2},
+#             {"index":4,"mirror":"dovel-pr17-validation/pr17r17-npm-tone.js","source":"Tonejs/Tone.js","pr":1},
+#             {"index":5,"mirror":"dovel-pr17-validation/pr17r17-npm-tone.js","source":"Tonejs/Tone.js","pr":2},
+#             {"index":6,"mirror":"dovel-pr17-validation/pr17r17-npm-redux-saga","source":"redux-saga/redux-saga","pr":1},
+#             {"index":7,"mirror":"dovel-pr17-validation/pr17r18-pypi-qutebrowser","source":"qutebrowser/qutebrowser","pr":2}]
+#   assume_rerun_done: 'true' reads a `rerun` verdict as the `failed` its repeat gives (dry runs only)
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        required: true
+      targets:
+        required: true
+      assume_rerun_done:
+        default: 'true'
+permissions:
+  contents: read
+jobs:
+  prepare-product:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      sha256: ${{ steps.pack.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+      - name: Unpack the product snapshot
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/product"
+          if git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product-clone" 2>/dev/null; then
+            rm -rf "$RUNNER_TEMP/product-clone/.git"; cp -r "$RUNNER_TEMP/product-clone/." "$RUNNER_TEMP/product/"; rm -rf "$RUNNER_TEMP/product-clone"
+          else
+            printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+            rm -f "$RUNNER_TEMP/product.key"
+          fi
+      - id: pack
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/handoff"
+          tar -C "$RUNNER_TEMP/product" -czf "$RUNNER_TEMP/handoff/product.tar.gz" .
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff/product.tar.gz
+          retention-days: 1
+
+  # Token, no repository code: the verdict, the trigger, the evidence; the mirror for `work`. No claim is posted.
+  scan:
+    needs: prepare-product
+    name: scan ${{ matrix.index }} ${{ matrix.mirror }}#${{ matrix.pr }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(inputs.targets) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: product, path: "${{ runner.temp }}/handoff" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - name: Unpack and install the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/product" && tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product"
+          cd "$RUNNER_TEMP/product" && corepack pnpm install --frozen-lockfile && corepack pnpm build
+      - name: Scan (dry run)
+        env:
+          GH_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+          MIRROR: ${{ matrix.mirror }}
+          PR: ${{ matrix.pr }}
+          ASSUME: ${{ inputs.assume_rerun_done }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/handoff2/requests"
+          cd "$RUNNER_TEMP/product"
+          assume=(); if [ "$ASSUME" = "true" ]; then assume=(--assume-rerun-done); fi
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-repair.mjs scan --repo "$MIRROR" --pr "$PR" \
+            --out "$RUNNER_TEMP/handoff2/requests" "${assume[@]}" | tee "$RUNNER_TEMP/handoff2/scan.log"
+          git clone -q "https://x-access-token:${GH_TOKEN}@github.com/${MIRROR}.git" "$RUNNER_TEMP/handoff2/repo"
+          git -C "$RUNNER_TEMP/handoff2/repo" remote set-url origin "https://github.com/${MIRROR}.git"
+          git -C "$RUNNER_TEMP/handoff2/repo" config user.name "Dovel Labs"; git -C "$RUNNER_TEMP/handoff2/repo" config user.email "dovel@users.noreply.github.com"
+          if grep -rqF -- "$GH_TOKEN" "$RUNNER_TEMP/handoff2"; then echo "::error::the hand-off holds the token"; exit 92; fi
+          tar -C "$RUNNER_TEMP" -cf "$RUNNER_TEMP/scan.tar" handoff2
+      - uses: actions/upload-artifact@v4
+        with: { name: "scan-${{ matrix.index }}", path: "${{ runner.temp }}/scan.tar", retention-days: 7 }
+
+  # NO GitHub token: reproduces each failing job with act and looks for a repair. Only the model key, over stdin.
+  work:
+    needs: [prepare-product, scan]
+    name: work ${{ matrix.index }} ${{ matrix.mirror }}#${{ matrix.pr }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(inputs.targets) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: product, path: "${{ runner.temp }}/handoff" }
+      - uses: actions/download-artifact@v4
+        with: { name: "scan-${{ matrix.index }}", path: "${{ runner.temp }}/handoff" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - name: Unpack and install the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/product" && tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product"
+          tar -xf "$RUNNER_TEMP/handoff/scan.tar" -C "$RUNNER_TEMP"
+          cd "$RUNNER_TEMP/product" && corepack pnpm install --frozen-lockfile && corepack pnpm build
+      - name: Reproduce and repair (dry run)
+        env:
+          DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          SOURCE: ${{ matrix.source }}
+        run: |
+          set -uo pipefail
+          secrets="$(node -e 'process.stdout.write(JSON.stringify(process.env.DOVEL_INPUT_OPENROUTER ? { OPENROUTER_API_KEY: process.env.DOVEL_INPUT_OPENROUTER } : {}))')"
+          unset DOVEL_INPUT_OPENROUTER
+          shopt -s nocasematch
+          for variable in $(compgen -e); do
+            if [[ "$variable" =~ (token|secret|password|credential|api[_-]?key|private[_-]?key) && "$variable" != TIKTOKEN_CACHE_DIR ]]; then unset "$variable"; fi
+          done
+          shopt -u nocasematch
+          export TMPDIR="$RUNNER_TEMP/dovel-tmp"; mkdir -p "$TMPDIR" "$RUNNER_TEMP/out"
+          cd "$RUNNER_TEMP/product"
+          if ls "$RUNNER_TEMP/handoff2/requests"/*.json >/dev/null 2>&1; then
+            node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-repair.mjs work --requests "$RUNNER_TEMP/handoff2/requests" \
+              --repository "$RUNNER_TEMP/handoff2/repo" --out "$RUNNER_TEMP/out" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" \
+              --act-job-timeout-minutes 30 --secrets-stdin <<<"$secrets" 2>&1 | tee "$RUNNER_TEMP/out/work.log"
+          else
+            echo "no CI repair triggered for this pull request" | tee "$RUNNER_TEMP/out/work.log"
+          fi
+          cp "$RUNNER_TEMP/handoff2/scan.log" "$RUNNER_TEMP/out/" || true
+          cp "$RUNNER_TEMP/handoff2/requests/decisions.json" "$RUNNER_TEMP/out/" || true
+          rm -rf "$RUNNER_TEMP/out/workers"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "work-${{ matrix.index }}", path: "${{ runner.temp }}/out", retention-days: 30 }
+
+  # Token and model key, no repository code: the publisher's own checks and review, dry run; prints the diff.
+  review:
+    needs: [prepare-product, work]
+    name: review ${{ matrix.index }} ${{ matrix.mirror }}#${{ matrix.pr }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(inputs.targets) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: product, path: "${{ runner.temp }}/handoff" }
+      - uses: actions/download-artifact@v4
+        with: { name: "work-${{ matrix.index }}", path: "${{ runner.temp }}/out" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - name: Unpack and install the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/product" && tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product"
+          cd "$RUNNER_TEMP/product" && corepack pnpm install --frozen-lockfile && corepack pnpm build
+      - name: Publisher checks and review (dry run; nothing written to GitHub)
+        env:
+          DOVEL_INPUT_GITHUB: ${{ secrets.MIRRORS_TOKEN }}
+          DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          MIRROR: ${{ matrix.mirror }}
+        run: |
+          set +e -uo pipefail
+          secrets="$(node -e 'process.stdout.write(JSON.stringify({ GH_TOKEN: process.env.DOVEL_INPUT_GITHUB, ...(process.env.DOVEL_INPUT_OPENROUTER ? { OPENROUTER_API_KEY: process.env.DOVEL_INPUT_OPENROUTER } : {}) }))')"
+          unset DOVEL_INPUT_GITHUB DOVEL_INPUT_OPENROUTER
+          cd "$RUNNER_TEMP/product"
+          if [ -d "$RUNNER_TEMP/out/ci-repair" ]; then
+            node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-repair.mjs publish --outcomes "$RUNNER_TEMP/out" --repo "$MIRROR" --secrets-stdin <<<"$secrets" 2>&1 | tee "$RUNNER_TEMP/out/review.log"
+          fi
+          { echo '```'; cat "$RUNNER_TEMP/out/scan.log" "$RUNNER_TEMP/out/work.log" "$RUNNER_TEMP/out/review.log" 2>/dev/null | tail -200; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "review-${{ matrix.index }}", path: "${{ runner.temp }}/out", retention-days: 30 }
