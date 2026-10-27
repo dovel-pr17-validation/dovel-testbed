@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "humanlayer/humanlayer",
+  "mirror": "dovel-pr17-validation/pr17r20-npm-humanlayer",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "gridstack/gridstack.js",
+  "mirror": "dovel-pr17-validation/pr17r20-npm-gridstack.js",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "QwikDev/qwik",
+  "mirror": "dovel-pr17-validation/pr17r20-npm-qwik",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "sindresorhus/np",
+  "mirror": "dovel-pr17-validation/pr17r20-npm-np",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "protobufjs/protobuf.js",
+  "mirror": "dovel-pr17-validation/pr17r20-npm-protobuf.js",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "zuiidea/antd-admin",
+  "mirror": "dovel-pr17-validation/pr17r20-npm-antd-admin",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "pymodbus-dev/pymodbus",
+  "mirror": "dovel-pr17-validation/pr17r20-pypi-pymodbus",
+  "branch": "dev",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "ahupp/python-magic",
+  "mirror": "dovel-pr17-validation/pr17r20-pypi-python-magic",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "nateshmbhat/pyttsx3",
+  "mirror": "dovel-pr17-validation/pr17r20-pypi-pyttsx3",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "hydra-ecosystem/omegaconf",
+  "mirror": "dovel-pr17-validation/pr17r20-pypi-omegaconf",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "vladkens/twscrape",
+  "mirror": "dovel-pr17-validation/pr17r20-pypi-twscrape",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "SYSTRAN/faster-whisper",
+  "mirror": "dovel-pr17-validation/pr17r20-pypi-faster-whisper",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "stern/stern",
+  "mirror": "dovel-pr17-validation/pr17r20-go-stern",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "yggdrasil-network/yggdrasil-go",
+  "mirror": "dovel-pr17-validation/pr17r20-go-yggdrasil-go",
+  "branch": "develop",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "99designs/gqlgen",
+  "mirror": "dovel-pr17-validation/pr17r20-go-gqlgen",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "kivikakk/comrak",
+  "mirror": "dovel-pr17-validation/pr17r20-cargo-comrak",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "achristmascarl/rainfrog",
+  "mirror": "dovel-pr17-validation/pr17r20-cargo-rainfrog",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "Start9Labs/start-technologies",
+  "mirror": "dovel-pr17-validation/pr17r20-cargo-start-technologies",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "JCTools/JCTools",
+  "mirror": "dovel-pr17-validation/pr17r20-maven-jctools",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "cabaletta/baritone",
+  "mirror": "dovel-pr17-validation/pr17r20-maven-baritone",
+  "branch": "1.21.4",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "gazay/gon",
+  "mirror": "dovel-pr17-validation/pr17r20-gem-gon",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "blackcandy-org/blackcandy",
+  "mirror": "dovel-pr17-validation/pr17r20-gem-blackcandy",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "sabre-io/Baikal",
+  "mirror": "dovel-pr17-validation/pr17r20-composer-baikal",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "vrana/adminer",
+  "mirror": "dovel-pr17-validation/pr17r20-composer-adminer",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "HMBSbige/NatTypeTester",
+  "mirror": "dovel-pr17-validation/pr17r20-nuget-nattypetester",
+  "branch": "master",
+  "ecosystem": "nuget"
+ }
+]
