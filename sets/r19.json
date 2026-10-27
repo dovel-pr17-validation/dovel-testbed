@@ -1,0 +1,177 @@
+[
+ {
+  "index": 3,
+  "source": "alibaba/hooks",
+  "mirror": "dovel-pr17-validation/pr17r19-npm-hooks",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "babel/babel",
+  "mirror": "dovel-pr17-validation/pr17r19-npm-babel",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "cordiverse/cordis",
+  "mirror": "dovel-pr17-validation/pr17r19-npm-cordis",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "conventional-changelog/conventional-changelog",
+  "mirror": "dovel-pr17-validation/pr17r19-npm-conventional-changelog",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "pypa/pip",
+  "mirror": "dovel-pr17-validation/pr17r19-pypi-pip",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "ActivityWatch/activitywatch",
+  "mirror": "dovel-pr17-validation/pr17r19-pypi-activitywatch",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "encode/django-rest-framework",
+  "mirror": "dovel-pr17-validation/pr17r19-pypi-django-rest-framework",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "darknessomi/musicbox",
+  "mirror": "dovel-pr17-validation/pr17r19-pypi-musicbox",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "simonw/datasette",
+  "mirror": "dovel-pr17-validation/pr17r19-pypi-datasette",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "rushter/MLAlgorithms",
+  "mirror": "dovel-pr17-validation/pr17r19-pypi-mlalgorithms",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "distribution/distribution",
+  "mirror": "dovel-pr17-validation/pr17r19-go-distribution",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "php/frankenphp",
+  "mirror": "dovel-pr17-validation/pr17r19-go-frankenphp",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "ariga/atlas",
+  "mirror": "dovel-pr17-validation/pr17r19-go-atlas",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "image-rs/image",
+  "mirror": "dovel-pr17-validation/pr17r19-cargo-image",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "lakesoul-io/LakeSoul",
+  "mirror": "dovel-pr17-validation/pr17r19-cargo-lakesoul",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "sozu-proxy/sozu",
+  "mirror": "dovel-pr17-validation/pr17r19-cargo-sozu",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "langchain4j/langchain4j",
+  "mirror": "dovel-pr17-validation/pr17r19-maven-langchain4j",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "github/markup",
+  "mirror": "dovel-pr17-validation/pr17r19-gem-markup",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "mbleigh/acts-as-taggable-on",
+  "mirror": "dovel-pr17-validation/pr17r19-gem-acts-as-taggable-on",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "pixelfed/pixelfed",
+  "mirror": "dovel-pr17-validation/pr17r19-composer-pixelfed",
+  "branch": "dev",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "aureuserp/aureuserp",
+  "mirror": "dovel-pr17-validation/pr17r19-composer-aureuserp",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "Cysharp/R3",
+  "mirror": "dovel-pr17-validation/pr17r19-nuget-r3",
+  "branch": "main",
+  "ecosystem": "nuget"
+ },
+ {
+  "index": 26,
+  "source": "Molunerfinn/PicGo",
+  "mirror": "dovel-pr17-validation/pr17r19-npm-picgo",
+  "branch": "dev",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 27,
+  "source": "endograph/redux-persist",
+  "mirror": "dovel-pr17-validation/pr17r19-npm-redux-persist",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 28,
+  "source": "orhanobut/dialogplus",
+  "mirror": "dovel-pr17-validation/pr17r19-maven-dialogplus",
+  "branch": "master",
+  "ecosystem": "maven"
+ }
+]
