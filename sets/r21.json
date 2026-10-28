@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "webtorrent/webtorrent",
+  "mirror": "dovel-pr17-validation/pr17r21-npm-webtorrent",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "di-sukharev/opencommit",
+  "mirror": "dovel-pr17-validation/pr17r21-npm-opencommit",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "ether/etherpad",
+  "mirror": "dovel-pr17-validation/pr17r21-npm-etherpad",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "docsifyjs/docsify",
+  "mirror": "dovel-pr17-validation/pr17r21-npm-docsify",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "fuma-nama/fumadocs",
+  "mirror": "dovel-pr17-validation/pr17r21-npm-fumadocs",
+  "branch": "dev",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "egoist/tsup",
+  "mirror": "dovel-pr17-validation/pr17r21-npm-tsup",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "decoderesearch/circuit-tracer",
+  "mirror": "dovel-pr17-validation/pr17r21-pypi-circuit-tracer",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "TylerYep/torchinfo",
+  "mirror": "dovel-pr17-validation/pr17r21-pypi-torchinfo",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "dromara/domain-admin",
+  "mirror": "dovel-pr17-validation/pr17r21-pypi-domain-admin",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "israel-dryer/ttkbootstrap",
+  "mirror": "dovel-pr17-validation/pr17r21-pypi-ttkbootstrap",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "rasterio/rasterio",
+  "mirror": "dovel-pr17-validation/pr17r21-pypi-rasterio",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "django-compressor/django-compressor",
+  "mirror": "dovel-pr17-validation/pr17r21-pypi-django-compressor",
+  "branch": "develop",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "silenceper/wechat",
+  "mirror": "dovel-pr17-validation/pr17r21-go-wechat",
+  "branch": "v2",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "hashicorp/hcl",
+  "mirror": "dovel-pr17-validation/pr17r21-go-hcl",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "noborus/trdsql",
+  "mirror": "dovel-pr17-validation/pr17r21-go-trdsql",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "snapview/tokio-tungstenite",
+  "mirror": "dovel-pr17-validation/pr17r21-cargo-tokio-tungstenite",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "altsem/gitu",
+  "mirror": "dovel-pr17-validation/pr17r21-cargo-gitu",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "creusot-rs/creusot",
+  "mirror": "dovel-pr17-validation/pr17r21-cargo-creusot",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "mockito/mockito-kotlin",
+  "mirror": "dovel-pr17-validation/pr17r21-maven-mockito-kotlin",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "robolectric/robolectric",
+  "mirror": "dovel-pr17-validation/pr17r21-maven-robolectric",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "railsadminteam/rails_admin",
+  "mirror": "dovel-pr17-validation/pr17r21-gem-rails_admin",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "github/secure_headers",
+  "mirror": "dovel-pr17-validation/pr17r21-gem-secure_headers",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "abraham/twitteroauth",
+  "mirror": "dovel-pr17-validation/pr17r21-composer-twitteroauth",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "webmozarts/assert",
+  "mirror": "dovel-pr17-validation/pr17r21-composer-assert",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "stratumauth/app",
+  "mirror": "dovel-pr17-validation/pr17r21-nuget-app",
+  "branch": "master",
+  "ecosystem": "nuget"
+ }
+]
