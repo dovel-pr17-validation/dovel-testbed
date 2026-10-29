@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "wonderwhy-er/DesktopCommanderMCP",
+  "mirror": "dovel-pr17-validation/pr17r25-npm-desktopcommandermcp",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "cure53/DOMPurify",
+  "mirror": "dovel-pr17-validation/pr17r25-npm-dompurify",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "voidcosmos/npkill",
+  "mirror": "dovel-pr17-validation/pr17r25-npm-npkill",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "ramda/ramda",
+  "mirror": "dovel-pr17-validation/pr17r25-npm-ramda",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "ecomfe/vue-echarts",
+  "mirror": "dovel-pr17-validation/pr17r25-npm-vue-echarts",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "mjmlio/mjml",
+  "mirror": "dovel-pr17-validation/pr17r25-npm-mjml",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "QuantEcon/QuantEcon.py",
+  "mirror": "dovel-pr17-validation/pr17r25-pypi-quantecon.py",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "trentm/python-markdown2",
+  "mirror": "dovel-pr17-validation/pr17r25-pypi-python-markdown2",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "YunoHost/yunohost",
+  "mirror": "dovel-pr17-validation/pr17r25-pypi-yunohost",
+  "branch": "dev",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "vllm-project/production-stack",
+  "mirror": "dovel-pr17-validation/pr17r25-pypi-production-stack",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "Netflix/metaflow",
+  "mirror": "dovel-pr17-validation/pr17r25-pypi-metaflow",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "jazzband/django-model-utils",
+  "mirror": "dovel-pr17-validation/pr17r25-pypi-django-model-utils",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "vulcand/oxy",
+  "mirror": "dovel-pr17-validation/pr17r25-go-oxy",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "aquasecurity/kube-bench",
+  "mirror": "dovel-pr17-validation/pr17r25-go-kube-bench",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "jwilder/dockerize",
+  "mirror": "dovel-pr17-validation/pr17r25-go-dockerize",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "theopfr/somo",
+  "mirror": "dovel-pr17-validation/pr17r25-cargo-somo",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "yuankunzhang/charming",
+  "mirror": "dovel-pr17-validation/pr17r25-cargo-charming",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "szabodanika/microbin",
+  "mirror": "dovel-pr17-validation/pr17r25-cargo-microbin",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "torakiki/pdfsam",
+  "mirror": "dovel-pr17-validation/pr17r25-maven-pdfsam",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "EngineHub/WorldEdit",
+  "mirror": "dovel-pr17-validation/pr17r25-maven-worldedit",
+  "branch": "version/7.4.x",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "citation-style-language/styles",
+  "mirror": "dovel-pr17-validation/pr17r25-gem-styles",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "zdennis/activerecord-import",
+  "mirror": "dovel-pr17-validation/pr17r25-gem-activerecord-import",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "cviebrock/eloquent-sluggable",
+  "mirror": "dovel-pr17-validation/pr17r25-composer-eloquent-sluggable",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "koel/koel",
+  "mirror": "dovel-pr17-validation/pr17r25-composer-koel",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "OpenTabletDriver/OpenTabletDriver",
+  "mirror": "dovel-pr17-validation/pr17r25-nuget-opentabletdriver",
+  "branch": "0.6.x",
+  "ecosystem": "nuget"
+ }
+]
