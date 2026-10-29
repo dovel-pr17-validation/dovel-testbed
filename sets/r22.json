@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "bluewave-labs/Checkmate",
+  "mirror": "dovel-pr17-validation/pr17r22-npm-checkmate",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "brianc/node-postgres",
+  "mirror": "dovel-pr17-validation/pr17r22-npm-node-postgres",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "forwardemail/supertest",
+  "mirror": "dovel-pr17-validation/pr17r22-npm-supertest",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "facebook/stylex",
+  "mirror": "dovel-pr17-validation/pr17r22-npm-stylex",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "vrtmrz/obsidian-livesync",
+  "mirror": "dovel-pr17-validation/pr17r22-npm-obsidian-livesync",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "sequelize/sequelize",
+  "mirror": "dovel-pr17-validation/pr17r22-npm-sequelize",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "Unmanic/unmanic",
+  "mirror": "dovel-pr17-validation/pr17r22-pypi-unmanic",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "pmorissette/ffn",
+  "mirror": "dovel-pr17-validation/pr17r22-pypi-ffn",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "explosion/thinc",
+  "mirror": "dovel-pr17-validation/pr17r22-pypi-thinc",
+  "branch": "v8.3.x",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "graphistry/pygraphistry",
+  "mirror": "dovel-pr17-validation/pr17r22-pypi-pygraphistry",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "pypa/setuptools",
+  "mirror": "dovel-pr17-validation/pr17r22-pypi-setuptools",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "Lightning-AI/litgpt",
+  "mirror": "dovel-pr17-validation/pr17r22-pypi-litgpt",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "bakito/adguardhome-sync",
+  "mirror": "dovel-pr17-validation/pr17r22-go-adguardhome-sync",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "swaggo/swag",
+  "mirror": "dovel-pr17-validation/pr17r22-go-swag",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "gokcehan/lf",
+  "mirror": "dovel-pr17-validation/pr17r22-go-lf",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "zizmorcore/zizmor",
+  "mirror": "dovel-pr17-validation/pr17r22-cargo-zizmor",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "ferronweb/ferron",
+  "mirror": "dovel-pr17-validation/pr17r22-cargo-ferron",
+  "branch": "develop-3.x",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "apache/auron",
+  "mirror": "dovel-pr17-validation/pr17r22-cargo-auron",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "spockframework/spock",
+  "mirror": "dovel-pr17-validation/pr17r22-maven-spock",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "Guardsquare/proguard",
+  "mirror": "dovel-pr17-validation/pr17r22-maven-proguard",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "nesquena/rabl",
+  "mirror": "dovel-pr17-validation/pr17r22-gem-rabl",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "javan/whenever",
+  "mirror": "dovel-pr17-validation/pr17r22-gem-whenever",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "CMB2/CMB2",
+  "mirror": "dovel-pr17-validation/pr17r22-composer-cmb2",
+  "branch": "develop",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "spatie/laravel-analytics",
+  "mirror": "dovel-pr17-validation/pr17r22-composer-laravel-analytics",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "Cysharp/ZLinq",
+  "mirror": "dovel-pr17-validation/pr17r22-nuget-zlinq",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]
