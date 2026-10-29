@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "nock/nock",
+  "mirror": "dovel-pr17-validation/pr17r23-npm-nock",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "antfu-collective/vitesse",
+  "mirror": "dovel-pr17-validation/pr17r23-npm-vitesse",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "react-grid-layout/react-grid-layout",
+  "mirror": "dovel-pr17-validation/pr17r23-npm-react-grid-layout",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "remarkjs/react-markdown",
+  "mirror": "dovel-pr17-validation/pr17r23-npm-react-markdown",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "vitest-dev/vitest",
+  "mirror": "dovel-pr17-validation/pr17r23-npm-vitest",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "sweetalert2/sweetalert2",
+  "mirror": "dovel-pr17-validation/pr17r23-npm-sweetalert2",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "langbot-app/LangBot",
+  "mirror": "dovel-pr17-validation/pr17r23-pypi-langbot",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "griptape-ai/griptape",
+  "mirror": "dovel-pr17-validation/pr17r23-pypi-griptape",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "beancount/fava",
+  "mirror": "dovel-pr17-validation/pr17r23-pypi-fava",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "chardet/chardet",
+  "mirror": "dovel-pr17-validation/pr17r23-pypi-chardet",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "simonw/shot-scraper",
+  "mirror": "dovel-pr17-validation/pr17r23-pypi-shot-scraper",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "Johnserf-Seed/f2",
+  "mirror": "dovel-pr17-validation/pr17r23-pypi-f2",
+  "branch": "v0.0.1.8-pw3",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "kisielk/errcheck",
+  "mirror": "dovel-pr17-validation/pr17r23-go-errcheck",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "tsuru/tsuru",
+  "mirror": "dovel-pr17-validation/pr17r23-go-tsuru",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "go-co-op/gocron",
+  "mirror": "dovel-pr17-validation/pr17r23-go-gocron",
+  "branch": "v2",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "webrtc-rs/webrtc",
+  "mirror": "dovel-pr17-validation/pr17r23-cargo-webrtc",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "HelixDB/helix-db",
+  "mirror": "dovel-pr17-validation/pr17r23-cargo-helix-db",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "rust-lang/book",
+  "mirror": "dovel-pr17-validation/pr17r23-cargo-book",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "airbnb/DeepLinkDispatch",
+  "mirror": "dovel-pr17-validation/pr17r23-maven-deeplinkdispatch",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "JetBrains/intellij-platform-plugin-template",
+  "mirror": "dovel-pr17-validation/pr17r23-maven-intellij-platform-plugin-template",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "feedbin/feedbin",
+  "mirror": "dovel-pr17-validation/pr17r23-gem-feedbin",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "travisjeffery/timecop",
+  "mirror": "dovel-pr17-validation/pr17r23-gem-timecop",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "laravel/passport",
+  "mirror": "dovel-pr17-validation/pr17r23-composer-passport",
+  "branch": "13.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "owen-it/laravel-auditing",
+  "mirror": "dovel-pr17-validation/pr17r23-composer-laravel-auditing",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "dotnet/eShop",
+  "mirror": "dovel-pr17-validation/pr17r23-nuget-eshop",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]
