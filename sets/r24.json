@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "i18next/i18next",
+  "mirror": "dovel-pr17-validation/pr17r24-npm-i18next",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "microsoft/playwright-cli",
+  "mirror": "dovel-pr17-validation/pr17r24-npm-playwright-cli",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "mediago-dev/mediago",
+  "mirror": "dovel-pr17-validation/pr17r24-npm-mediago",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "node-red/node-red",
+  "mirror": "dovel-pr17-validation/pr17r24-npm-node-red",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "paperjs/paper.js",
+  "mirror": "dovel-pr17-validation/pr17r24-npm-paper.js",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "nextai-translator/nextai-translator",
+  "mirror": "dovel-pr17-validation/pr17r24-npm-nextai-translator",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "viewflow/viewflow",
+  "mirror": "dovel-pr17-validation/pr17r24-pypi-viewflow",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "bookwyrm-social/bookwyrm",
+  "mirror": "dovel-pr17-validation/pr17r24-pypi-bookwyrm",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "dateutil/dateutil",
+  "mirror": "dovel-pr17-validation/pr17r24-pypi-dateutil",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "eclipse-paho/paho.mqtt.python",
+  "mirror": "dovel-pr17-validation/pr17r24-pypi-paho.mqtt.python",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "home-assistant-libs/pychromecast",
+  "mirror": "dovel-pr17-validation/pr17r24-pypi-pychromecast",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "ejwa/gitinspector",
+  "mirror": "dovel-pr17-validation/pr17r24-pypi-gitinspector",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "fluid-cloudnative/fluid",
+  "mirror": "dovel-pr17-validation/pr17r24-go-fluid",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "xjasonlyu/tun2socks",
+  "mirror": "dovel-pr17-validation/pr17r24-go-tun2socks",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "89luca89/distrobox",
+  "mirror": "dovel-pr17-validation/pr17r24-go-distrobox",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "nextest-rs/nextest",
+  "mirror": "dovel-pr17-validation/pr17r24-cargo-nextest",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "lycheeverse/lychee",
+  "mirror": "dovel-pr17-validation/pr17r24-cargo-lychee",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "rust-phf/rust-phf",
+  "mirror": "dovel-pr17-validation/pr17r24-cargo-rust-phf",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "gotson/komga",
+  "mirror": "dovel-pr17-validation/pr17r24-maven-komga",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "jeequan/jeepay",
+  "mirror": "dovel-pr17-validation/pr17r24-maven-jeepay",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "thoughtbot/high_voltage",
+  "mirror": "dovel-pr17-validation/pr17r24-gem-high_voltage",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "flyerhzm/bullet",
+  "mirror": "dovel-pr17-validation/pr17r24-gem-bullet",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "PHP-CS-Fixer/PHP-CS-Fixer",
+  "mirror": "dovel-pr17-validation/pr17r24-composer-php-cs-fixer",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "google/recaptcha",
+  "mirror": "dovel-pr17-validation/pr17r24-composer-recaptcha",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "chronoxor/NetCoreServer",
+  "mirror": "dovel-pr17-validation/pr17r24-nuget-netcoreserver",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]
