@@ -309,6 +309,19 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
           corepack pnpm build
+      - name: Import the hand-off as untrusted data
+        if: steps.requests.outputs.any == 'true'
+        working-directory: ${{ runner.temp }}/product
+        env:
+          MIRROR: ${{ matrix.mirror }}
+          CI_GATE: ${{ inputs.ci_gate }}
+        run: |
+          set -euo pipefail
+          # As dovel.yml's publish job: only checked requests reach the publisher.
+          mkdir -p "$RUNNER_TEMP/imported"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/import-publication-handoff.mjs \
+            "$RUNNER_TEMP/publication/$SLUG" "$RUNNER_TEMP/imported/$SLUG" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" \
+            --ci-gate "$CI_GATE" --report "$RUNNER_TEMP/imported-report.json"
       - name: Publish the proposals
         if: steps.requests.outputs.any == 'true'
         env:
@@ -319,7 +332,7 @@ jobs:
         run: |
           # Not -e: what the publisher recorded is kept even when it fails.
           set +e -uo pipefail
-          handoff="$RUNNER_TEMP/publication/$SLUG"
+          handoff="$RUNNER_TEMP/imported/$SLUG"
           secrets="$(node -e '
             const pairs = [["OPENROUTER_API_KEY", "DOVEL_INPUT_OPENROUTER"], ["GH_TOKEN", "DOVEL_INPUT_GITHUB"]];
             process.stdout.write(JSON.stringify(Object.fromEntries(pairs.filter(([, from]) => process.env[from]).map(([to, from]) => [to, process.env[from]]))));
