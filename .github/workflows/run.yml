@@ -155,6 +155,8 @@ jobs:
       matrix:
         include: ${{ fromJson(needs.plan.outputs.matrix) }}
     steps:
+      # The job's own start: the flow admits no phase past timeout-minutes (less 15 for keeping the results).
+      - run: echo "JOB_STARTED_AT=$(date +%s%3N)" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
           name: product
@@ -214,7 +216,7 @@ jobs:
           REVIEWER_RUNTIME=openrouter node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/run-dovel-flow.mjs \
             --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates 3 \
             --open-pr "$OPEN_PR" --ci-gate "$CI_GATE" --publication-out "$RUNNER_TEMP/publications" --skip-ci-verdict-sweep \
-            --ci-runner "$CI_RUNNER" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" --act-jobs 2 --act-job-timeout-minutes 30 \
+            --ci-runner "$CI_RUNNER" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" --act-jobs 2 --act-job-timeout-minutes 30 --job-deadline-at "$(( JOB_STARTED_AT + (330 - 15) * 60000 ))" \
             --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
           printf '{"exitCode":%s,"source":"%s","mirror":"%s","runner":"github-hosted ubuntu-24.04"}\n' "$code" "${{ matrix.source }}" "$MIRROR" > "$output/run.json"
           tail -40 "$output/flow.log"
