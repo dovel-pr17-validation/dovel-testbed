@@ -1,0 +1,170 @@
+[
+ {
+  "index": 1,
+  "source": "wenzhixin/bootstrap-table",
+  "mirror": "dovel-pr17-validation/pr17r27-npm-bootstrap-table",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "unovue/shadcn-vue",
+  "mirror": "dovel-pr17-validation/pr17r27-npm-shadcn-vue",
+  "branch": "dev",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "nodemailer/nodemailer",
+  "mirror": "dovel-pr17-validation/pr17r27-npm-nodemailer",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "Koenkk/zigbee2mqtt",
+  "mirror": "dovel-pr17-validation/pr17r27-npm-zigbee2mqtt",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "inertiajs/inertia",
+  "mirror": "dovel-pr17-validation/pr17r27-npm-inertia",
+  "branch": "3.x",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "jsdoc/jsdoc",
+  "mirror": "dovel-pr17-validation/pr17r27-npm-jsdoc",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "xdit-project/xDiT",
+  "mirror": "dovel-pr17-validation/pr17r27-pypi-xdit",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "EverMind-AI/EverOS",
+  "mirror": "dovel-pr17-validation/pr17r27-pypi-everos",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "onekey-sec/unblob",
+  "mirror": "dovel-pr17-validation/pr17r27-pypi-unblob",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "dosisod/refurb",
+  "mirror": "dovel-pr17-validation/pr17r27-pypi-refurb",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "SCons/scons",
+  "mirror": "dovel-pr17-validation/pr17r27-pypi-scons",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "mixelpixx/KiCAD-MCP-Server",
+  "mirror": "dovel-pr17-validation/pr17r27-pypi-kicad-mcp-server",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "shadow1ng/fscan",
+  "mirror": "dovel-pr17-validation/pr17r27-go-fscan",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "caddyserver/certmagic",
+  "mirror": "dovel-pr17-validation/pr17r27-go-certmagic",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "mjl-/mox",
+  "mirror": "dovel-pr17-validation/pr17r27-go-mox",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "rust-scraper/scraper",
+  "mirror": "dovel-pr17-validation/pr17r27-cargo-scraper",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "ron-rs/ron",
+  "mirror": "dovel-pr17-validation/pr17r27-cargo-ron",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "codecentric/spring-boot-admin",
+  "mirror": "dovel-pr17-validation/pr17r27-maven-spring-boot-admin",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "bethington/ghidra-mcp",
+  "mirror": "dovel-pr17-validation/pr17r27-maven-ghidra-mcp",
+  "branch": "dev",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "kaminari/kaminari",
+  "mirror": "dovel-pr17-validation/pr17r27-gem-kaminari",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "grosser/parallel",
+  "mirror": "dovel-pr17-validation/pr17r27-gem-parallel",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "composer/satis",
+  "mirror": "dovel-pr17-validation/pr17r27-composer-satis",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "mpdf/mpdf",
+  "mirror": "dovel-pr17-validation/pr17r27-composer-mpdf",
+  "branch": "development",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "PintaProject/Pinta",
+  "mirror": "dovel-pr17-validation/pr17r27-nuget-pinta",
+  "branch": "master",
+  "ecosystem": "nuget"
+ }
+]
