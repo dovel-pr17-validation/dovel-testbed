@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "modelcontextprotocol/inspector",
+  "mirror": "dovel-pr17-validation/pr17r26-npm-inspector",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "vanilla-extract-css/vanilla-extract",
+  "mirror": "dovel-pr17-validation/pr17r26-npm-vanilla-extract",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "konvajs/konva",
+  "mirror": "dovel-pr17-validation/pr17r26-npm-konva",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "vega/vega",
+  "mirror": "dovel-pr17-validation/pr17r26-npm-vega",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "pmndrs/jotai",
+  "mirror": "dovel-pr17-validation/pr17r26-npm-jotai",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "umijs/qiankun",
+  "mirror": "dovel-pr17-validation/pr17r26-npm-qiankun",
+  "branch": "next",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "ekzhu/datasketch",
+  "mirror": "dovel-pr17-validation/pr17r26-pypi-datasketch",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "Pycord-Development/pycord",
+  "mirror": "dovel-pr17-validation/pr17r26-pypi-pycord",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "oauthlib/oauthlib",
+  "mirror": "dovel-pr17-validation/pr17r26-pypi-oauthlib",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 10,
+  "source": "rust-lang/this-week-in-rust",
+  "mirror": "dovel-pr17-validation/pr17r26-pypi-this-week-in-rust",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 11,
+  "source": "mongodb/motor",
+  "mirror": "dovel-pr17-validation/pr17r26-pypi-motor",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "openenv/OpenEnv",
+  "mirror": "dovel-pr17-validation/pr17r26-pypi-openenv",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "idursun/jjui",
+  "mirror": "dovel-pr17-validation/pr17r26-go-jjui",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 14,
+  "source": "sorenisanerd/gotty",
+  "mirror": "dovel-pr17-validation/pr17r26-go-gotty",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 15,
+  "source": "raviqqe/muffet",
+  "mirror": "dovel-pr17-validation/pr17r26-go-muffet",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 16,
+  "source": "kkawakam/rustyline",
+  "mirror": "dovel-pr17-validation/pr17r26-cargo-rustyline",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "immunant/c2rust",
+  "mirror": "dovel-pr17-validation/pr17r26-cargo-c2rust",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 18,
+  "source": "Byron/dua-cli",
+  "mirror": "dovel-pr17-validation/pr17r26-cargo-dua-cli",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 19,
+  "source": "orhanobut/logger",
+  "mirror": "dovel-pr17-validation/pr17r26-maven-logger",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "GoogleContainerTools/jib",
+  "mirror": "dovel-pr17-validation/pr17r26-maven-jib",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 21,
+  "source": "jeremyevans/sequel",
+  "mirror": "dovel-pr17-validation/pr17r26-gem-sequel",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "carrierwaveuploader/carrierwave",
+  "mirror": "dovel-pr17-validation/pr17r26-gem-carrierwave",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "composer/semver",
+  "mirror": "dovel-pr17-validation/pr17r26-composer-semver",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "jsonrainbow/json-schema",
+  "mirror": "dovel-pr17-validation/pr17r26-composer-json-schema",
+  "branch": "main",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "radzenhq/radzen-blazor",
+  "mirror": "dovel-pr17-validation/pr17r26-nuget-radzen-blazor",
+  "branch": "master",
+  "ecosystem": "nuget"
+ }
+]
