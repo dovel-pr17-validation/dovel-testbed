@@ -1,0 +1,254 @@
+[
+ {
+  "index": 1,
+  "source": "directus/directus",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-directus",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "Unleash/unleash",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-unleash",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "jitsi/jitsi-meet",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-jitsi-meet",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "Openpanel-dev/openpanel",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-openpanel",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "frappe/lms",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-lms",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "hoppscotch/hoppscotch",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-hoppscotch",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 8,
+  "source": "rybbit-io/rybbit",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-rybbit",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 9,
+  "source": "tolgee/tolgee-platform",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-tolgee-platform",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 10,
+  "source": "evershopcommerce/evershop",
+  "mirror": "dovel-pr17-validation/pr17s100-npm-evershop",
+  "branch": "dev",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 11,
+  "source": "frappe/helpdesk",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-helpdesk",
+  "branch": "develop",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 12,
+  "source": "esphome/esphome",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-esphome",
+  "branch": "dev",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 13,
+  "source": "marimo-team/marimo",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-marimo",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 14,
+  "source": "permitio/opal",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-opal",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 16,
+  "source": "getzep/zep",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-zep",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 17,
+  "source": "PrefectHQ/prefect",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-prefect",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 18,
+  "source": "modoboa/modoboa",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-modoboa",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 19,
+  "source": "meltano/meltano",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-meltano",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 20,
+  "source": "kiwitcms/Kiwi",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-kiwi",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 21,
+  "source": "frappe/crm",
+  "mirror": "dovel-pr17-validation/pr17s100-pypi-crm",
+  "branch": "develop",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 22,
+  "source": "milvus-io/milvus",
+  "mirror": "dovel-pr17-validation/pr17s100-go-milvus",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 24,
+  "source": "spacedriveapp/spacedrive",
+  "mirror": "dovel-pr17-validation/pr17s100-cargo-spacedrive",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 25,
+  "source": "paradedb/paradedb",
+  "mirror": "dovel-pr17-validation/pr17s100-cargo-paradedb",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 26,
+  "source": "gitbutlerapp/gitbutler",
+  "mirror": "dovel-pr17-validation/pr17s100-cargo-gitbutler",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 27,
+  "source": "qdrant/qdrant",
+  "mirror": "dovel-pr17-validation/pr17s100-cargo-qdrant",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 28,
+  "source": "CapSoftware/Cap",
+  "mirror": "dovel-pr17-validation/pr17s100-cargo-cap",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 29,
+  "source": "tursodatabase/turso",
+  "mirror": "dovel-pr17-validation/pr17s100-cargo-turso",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 30,
+  "source": "thunderbird/thunderbird-android",
+  "mirror": "dovel-pr17-validation/pr17s100-maven-thunderbird-android",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 31,
+  "source": "crate/crate",
+  "mirror": "dovel-pr17-validation/pr17s100-maven-crate",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 32,
+  "source": "chatwoot/chatwoot",
+  "mirror": "dovel-pr17-validation/pr17s100-gem-chatwoot",
+  "branch": "develop",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 33,
+  "source": "mastodon/mastodon",
+  "mirror": "dovel-pr17-validation/pr17s100-gem-mastodon",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 34,
+  "source": "we-promise/sure",
+  "mirror": "dovel-pr17-validation/pr17s100-gem-sure",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 35,
+  "source": "statamic/cms",
+  "mirror": "dovel-pr17-validation/pr17s100-composer-cms",
+  "branch": "6.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 36,
+  "source": "espocrm/espocrm",
+  "mirror": "dovel-pr17-validation/pr17s100-composer-espocrm",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 37,
+  "source": "unopim/unopim",
+  "mirror": "dovel-pr17-validation/pr17s100-composer-unopim",
+  "branch": "3.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 38,
+  "source": "owncloud/core",
+  "mirror": "dovel-pr17-validation/pr17s100-composer-core",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 39,
+  "source": "Leantime/leantime",
+  "mirror": "dovel-pr17-validation/pr17s100-composer-leantime",
+  "branch": "master",
+  "ecosystem": "composer"
+ }
+]
