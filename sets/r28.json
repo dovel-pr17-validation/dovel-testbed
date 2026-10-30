@@ -1,0 +1,142 @@
+[
+ {
+  "index": 1,
+  "source": "pmndrs/valtio",
+  "mirror": "dovel-pr17-validation/pr17r28-npm-valtio",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "modelcontextprotocol/typescript-sdk",
+  "mirror": "dovel-pr17-validation/pr17r28-npm-typescript-sdk",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "node-schedule/node-schedule",
+  "mirror": "dovel-pr17-validation/pr17r28-npm-node-schedule",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "oldj/SwitchHosts",
+  "mirror": "dovel-pr17-validation/pr17r28-npm-switchhosts",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "primer/octicons",
+  "mirror": "dovel-pr17-validation/pr17r28-npm-octicons",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "miurla/morphic",
+  "mirror": "dovel-pr17-validation/pr17r28-npm-morphic",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "bghira/SimpleTuner",
+  "mirror": "dovel-pr17-validation/pr17r28-pypi-simpletuner",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "anacrolix/torrent",
+  "mirror": "dovel-pr17-validation/pr17r28-go-torrent",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 9,
+  "source": "contribsys/faktory",
+  "mirror": "dovel-pr17-validation/pr17r28-go-faktory",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 10,
+  "source": "noborus/ov",
+  "mirror": "dovel-pr17-validation/pr17r28-go-ov",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 11,
+  "source": "neovide/neovide",
+  "mirror": "dovel-pr17-validation/pr17r28-cargo-neovide",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 12,
+  "source": "pamburus/hl",
+  "mirror": "dovel-pr17-validation/pr17r28-cargo-hl",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 13,
+  "source": "napi-rs/napi-rs",
+  "mirror": "dovel-pr17-validation/pr17r28-cargo-napi-rs",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 14,
+  "source": "AntennaPod/AntennaPod",
+  "mirror": "dovel-pr17-validation/pr17r28-maven-antennapod",
+  "branch": "develop",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 15,
+  "source": "square/wire",
+  "mirror": "dovel-pr17-validation/pr17r28-maven-wire",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 16,
+  "source": "petergoldstein/dalli",
+  "mirror": "dovel-pr17-validation/pr17r28-gem-dalli",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 17,
+  "source": "activeadmin/activeadmin",
+  "mirror": "dovel-pr17-validation/pr17r28-gem-activeadmin",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 18,
+  "source": "cachethq/cachet",
+  "mirror": "dovel-pr17-validation/pr17r28-composer-cachet",
+  "branch": "3.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 19,
+  "source": "catfan/Medoo",
+  "mirror": "dovel-pr17-validation/pr17r28-composer-medoo",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 20,
+  "source": "modelcontextprotocol/csharp-sdk",
+  "mirror": "dovel-pr17-validation/pr17r28-nuget-csharp-sdk",
+  "branch": "main",
+  "ecosystem": "nuget"
+ }
+]
