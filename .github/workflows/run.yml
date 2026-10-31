@@ -126,14 +126,18 @@ jobs:
           # Submodules as the repository's own CI checkout fetches them (actions/checkout submodules: recursive);
           # their URLs are the upstream ones, fetched without the token.
           if [ -f "$RUNNER_TEMP/repo/.gitmodules" ]; then
-            git -C "$RUNNER_TEMP/repo" -c credential.helper= submodule update --init --recursive --depth 1 || echo "::warning::some submodules could not be fetched"
+            git -C "$RUNNER_TEMP/repo" -c credential.helper= -c gc.auto=0 -c maintenance.auto=false -c fetch.writeCommitGraph=false submodule update --init --recursive --depth 1 || echo "::warning::some submodules could not be fetched"
           fi
           git -C "$RUNNER_TEMP/repo" config user.name "Dovel Labs"
           git -C "$RUNNER_TEMP/repo" config user.email "dovel@users.noreply.github.com"
           # Nothing handed to the job that runs repository code may carry the token.
           if grep -rqF -- "$MIRRORS_TOKEN" "$RUNNER_TEMP/repo/.git"; then echo "::error::the mirror's Git metadata still holds the token"; exit 92; fi
           mkdir -p "$RUNNER_TEMP/handoff"
-          tar -C "$RUNNER_TEMP" -cf "$RUNNER_TEMP/handoff/repo.tar" repo
+          # A detached Git housekeeping process can still be writing a pack; archive once the tree is still.
+          for attempt in 1 2 3; do
+            tar -C "$RUNNER_TEMP" -cf "$RUNNER_TEMP/handoff/repo.tar" repo && break
+            [ "$attempt" -lt 3 ] || exit 93; sleep 15
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: input-${{ matrix.index }}
