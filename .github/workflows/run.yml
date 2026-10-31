@@ -201,6 +201,8 @@ jobs:
         run: |
           set -uo pipefail
           output="$RUNNER_TEMP/out"; mkdir -p "$output"
+          # The runner's memory and disk each minute, in the job log, so a runner lost mid-run leaves its last state.
+          ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') swap: $(free -m | awk 'NR==3{print $3"/"$2}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
           # As dovel-flow/action.yml does: the key reaches the flow over stdin, and every credential-shaped
           # variable is unset before the flow replaces this shell, so repository code never reads one.
           secrets="$(node -e '
