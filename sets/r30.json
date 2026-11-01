@@ -1,0 +1,177 @@
+[
+ {
+  "index": 1,
+  "source": "QwikDev/partytown",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-partytown",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "reduxjs/react-redux",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-react-redux",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "postmanlabs/newman",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-newman",
+  "branch": "develop",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "microsoft/monaco-editor",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-monaco-editor",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "tonyantony300/dashbeam",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-dashbeam",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "kepano/defuddle",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-defuddle",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 8,
+  "source": "jacobgil/pytorch-grad-cam",
+  "mirror": "dovel-pr17-validation/pr17r30-pypi-pytorch-grad-cam",
+  "branch": "master",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 9,
+  "source": "canopy-network/canopy",
+  "mirror": "dovel-pr17-validation/pr17r30-go-canopy",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 10,
+  "source": "tensorchord/envd",
+  "mirror": "dovel-pr17-validation/pr17r30-go-envd",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 11,
+  "source": "boyter/scc",
+  "mirror": "dovel-pr17-validation/pr17r30-go-scc",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 12,
+  "source": "gopasspw/gopass",
+  "mirror": "dovel-pr17-validation/pr17r30-go-gopass",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 13,
+  "source": "EFForg/rayhunter",
+  "mirror": "dovel-pr17-validation/pr17r30-cargo-rayhunter",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 14,
+  "source": "o2sh/onefetch",
+  "mirror": "dovel-pr17-validation/pr17r30-cargo-onefetch",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 15,
+  "source": "dtolnay/quote",
+  "mirror": "dovel-pr17-validation/pr17r30-cargo-quote",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 16,
+  "source": "timothymiller/cloudflare-ddns",
+  "mirror": "dovel-pr17-validation/pr17r30-cargo-cloudflare-ddns",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 17,
+  "source": "d4rken-org/sdmaid-se",
+  "mirror": "dovel-pr17-validation/pr17r30-maven-sdmaid-se",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 18,
+  "source": "YiiGuxing/TranslationPlugin",
+  "mirror": "dovel-pr17-validation/pr17r30-maven-translationplugin",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 19,
+  "source": "MuntashirAkon/AppManager",
+  "mirror": "dovel-pr17-validation/pr17r30-maven-appmanager",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 20,
+  "source": "rouge-ruby/rouge",
+  "mirror": "dovel-pr17-validation/pr17r30-gem-rouge",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 21,
+  "source": "Freika/dawarich",
+  "mirror": "dovel-pr17-validation/pr17r30-gem-dawarich",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 22,
+  "source": "omniauth/omniauth",
+  "mirror": "dovel-pr17-validation/pr17r30-gem-omniauth",
+  "branch": "master",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 23,
+  "source": "php-debugbar/php-debugbar",
+  "mirror": "dovel-pr17-validation/pr17r30-composer-php-debugbar",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 24,
+  "source": "PHPOffice/PHPWord",
+  "mirror": "dovel-pr17-validation/pr17r30-composer-phpword",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 25,
+  "source": "riok/mapperly",
+  "mirror": "dovel-pr17-validation/pr17r30-nuget-mapperly",
+  "branch": "main",
+  "ecosystem": "nuget"
+ },
+ {
+  "index": 26,
+  "source": "EveryInc/compound-engineering-plugin",
+  "mirror": "dovel-pr17-validation/pr17r30-npm-compound-engineering-plugin",
+  "branch": "main",
+  "ecosystem": "npm"
+ }
+]
