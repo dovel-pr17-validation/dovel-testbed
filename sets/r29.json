@@ -1,0 +1,135 @@
+[
+ {
+  "index": 1,
+  "source": "microsoft/inshellisense",
+  "mirror": "dovel-pr17-validation/pr17r29-npm-inshellisense",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 2,
+  "source": "reduxjs/redux-toolkit",
+  "mirror": "dovel-pr17-validation/pr17r29-npm-redux-toolkit",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 3,
+  "source": "camsong/You-Dont-Need-jQuery",
+  "mirror": "dovel-pr17-validation/pr17r29-npm-you-dont-need-jquery",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 4,
+  "source": "tabulator-tables/tabulator",
+  "mirror": "dovel-pr17-validation/pr17r29-npm-tabulator",
+  "branch": "master",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 5,
+  "source": "windingwind/zotero-pdf-translate",
+  "mirror": "dovel-pr17-validation/pr17r29-npm-zotero-pdf-translate",
+  "branch": "main",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 6,
+  "source": "coleam00/Archon",
+  "mirror": "dovel-pr17-validation/pr17r29-npm-archon",
+  "branch": "dev",
+  "ecosystem": "npm"
+ },
+ {
+  "index": 7,
+  "source": "apache/burr",
+  "mirror": "dovel-pr17-validation/pr17r29-pypi-burr",
+  "branch": "main",
+  "ecosystem": "pypi"
+ },
+ {
+  "index": 8,
+  "source": "pufferpanel/pufferpanel",
+  "mirror": "dovel-pr17-validation/pr17r29-go-pufferpanel",
+  "branch": "v3",
+  "ecosystem": "go"
+ },
+ {
+  "index": 9,
+  "source": "kopia/kopia",
+  "mirror": "dovel-pr17-validation/pr17r29-go-kopia",
+  "branch": "master",
+  "ecosystem": "go"
+ },
+ {
+  "index": 10,
+  "source": "xpzouying/xiaohongshu-mcp",
+  "mirror": "dovel-pr17-validation/pr17r29-go-xiaohongshu-mcp",
+  "branch": "main",
+  "ecosystem": "go"
+ },
+ {
+  "index": 11,
+  "source": "tramhao/termusic",
+  "mirror": "dovel-pr17-validation/pr17r29-cargo-termusic",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 12,
+  "source": "TheAlgorithms/Rust",
+  "mirror": "dovel-pr17-validation/pr17r29-cargo-rust",
+  "branch": "master",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 13,
+  "source": "ikatson/rqbit",
+  "mirror": "dovel-pr17-validation/pr17r29-cargo-rqbit",
+  "branch": "main",
+  "ecosystem": "cargo"
+ },
+ {
+  "index": 14,
+  "source": "Flow-Tube/Flow",
+  "mirror": "dovel-pr17-validation/pr17r29-maven-flow",
+  "branch": "main",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 15,
+  "source": "Suwayomi/Suwayomi-Server",
+  "mirror": "dovel-pr17-validation/pr17r29-maven-suwayomi-server",
+  "branch": "master",
+  "ecosystem": "maven"
+ },
+ {
+  "index": 17,
+  "source": "whitesmith/rubycritic",
+  "mirror": "dovel-pr17-validation/pr17r29-gem-rubycritic",
+  "branch": "main",
+  "ecosystem": "gem"
+ },
+ {
+  "index": 18,
+  "source": "symfony/flex",
+  "mirror": "dovel-pr17-validation/pr17r29-composer-flex",
+  "branch": "2.x",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 19,
+  "source": "RSS-Bridge/rss-bridge",
+  "mirror": "dovel-pr17-validation/pr17r29-composer-rss-bridge",
+  "branch": "master",
+  "ecosystem": "composer"
+ },
+ {
+  "index": 20,
+  "source": "MudBlazor/MudBlazor",
+  "mirror": "dovel-pr17-validation/pr17r29-nuget-mudblazor",
+  "branch": "dev",
+  "ecosystem": "nuget"
+ }
+]
