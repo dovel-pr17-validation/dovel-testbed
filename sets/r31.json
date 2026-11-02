@@ -1,0 +1,202 @@
+[
+ {
+  "index": 1,
+  "source": "voyager-crew/voyager",
+  "mirror": "dovel-pr17-validation/pr17r31-npm-voyager",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 2,
+  "source": "vbenjs/vue-vben-admin",
+  "mirror": "dovel-pr17-validation/pr17r31-npm-vue-vben-admin",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 4,
+  "source": "iib0011/omni-tools",
+  "mirror": "dovel-pr17-validation/pr17r31-npm-omni-tools",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 5,
+  "source": "kern/filepizza",
+  "mirror": "dovel-pr17-validation/pr17r31-npm-filepizza",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 6,
+  "source": "GoogleChrome/web-vitals",
+  "mirror": "dovel-pr17-validation/pr17r31-npm-web-vitals",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 7,
+  "source": "sarperavci/CloudflareBypassForScraping",
+  "mirror": "dovel-pr17-validation/pr17r31-pypi-cloudflarebypassforscraping",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 8,
+  "source": "google/langextract",
+  "mirror": "dovel-pr17-validation/pr17r31-pypi-langextract",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 9,
+  "source": "brndnmtthws/thetagang",
+  "mirror": "dovel-pr17-validation/pr17r31-pypi-thetagang",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 10,
+  "source": "ipython/ipython",
+  "mirror": "dovel-pr17-validation/pr17r31-pypi-ipython",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 11,
+  "source": "borgbackup/borg",
+  "mirror": "dovel-pr17-validation/pr17r31-pypi-borg",
+  "branch": "master",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 12,
+  "source": "HKUDS/RAG-Anything",
+  "mirror": "dovel-pr17-validation/pr17r31-pypi-rag-anything",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 13,
+  "source": "hashicorp/go-multierror",
+  "mirror": "dovel-pr17-validation/pr17r31-go-go-multierror",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2404"
+ },
+ {
+  "index": 14,
+  "source": "gin-contrib/cors",
+  "mirror": "dovel-pr17-validation/pr17r31-go-cors",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 15,
+  "source": "kubernetes-sigs/krew",
+  "mirror": "dovel-pr17-validation/pr17r31-go-krew",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 16,
+  "source": "gleam-lang/gleam",
+  "mirror": "dovel-pr17-validation/pr17r31-cargo-gleam",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 17,
+  "source": "flowsurface-rs/flowsurface",
+  "mirror": "dovel-pr17-validation/pr17r31-cargo-flowsurface",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 18,
+  "source": "ast-grep/ast-grep",
+  "mirror": "dovel-pr17-validation/pr17r31-cargo-ast-grep",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2604"
+ },
+ {
+  "index": 19,
+  "source": "clojure/clojure",
+  "mirror": "dovel-pr17-validation/pr17r31-maven-clojure",
+  "branch": "master",
+  "ecosystem": "maven",
+  "runner": "2404"
+ },
+ {
+  "index": 20,
+  "source": "RoaringBitmap/RoaringBitmap",
+  "mirror": "dovel-pr17-validation/pr17r31-maven-roaringbitmap",
+  "branch": "master",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 21,
+  "source": "jnunemaker/httparty",
+  "mirror": "dovel-pr17-validation/pr17r31-gem-httparty",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 22,
+  "source": "lobsters/lobsters",
+  "mirror": "dovel-pr17-validation/pr17r31-gem-lobsters",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 23,
+  "source": "doctrine/dbal",
+  "mirror": "dovel-pr17-validation/pr17r31-composer-dbal",
+  "branch": "4.5.x",
+  "ecosystem": "composer",
+  "runner": "2404"
+ },
+ {
+  "index": 24,
+  "source": "nuwave/lighthouse",
+  "mirror": "dovel-pr17-validation/pr17r31-composer-lighthouse",
+  "branch": "master",
+  "ecosystem": "composer",
+  "runner": "2404"
+ },
+ {
+  "index": 26,
+  "source": "mobxjs/mobx",
+  "mirror": "dovel-pr17-validation/pr17r31-npm-mobx",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 27,
+  "source": "inbucket/inbucket",
+  "mirror": "dovel-pr17-validation/pr17r31-go-inbucket",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2404"
+ }
+]
