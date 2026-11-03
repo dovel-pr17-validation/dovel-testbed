@@ -1,0 +1,202 @@
+[
+ {
+  "index": 1,
+  "source": "latitude-dev/latitude-llm",
+  "mirror": "dovel-pr17-validation/pr17r32b-npm-latitude-llm",
+  "branch": "development",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 2,
+  "source": "chartbrew/chartbrew",
+  "mirror": "dovel-pr17-validation/pr17r32b-npm-chartbrew",
+  "branch": "master",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 3,
+  "source": "wundergraph/cosmo",
+  "mirror": "dovel-pr17-validation/pr17r32b-npm-cosmo",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 4,
+  "source": "bolna-ai/bolna",
+  "mirror": "dovel-pr17-validation/pr17r32b-pypi-bolna",
+  "branch": "master",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 5,
+  "source": "ConduitIO/conduit",
+  "mirror": "dovel-pr17-validation/pr17r32b-go-conduit",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 6,
+  "source": "krakend/krakend-ce",
+  "mirror": "dovel-pr17-validation/pr17r32b-go-krakend-ce",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 7,
+  "source": "VictoriaMetrics/operator",
+  "mirror": "dovel-pr17-validation/pr17r32b-go-operator",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 8,
+  "source": "chef/chef",
+  "mirror": "dovel-pr17-validation/pr17r32b-gem-chef",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 9,
+  "source": "onetimesecret/onetimesecret",
+  "mirror": "dovel-pr17-validation/pr17r32b-gem-onetimesecret",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 10,
+  "source": "LykosAI/StabilityMatrix",
+  "mirror": "dovel-pr17-validation/pr17r32b-nuget-stabilitymatrix",
+  "branch": "main",
+  "ecosystem": "nuget",
+  "runner": "2604"
+ },
+ {
+  "index": 11,
+  "source": "pipecat-ai/pipecat-client-web",
+  "mirror": "dovel-pr17-validation/pr17r32b-npm-pipecat-client-web",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 12,
+  "source": "sanity-io/groq-js",
+  "mirror": "dovel-pr17-validation/pr17r32b-npm-groq-js",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 13,
+  "source": "stripe/react-stripe-js",
+  "mirror": "dovel-pr17-validation/pr17r32b-npm-react-stripe-js",
+  "branch": "master",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 14,
+  "source": "deepgram/deepgram-python-sdk",
+  "mirror": "dovel-pr17-validation/pr17r32b-pypi-deepgram-python-sdk",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 15,
+  "source": "redis/mcp-redis",
+  "mirror": "dovel-pr17-validation/pr17r32b-pypi-mcp-redis",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 16,
+  "source": "getzep/zep-python",
+  "mirror": "dovel-pr17-validation/pr17r32b-pypi-zep-python",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 17,
+  "source": "redis/redis-om-python",
+  "mirror": "dovel-pr17-validation/pr17r32b-pypi-redis-om-python",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 18,
+  "source": "Doist/todoist-api-python",
+  "mirror": "dovel-pr17-validation/pr17r32b-pypi-todoist-api-python",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 19,
+  "source": "apollographql/rover",
+  "mirror": "dovel-pr17-validation/pr17r32b-cargo-rover",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 20,
+  "source": "oxidecomputer/typify",
+  "mirror": "dovel-pr17-validation/pr17r32b-cargo-typify",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 21,
+  "source": "supabase/pg_jsonschema",
+  "mirror": "dovel-pr17-validation/pr17r32b-cargo-pg_jsonschema",
+  "branch": "master",
+  "ecosystem": "cargo",
+  "runner": "2604"
+ },
+ {
+  "index": 22,
+  "source": "supabase/supabase-kt",
+  "mirror": "dovel-pr17-validation/pr17r32b-maven-supabase-kt",
+  "branch": "master",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 23,
+  "source": "minio/minio-java",
+  "mirror": "dovel-pr17-validation/pr17r32b-maven-minio-java",
+  "branch": "master",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 24,
+  "source": "ueberdosis/tiptap-php",
+  "mirror": "dovel-pr17-validation/pr17r32b-composer-tiptap-php",
+  "branch": "main",
+  "ecosystem": "composer",
+  "runner": "2404"
+ },
+ {
+  "index": 25,
+  "source": "phpstan/phpstan-strict-rules",
+  "mirror": "dovel-pr17-validation/pr17r32b-composer-phpstan-strict-rules",
+  "branch": "2.1.x",
+  "ecosystem": "composer",
+  "runner": "2404"
+ }
+]
