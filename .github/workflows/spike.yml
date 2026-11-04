@@ -1,0 +1,37 @@
+name: spike-atime
+on:
+  push:
+    branches: [spike-atime]
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21' }
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.23', cache: false }
+      - name: kernel and mounts
+        run: uname -a; findmnt -no TARGET,FSTYPE,OPTIONS / /home /opt "$GITHUB_WORKSPACE" /tmp || true
+      - name: workspace on the host (no isolation)
+        run: OUT=/tmp/out bash probe.sh workspace-host "$GITHUB_WORKSPACE/w"
+      - name: prepare lower-layer fixtures on the host
+        run: OUT=/tmp/out PHASE=setup bash probe.sh lower-setup /home/runner/lowerfix
+      - name: inside an isolate.sh-like mount namespace with overlays on /home and /opt
+        run: |
+          cat > /tmp/inner.sh <<'IN'
+          set -u
+          S=/tmp/scratch; mkdir -p $S
+          for d in /home /opt; do n=$(echo $d | tr / _); mkdir -p $S/$n/upper $S/$n/work
+            mount -t overlay overlay -o "lowerdir=$d,upperdir=$S/$n/upper,workdir=$S/$n/work" "$d"; done
+          findmnt -no TARGET,FSTYPE,OPTIONS /home /opt | tee -a /tmp/out/result.txt
+          U="setpriv --reuid=$(id -u runner) --regid=$(id -g runner) --init-groups env HOME=/home/runner PATH=$PATH"
+          $U OUT=/tmp/out bash $GITHUB_WORKSPACE/probe.sh overlay-upper-home /home/runner/upperfix
+          $U OUT=/tmp/out bash $GITHUB_WORKSPACE/probe.sh overlay-upper-opt-tmpcache /opt/hostedtoolcache/spike 2>/dev/null || { mkdir -p /opt/spike; chown runner /opt/spike; $U OUT=/tmp/out bash $GITHUB_WORKSPACE/probe.sh overlay-upper-opt /opt/spike; }
+          $U OUT=/tmp/out PHASE=check bash $GITHUB_WORKSPACE/probe.sh overlay-lower-home /home/runner/lowerfix
+          $U OUT=/tmp/out bash $GITHUB_WORKSPACE/probe.sh workspace-bound-through-in-ns "$GITHUB_WORKSPACE/w2"
+          IN
+          sudo -E unshare --mount --propagation slave /bin/bash /tmp/inner.sh
+      - name: result
+        if: always()
+        run: cat /tmp/out/result.txt
