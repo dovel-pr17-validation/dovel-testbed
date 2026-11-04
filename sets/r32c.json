@@ -1,0 +1,66 @@
+[
+ {
+  "index": 1,
+  "source": "wundergraph/cosmo",
+  "mirror": "dovel-pr17-validation/pr17r32c-npm-cosmo",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 2,
+  "source": "ConduitIO/conduit",
+  "mirror": "dovel-pr17-validation/pr17r32c-go-conduit",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 3,
+  "source": "chef/chef",
+  "mirror": "dovel-pr17-validation/pr17r32c-gem-chef",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 4,
+  "source": "redis/mcp-redis",
+  "mirror": "dovel-pr17-validation/pr17r32c-pypi-mcp-redis",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 5,
+  "source": "getzep/zep-python",
+  "mirror": "dovel-pr17-validation/pr17r32c-pypi-zep-python",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 6,
+  "source": "apollographql/rover",
+  "mirror": "dovel-pr17-validation/pr17r32c-cargo-rover",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 7,
+  "source": "supabase/supabase-kt",
+  "mirror": "dovel-pr17-validation/pr17r32c-maven-supabase-kt",
+  "branch": "master",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 8,
+  "source": "phpstan/phpstan-strict-rules",
+  "mirror": "dovel-pr17-validation/pr17r32c-composer-phpstan-strict-rules",
+  "branch": "2.1.x",
+  "ecosystem": "composer",
+  "runner": "2404"
+ }
+]
