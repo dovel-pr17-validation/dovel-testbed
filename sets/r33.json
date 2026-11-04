@@ -1,0 +1,202 @@
+[
+ {
+  "index": 1,
+  "source": "mixpanel/mixpanel-js",
+  "mirror": "dovel-pr17-validation/pr17r33-npm-mixpanel-js",
+  "branch": "master",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 2,
+  "source": "inngest/inngest-js",
+  "mirror": "dovel-pr17-validation/pr17r33-npm-inngest-js",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 3,
+  "source": "GetStream/stream-js",
+  "mirror": "dovel-pr17-validation/pr17r33-npm-stream-js",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 4,
+  "source": "brightdata/brightdata-mcp",
+  "mirror": "dovel-pr17-validation/pr17r33-npm-brightdata-mcp",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 5,
+  "source": "deepgram/deepgram-js-sdk",
+  "mirror": "dovel-pr17-validation/pr17r33-npm-deepgram-js-sdk",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 6,
+  "source": "comet-ml/opik-mcp",
+  "mirror": "dovel-pr17-validation/pr17r33-pypi-opik-mcp",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 7,
+  "source": "dbos-inc/dbos-transact-py",
+  "mirror": "dovel-pr17-validation/pr17r33-pypi-dbos-transact-py",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 8,
+  "source": "weaviate/weaviate-python-client",
+  "mirror": "dovel-pr17-validation/pr17r33-pypi-weaviate-python-client",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 9,
+  "source": "anthropics/claude-agent-sdk-python",
+  "mirror": "dovel-pr17-validation/pr17r33-pypi-claude-agent-sdk-python",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 10,
+  "source": "safe-global/safe-core-sdk",
+  "mirror": "dovel-pr17-validation/pr17r33-npm-safe-core-sdk",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 11,
+  "source": "livekit/server-sdk-go",
+  "mirror": "dovel-pr17-validation/pr17r33-go-server-sdk-go",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 12,
+  "source": "tursodatabase/turso-cli",
+  "mirror": "dovel-pr17-validation/pr17r33-go-turso-cli",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2404"
+ },
+ {
+  "index": 13,
+  "source": "plaid/plaid-go",
+  "mirror": "dovel-pr17-validation/pr17r33-go-plaid-go",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2404"
+ },
+ {
+  "index": 14,
+  "source": "oxc-project/oxc-resolver",
+  "mirror": "dovel-pr17-validation/pr17r33-cargo-oxc-resolver",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 15,
+  "source": "software-mansion/smelter",
+  "mirror": "dovel-pr17-validation/pr17r33-cargo-smelter",
+  "branch": "master",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 16,
+  "source": "anza-xyz/wincode",
+  "mirror": "dovel-pr17-validation/pr17r33-cargo-wincode",
+  "branch": "master",
+  "ecosystem": "cargo",
+  "runner": "2604"
+ },
+ {
+  "index": 17,
+  "source": "gravitee-io/gravitee-api-management",
+  "mirror": "dovel-pr17-validation/pr17r33-maven-gravitee-api-management",
+  "branch": "master",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 18,
+  "source": "vaadin/flow",
+  "mirror": "dovel-pr17-validation/pr17r33-maven-flow",
+  "branch": "main",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 19,
+  "source": "Kong/unirest-java",
+  "mirror": "dovel-pr17-validation/pr17r33-maven-unirest-java",
+  "branch": "main",
+  "ecosystem": "maven",
+  "runner": "2604"
+ },
+ {
+  "index": 20,
+  "source": "discourse/prometheus_exporter",
+  "mirror": "dovel-pr17-validation/pr17r33-gem-prometheus_exporter",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 21,
+  "source": "discourse/logster",
+  "mirror": "dovel-pr17-validation/pr17r33-gem-logster",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 22,
+  "source": "getsentry/sentry-php",
+  "mirror": "dovel-pr17-validation/pr17r33-composer-sentry-php",
+  "branch": "master",
+  "ecosystem": "composer",
+  "runner": "2604"
+ },
+ {
+  "index": 23,
+  "source": "phpstan/phpstan-symfony",
+  "mirror": "dovel-pr17-validation/pr17r33-composer-phpstan-symfony",
+  "branch": "2.1.x",
+  "ecosystem": "composer",
+  "runner": "2404"
+ },
+ {
+  "index": 24,
+  "source": "getsentry/sentry-dotnet",
+  "mirror": "dovel-pr17-validation/pr17r33-nuget-sentry-dotnet",
+  "branch": "main",
+  "ecosystem": "nuget",
+  "runner": "2604"
+ },
+ {
+  "index": 25,
+  "source": "qdrant/qdrant-dotnet",
+  "mirror": "dovel-pr17-validation/pr17r33-nuget-qdrant-dotnet",
+  "branch": "main",
+  "ecosystem": "nuget",
+  "runner": "2404"
+ }
+]
