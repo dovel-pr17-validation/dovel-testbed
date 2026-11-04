@@ -31,7 +31,7 @@ jobs:
           $U OUT=/tmp/out PHASE=check bash $GITHUB_WORKSPACE/probe.sh overlay-lower-home /home/runner/lowerfix
           $U OUT=/tmp/out bash $GITHUB_WORKSPACE/probe.sh workspace-bound-through-in-ns "$GITHUB_WORKSPACE/w2"
           IN
-          sudo -E unshare --mount --propagation slave /bin/bash /tmp/inner.sh
+          sudo -E env "PATH=$PATH" unshare --mount --propagation slave /bin/bash /tmp/inner.sh
       - name: result
         if: always()
         run: cat /tmp/out/result.txt
