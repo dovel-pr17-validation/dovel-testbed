@@ -1,0 +1,202 @@
+[
+ {
+  "index": 1,
+  "source": "makenotion/notion-sdk-js",
+  "mirror": "dovel-pr17-validation/pr17r34-npm-notion-sdk-js",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 3,
+  "source": "discord/embedded-app-sdk",
+  "mirror": "dovel-pr17-validation/pr17r34-npm-embedded-app-sdk",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 5,
+  "source": "apify/crawlee",
+  "mirror": "dovel-pr17-validation/pr17r34-npm-crawlee",
+  "branch": "master",
+  "ecosystem": "npm",
+  "runner": "2604"
+ },
+ {
+  "index": 6,
+  "source": "nuclia/nucliadb",
+  "mirror": "dovel-pr17-validation/pr17r34-pypi-nucliadb",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 7,
+  "source": "planetlabs/planet-client-python",
+  "mirror": "dovel-pr17-validation/pr17r34-pypi-planet-client-python",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 8,
+  "source": "roboflow/rf-detr",
+  "mirror": "dovel-pr17-validation/pr17r34-pypi-rf-detr",
+  "branch": "develop",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 9,
+  "source": "Nixtla/statsforecast",
+  "mirror": "dovel-pr17-validation/pr17r34-pypi-statsforecast",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2404"
+ },
+ {
+  "index": 10,
+  "source": "livekit/agents",
+  "mirror": "dovel-pr17-validation/pr17r34-pypi-agents",
+  "branch": "main",
+  "ecosystem": "pypi",
+  "runner": "2604"
+ },
+ {
+  "index": 11,
+  "source": "beam-cloud/beta9",
+  "mirror": "dovel-pr17-validation/pr17r34-go-beta9",
+  "branch": "main",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 12,
+  "source": "projectdiscovery/cloudlist",
+  "mirror": "dovel-pr17-validation/pr17r34-go-cloudlist",
+  "branch": "dev",
+  "ecosystem": "go",
+  "runner": "2404"
+ },
+ {
+  "index": 13,
+  "source": "zerodha/dungbeetle",
+  "mirror": "dovel-pr17-validation/pr17r34-go-dungbeetle",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2604"
+ },
+ {
+  "index": 14,
+  "source": "Cysharp/csbindgen",
+  "mirror": "dovel-pr17-validation/pr17r34-cargo-csbindgen",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2404"
+ },
+ {
+  "index": 15,
+  "source": "longbridge/longbridge-terminal",
+  "mirror": "dovel-pr17-validation/pr17r34-cargo-longbridge-terminal",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2604"
+ },
+ {
+  "index": 16,
+  "source": "DioxusLabs/taffy",
+  "mirror": "dovel-pr17-validation/pr17r34-cargo-taffy",
+  "branch": "main",
+  "ecosystem": "cargo",
+  "runner": "2604"
+ },
+ {
+  "index": 17,
+  "source": "GetStream/stream-draw-android",
+  "mirror": "dovel-pr17-validation/pr17r34-maven-stream-draw-android",
+  "branch": "main",
+  "ecosystem": "maven",
+  "runner": "2404"
+ },
+ {
+  "index": 18,
+  "source": "codelibs/fess",
+  "mirror": "dovel-pr17-validation/pr17r34-maven-fess",
+  "branch": "main",
+  "ecosystem": "maven",
+  "runner": "2404"
+ },
+ {
+  "index": 19,
+  "source": "spiculedata/saiku",
+  "mirror": "dovel-pr17-validation/pr17r34-maven-saiku",
+  "branch": "development",
+  "ecosystem": "maven",
+  "runner": "2404"
+ },
+ {
+  "index": 20,
+  "source": "chef/ohai",
+  "mirror": "dovel-pr17-validation/pr17r34-gem-ohai",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2404"
+ },
+ {
+  "index": 21,
+  "source": "spree/spree-starter",
+  "mirror": "dovel-pr17-validation/pr17r34-gem-spree-starter",
+  "branch": "main",
+  "ecosystem": "gem",
+  "runner": "2604"
+ },
+ {
+  "index": 22,
+  "source": "filamentphp/demo",
+  "mirror": "dovel-pr17-validation/pr17r34-composer-demo",
+  "branch": "5.x",
+  "ecosystem": "composer",
+  "runner": "2404"
+ },
+ {
+  "index": 23,
+  "source": "getsentry/sentry-symfony",
+  "mirror": "dovel-pr17-validation/pr17r34-composer-sentry-symfony",
+  "branch": "master",
+  "ecosystem": "composer",
+  "runner": "2604"
+ },
+ {
+  "index": 24,
+  "source": "Cysharp/ZLogger",
+  "mirror": "dovel-pr17-validation/pr17r34-nuget-zlogger",
+  "branch": "master",
+  "ecosystem": "nuget",
+  "runner": "2404"
+ },
+ {
+  "index": 25,
+  "source": "petabridge/akkadotnet-code-samples",
+  "mirror": "dovel-pr17-validation/pr17r34-nuget-akkadotnet-code-samples",
+  "branch": "master",
+  "ecosystem": "nuget",
+  "runner": "2404"
+ },
+ {
+  "index": 26,
+  "source": "iyzico/iyzipay-node",
+  "mirror": "dovel-pr17-validation/pr17r34-npm-iyzipay-node",
+  "branch": "master",
+  "ecosystem": "npm",
+  "runner": "2404"
+ },
+ {
+  "index": 27,
+  "source": "moov-io/iso8583",
+  "mirror": "dovel-pr17-validation/pr17r34-go-iso8583",
+  "branch": "master",
+  "ecosystem": "go",
+  "runner": "2404"
+ }
+]
