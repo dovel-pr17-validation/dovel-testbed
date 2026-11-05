@@ -31,6 +31,9 @@ on:
       ci_runner:
         description: How updates are judged - 'act' (the repository's own CI jobs, run with act) or 'emulate'
         default: 'emulate'
+      max_candidates:
+        description: Updates to attempt per repository (batches use 3)
+        default: '3'
 permissions:
   contents: read
 concurrency:
@@ -198,6 +201,7 @@ jobs:
           OPEN_PR: ${{ inputs.open_pr }}
           CI_GATE: ${{ inputs.ci_gate }}
           CI_RUNNER: ${{ inputs.ci_runner }}
+          MAX_CANDIDATES: ${{ inputs.max_candidates }}
           SOURCE: ${{ matrix.source }}
         run: |
           set -uo pipefail
@@ -221,7 +225,7 @@ jobs:
           # Pull requests are written down for the publish job, never opened here; the sweep of earlier ones'
           # CI verdicts needs the token, so the publish job runs it.
           REVIEWER_RUNTIME=openrouter node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/run-dovel-flow.mjs \
-            --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates 3 \
+            --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates "${MAX_CANDIDATES:-3}" \
             --open-pr "$OPEN_PR" --ci-gate "$CI_GATE" --publication-out "$RUNNER_TEMP/publications" --skip-ci-verdict-sweep \
             --ci-runner "$CI_RUNNER" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" --act-jobs 2 --act-job-timeout-minutes 30 --job-deadline-at "$(( JOB_STARTED_AT + (330 - 15) * 60000 ))" \
             --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
