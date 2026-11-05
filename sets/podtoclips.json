@@ -1,0 +1,10 @@
+[
+ {
+  "index": 1,
+  "source": "APPNINJAS123/podtoclips",
+  "mirror": "dovel-pr17-validation/pr17-npm-podtoclips",
+  "branch": "main",
+  "ecosystem": "npm",
+  "runner": "2404"
+ }
+]
