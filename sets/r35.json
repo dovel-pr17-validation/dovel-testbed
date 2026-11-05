@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "makenotion/notion-mcp-server",
+    "mirror": "dovel-pr17-validation/pr17r35-npm-notion-mcp-server",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "Countly/countly-sdk-web",
+    "mirror": "dovel-pr17-validation/pr17r35-npm-countly-sdk-web",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "crbnos/carbon",
+    "mirror": "dovel-pr17-validation/pr17r35-npm-carbon",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "algolia/autocomplete",
+    "mirror": "dovel-pr17-validation/pr17r35-npm-autocomplete",
+    "branch": "next",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "e2b-dev/e2b-cookbook",
+    "mirror": "dovel-pr17-validation/pr17r35-npm-e2b-cookbook",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "aurelio-labs/semantic-router",
+    "mirror": "dovel-pr17-validation/pr17r35-pypi-semantic-router",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 7,
+    "source": "langchain-ai/open-swe",
+    "mirror": "dovel-pr17-validation/pr17r35-pypi-open-swe",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 8,
+    "source": "mljar/mljar-supervised",
+    "mirror": "dovel-pr17-validation/pr17r35-pypi-mljar-supervised",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "ultralytics/ultralytics",
+    "mirror": "dovel-pr17-validation/pr17r35-pypi-ultralytics",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "bentoml/BentoML",
+    "mirror": "dovel-pr17-validation/pr17r35-pypi-bentoml",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "datazip-inc/olake",
+    "mirror": "dovel-pr17-validation/pr17r35-go-olake",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "pulumi/kubespy",
+    "mirror": "dovel-pr17-validation/pr17r35-go-kubespy",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "brexhq/substation",
+    "mirror": "dovel-pr17-validation/pr17r35-go-substation",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 14,
+    "source": "duckdb/duckdb-rs",
+    "mirror": "dovel-pr17-validation/pr17r35-cargo-duckdb-rs",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "cnosdb/cnosdb",
+    "mirror": "dovel-pr17-validation/pr17r35-cargo-cnosdb",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "FalkorDB/FalkorDB",
+    "mirror": "dovel-pr17-validation/pr17r35-cargo-falkordb",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  },
+  {
+    "index": 17,
+    "source": "GetStream/whatsApp-clone-compose",
+    "mirror": "dovel-pr17-validation/pr17r35-maven-whatsapp-clone-compose",
+    "branch": "main",
+    "ecosystem": "maven",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "swagger-api/swagger-parser",
+    "mirror": "dovel-pr17-validation/pr17r35-maven-swagger-parser",
+    "branch": "master",
+    "ecosystem": "maven",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "milvus-io/milvus-sdk-java",
+    "mirror": "dovel-pr17-validation/pr17r35-maven-milvus-sdk-java",
+    "branch": "master",
+    "ecosystem": "maven",
+    "runner": "2604"
+  },
+  {
+    "index": 20,
+    "source": "toptal/database_validations",
+    "mirror": "dovel-pr17-validation/pr17r35-gem-database_validations",
+    "branch": "master",
+    "ecosystem": "gem",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "toptal/chewy",
+    "mirror": "dovel-pr17-validation/pr17r35-gem-chewy",
+    "branch": "master",
+    "ecosystem": "gem",
+    "runner": "2604"
+  },
+  {
+    "index": 22,
+    "source": "matomo-org/device-detector",
+    "mirror": "dovel-pr17-validation/pr17r35-composer-device-detector",
+    "branch": "master",
+    "ecosystem": "composer",
+    "runner": "2604"
+  },
+  {
+    "index": 23,
+    "source": "livewire/blaze",
+    "mirror": "dovel-pr17-validation/pr17r35-composer-blaze",
+    "branch": "main",
+    "ecosystem": "composer",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "Cysharp/MasterMemory",
+    "mirror": "dovel-pr17-validation/pr17r35-nuget-mastermemory",
+    "branch": "master",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "Cysharp/Ulid",
+    "mirror": "dovel-pr17-validation/pr17r35-nuget-ulid",
+    "branch": "master",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  }
+]
