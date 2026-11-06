@@ -1,0 +1,194 @@
+[
+  {
+    "index": 1,
+    "source": "safe-global/safe-core-sdk",
+    "mirror": "dovel-pr17-validation/pr17m1p-npm-safe-core-sdk",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "ast-grep/ast-grep",
+    "mirror": "dovel-pr17-validation/pr17m1p-npm-ast-grep",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 3,
+    "source": "mobxjs/mobx",
+    "mirror": "dovel-pr17-validation/pr17m1p-npm-mobx",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "deepgram/deepgram-python-sdk",
+    "mirror": "dovel-pr17-validation/pr17m1p-pypi-deepgram-python-sdk",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "getzep/zep-python",
+    "mirror": "dovel-pr17-validation/pr17m1p-pypi-zep-python",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "wundergraph/cosmo",
+    "mirror": "dovel-pr17-validation/pr17m1p-go-cosmo",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "EFForg/rayhunter",
+    "mirror": "dovel-pr17-validation/pr17m1p-cargo-rayhunter",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "Cysharp/csbindgen",
+    "mirror": "dovel-pr17-validation/pr17m1p-cargo-csbindgen",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "nuwave/lighthouse",
+    "mirror": "dovel-pr17-validation/pr17m1p-composer-lighthouse",
+    "branch": "master",
+    "ecosystem": "composer",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "worldfnd/provekit",
+    "mirror": "dovel-pr17-validation/pr17m1n-cargo-provekit",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  },
+  {
+    "index": 11,
+    "source": "dfinity/sdk",
+    "mirror": "dovel-pr17-validation/pr17m1n-cargo-sdk",
+    "branch": "master",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "mimblewimble/grin-wallet",
+    "mirror": "dovel-pr17-validation/pr17m1n-cargo-grin-wallet",
+    "branch": "master",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "chainguard-dev/dfc",
+    "mirror": "dovel-pr17-validation/pr17m1n-go-dfc",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 14,
+    "source": "le0pard/vmail",
+    "mirror": "dovel-pr17-validation/pr17m1n-gem-vmail",
+    "branch": "main",
+    "ecosystem": "gem",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "processing/p5.js-web-editor",
+    "mirror": "dovel-pr17-validation/pr17m1n-npm-p5.js-web-editor",
+    "branch": "develop",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "risevest/octonet",
+    "mirror": "dovel-pr17-validation/pr17m1n-npm-octonet",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "daangn/codepocket",
+    "mirror": "dovel-pr17-validation/pr17m1n-npm-codepocket",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "Greenstand/treetracker-web-map-client",
+    "mirror": "dovel-pr17-validation/pr17m1n-npm-treetracker-web-map-client",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "openapistack/openapi-client-axios",
+    "mirror": "dovel-pr17-validation/pr17m1n-npm-openapi-client-axios",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "Unity-Technologies/UnityDataTools",
+    "mirror": "dovel-pr17-validation/pr17m1n-nuget-unitydatatools",
+    "branch": "main",
+    "ecosystem": "nuget",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "jonas1ara/73",
+    "mirror": "dovel-pr17-validation/pr17m1n-nuget-73",
+    "branch": "main",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "Azure-Samples/Legacy-Modernization-Agents",
+    "mirror": "dovel-pr17-validation/pr17m1n-nuget-legacy-modernization-agents",
+    "branch": "main",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "phpactor/phpactor",
+    "mirror": "dovel-pr17-validation/pr17m1n-composer-phpactor",
+    "branch": "master",
+    "ecosystem": "composer",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "zooniverse/panoptes",
+    "mirror": "dovel-pr17-validation/pr17m1n-gem-panoptes",
+    "branch": "master",
+    "ecosystem": "gem",
+    "runner": "2404"
+  }
+]
