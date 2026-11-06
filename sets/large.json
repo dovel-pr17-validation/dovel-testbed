@@ -1,0 +1,162 @@
+[
+  {
+    "index": 1,
+    "source": "algolia/autocomplete",
+    "mirror": "dovel-pr17-validation/pr17m1p-npm-autocomplete",
+    "branch": "next",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "gleam-lang/gleam",
+    "mirror": "dovel-pr17-validation/pr17m1p-cargo-gleam",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "getsentry/sentry-php",
+    "mirror": "dovel-pr17-validation/pr17m1p-composer-sentry-php",
+    "branch": "master",
+    "ecosystem": "composer",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "onetimesecret/onetimesecret",
+    "mirror": "dovel-pr17-validation/pr17m1p-gem-onetimesecret",
+    "branch": "main",
+    "ecosystem": "gem",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "qdrant/qdrant-dotnet",
+    "mirror": "dovel-pr17-validation/pr17m1p-nuget-qdrant-dotnet",
+    "branch": "main",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "mitodl/ocw-studio",
+    "mirror": "dovel-pr17-validation/pr17m1l-npm-ocw-studio",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "CBIIT/bento-icdc-frontend",
+    "mirror": "dovel-pr17-validation/pr17m1l-npm-bento-icdc-frontend",
+    "branch": "development",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 8,
+    "source": "decred/decrediton",
+    "mirror": "dovel-pr17-validation/pr17m1l-npm-decrediton",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "misenhower/splatoon2.ink",
+    "mirror": "dovel-pr17-validation/pr17m1l-npm-splatoon2.ink",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "demisto/demisto-sdk",
+    "mirror": "dovel-pr17-validation/pr17m1l-pypi-demisto-sdk",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "isosuite/releso",
+    "mirror": "dovel-pr17-validation/pr17m1l-pypi-releso",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "martiniani-lab/pele",
+    "mirror": "dovel-pr17-validation/pr17m1l-pypi-pele",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "daptin/daptin",
+    "mirror": "dovel-pr17-validation/pr17m1l-go-daptin",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "alan-turing-institute/trustchain",
+    "mirror": "dovel-pr17-validation/pr17m1l-cargo-trustchain",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "poljar/weechat-matrix-rs",
+    "mirror": "dovel-pr17-validation/pr17m1l-cargo-weechat-matrix-rs",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "maplant/scheme-rs",
+    "mirror": "dovel-pr17-validation/pr17m1l-cargo-scheme-rs",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "xd009642/llvm-profparser",
+    "mirror": "dovel-pr17-validation/pr17m1l-cargo-llvm-profparser",
+    "branch": "master",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "DIGI-UW/openelis-analyzer-bridge",
+    "mirror": "dovel-pr17-validation/pr17m1l-maven-openelis-analyzer-bridge",
+    "branch": "develop",
+    "ecosystem": "maven",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "Automattic/legacy-redirector",
+    "mirror": "dovel-pr17-validation/pr17m1l-composer-legacy-redirector",
+    "branch": "develop",
+    "ecosystem": "composer",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "clue/reactphp-eventsource",
+    "mirror": "dovel-pr17-validation/pr17m1l-composer-reactphp-eventsource",
+    "branch": "1.x",
+    "ecosystem": "composer",
+    "runner": "2404"
+  }
+]
