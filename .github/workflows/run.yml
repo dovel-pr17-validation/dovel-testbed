@@ -200,7 +200,7 @@ jobs:
           out="$RUNNER_TEMP/second-chance"; mkdir -p "$out/requests"
           cd "$RUNNER_TEMP/product"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-verdict.mjs --repo "$MIRROR" 2>&1 | tee "$out/verdicts.log" || true
-          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-repair.mjs scan --claim --second-chance-only true \
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-repair.mjs scan --claim --second-chance true --second-chance-only true \
             --repo "$MIRROR" --out "$out/requests" --claims-out "$out/claims.txt" 2>&1 | tee "$out/scan.log" || echo "::warning::the second-chance scan failed"
           if grep -rqF -- "$GH_TOKEN" "$out"; then echo "::error::the hand-off holds the token"; exit 92; fi
       - uses: actions/upload-artifact@v4
@@ -280,7 +280,7 @@ jobs:
           # The second-chance requests ride on the CI repair round's input (the flow reads <input>/second-chance/).
           second_chance=()
           if [ "$SECOND_CHANCE" = true ] && [ -d "$RUNNER_TEMP/second-chance/requests/second-chance" ]; then
-            second_chance=(--ci-repair true --ci-repair-input "$RUNNER_TEMP/second-chance/requests")
+            second_chance=(--ci-repair true --second-chance true --ci-repair-input "$RUNNER_TEMP/second-chance/requests")
           fi
           # The runner's memory and disk each minute, in the job log, so a runner lost mid-run leaves its last state.
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') swap: $(free -m | awk 'NR==3{print $3"/"$2}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
@@ -361,12 +361,23 @@ jobs:
         with:
           name: publication-${{ matrix.index }}
           path: ${{ runner.temp }}/publication
+      # The claims the second-chance token job made: from its own artifact, never from `run`'s.
+      - uses: actions/download-artifact@v4
+        if: inputs.second_chance == 'true'
+        continue-on-error: true
+        with:
+          name: second-chance-${{ matrix.index }}
+          path: ${{ runner.temp }}/second-chance
       - id: requests
         run: |
           slug=$(printf '%02d' "${{ matrix.index }}")-$(echo "${{ matrix.source }}" | tr '/' '-')
           echo "SLUG=$slug" >> "$GITHUB_ENV"
-          # A second-chance outcome (requests/second-chance/*.json) counts too.
+          # A second-chance outcome (requests/second-chance/*.json) counts too, and so does a claim alone: a claim the
+          # run never answered (it died, wrote nothing) is still concluded by the publisher.
           if [ -d "$RUNNER_TEMP/publication/$slug/requests" ] && find "$RUNNER_TEMP/publication/$slug/requests" -maxdepth 2 -name '*.json' | grep -q .; then
+            echo "any=true" >> "$GITHUB_OUTPUT"
+          elif [ -s "$RUNNER_TEMP/second-chance/claims.txt" ]; then
+            mkdir -p "$RUNNER_TEMP/publication/$slug/requests"
             echo "any=true" >> "$GITHUB_OUTPUT"
           else
             echo "No publication requests from this leg."
@@ -399,13 +410,6 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
           corepack pnpm build
-      # The claims the second-chance token job made: from its own artifact, never from `run`'s.
-      - uses: actions/download-artifact@v4
-        if: steps.requests.outputs.any == 'true' && inputs.second_chance == 'true'
-        continue-on-error: true
-        with:
-          name: second-chance-${{ matrix.index }}
-          path: ${{ runner.temp }}/second-chance
       - name: Import the hand-off as untrusted data
         if: steps.requests.outputs.any == 'true'
         working-directory: ${{ runner.temp }}/product
@@ -419,7 +423,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/imported"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/import-publication-handoff.mjs \
             "$RUNNER_TEMP/publication/$SLUG" "$RUNNER_TEMP/imported/$SLUG" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" \
-            --ci-gate "$CI_GATE" --ci-repair "$SECOND_CHANCE" --report "$RUNNER_TEMP/imported-report.json"
+            --ci-gate "$CI_GATE" --ci-repair "$SECOND_CHANCE" --second-chance "$SECOND_CHANCE" --report "$RUNNER_TEMP/imported-report.json"
       - name: Publish the proposals
         if: steps.requests.outputs.any == 'true'
         env:
@@ -444,7 +448,7 @@ jobs:
           # The second-chance outcomes and the token job's claims (sc:<number>:<attempt> words only).
           second_chance=()
           if [ "$SECOND_CHANCE" = true ]; then
-            second_chance=(--ci-repair true)
+            second_chance=(--ci-repair true --second-chance true)
             claims="$(head -n 1 "$RUNNER_TEMP/second-chance/claims.txt" 2>/dev/null || true)"
             if [[ "$claims" =~ ^sc:[0-9]+:[A-Za-z0-9-]+(\ sc:[0-9]+:[A-Za-z0-9-]+)*$ ]]; then second_chance+=(--ci-repair-claims "$claims"); fi
           fi
