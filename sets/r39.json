@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "langchain-ai/deepagentsjs",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-deepagentsjs",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 3,
+    "source": "vercel/serve-handler",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-serve-handler",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "Kanaries/graphic-walker",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-graphic-walker",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "ghostery/ghostery-extension",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-ghostery-extension",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "Sync-in/server",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-server",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 7,
+    "source": "carboneio/carbone",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-carbone",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "getsentry/vitest-evals",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-vitest-evals",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "giselles-ai/giselle",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-giselle",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "home-assistant/supervisor",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-supervisor",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 11,
+    "source": "plastic-labs/honcho",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-honcho",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "posit-dev/py-shiny",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-py-shiny",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "minitap-ai/mobile-use",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-mobile-use",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 14,
+    "source": "SylphAI-Inc/AdalFlow",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-adalflow",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "stelviodev/stelvio",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-stelvio",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "Neywa-Labs/mlx-vlm",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-mlx-vlm",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "langchain-ai/react-agent",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-react-agent",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "langflow-ai/openrag",
+    "mirror": "dovel-pr17-validation/pr17r39-pypi-openrag",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "yorkie-team/yorkie",
+    "mirror": "dovel-pr17-validation/pr17r39-go-yorkie",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 20,
+    "source": "maxmind/MaxMind-DB",
+    "mirror": "dovel-pr17-validation/pr17r39-go-maxmind-db",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "kernel/hypeman",
+    "mirror": "dovel-pr17-validation/pr17r39-go-hypeman",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "meshery/meshkit",
+    "mirror": "dovel-pr17-validation/pr17r39-go-meshkit",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "zapier/kubechecks",
+    "mirror": "dovel-pr17-validation/pr17r39-go-kubechecks",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "mondoohq/cnspec",
+    "mirror": "dovel-pr17-validation/pr17r39-go-cnspec",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 25,
+    "source": "ludo-technologies/pyscn",
+    "mirror": "dovel-pr17-validation/pr17r39-go-pyscn",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 26,
+    "source": "ZeusLN/zeus",
+    "mirror": "dovel-pr17-validation/pr17r39-npm-zeus",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  }
+]
