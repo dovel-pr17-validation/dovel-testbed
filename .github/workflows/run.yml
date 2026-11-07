@@ -347,6 +347,7 @@ jobs:
           MIRROR: ${{ matrix.mirror }}
           CI_GATE: ${{ inputs.ci_gate }}
           MAX_CANDIDATES: ${{ inputs.max_candidates }}
+          CATCH_UP: ${{ inputs.catch_up }}
         run: |
           # Not -e: what the publisher recorded is kept even when it fails.
           set +e -uo pipefail
@@ -360,7 +361,7 @@ jobs:
           if [ -f "$handoff/repository-progress.json" ]; then progress=(--progress "$handoff/repository-progress.json"); fi
           cd "$RUNNER_TEMP/product"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/publish-dovel-proposals.mjs "$handoff/requests" \
-            --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --ci-gate "$CI_GATE" --max-proposals "${MAX_CANDIDATES:-3}" "${progress[@]}" \
+            --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --ci-gate "$CI_GATE" --max-proposals "$( [ "${CATCH_UP:-auto}" = true ] && echo 5 || echo "${MAX_CANDIDATES:-3}" )" "${progress[@]}" \
             --results-out "$handoff/publication-results.json" --secrets-stdin <<<"$secrets" 2>&1 | tee "$handoff/publish.log"
           code=${PIPESTATUS[0]}
           mkdir -p "$RUNNER_TEMP/published/$SLUG"
