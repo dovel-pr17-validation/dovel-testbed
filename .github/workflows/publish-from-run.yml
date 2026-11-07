@@ -1,0 +1,221 @@
+name: Dovel publish from run
+# The `publish` job of run.yml, for chosen legs of an earlier (or still running) run of it: opens the pull requests
+# those legs' `run` jobs wrote down (their publication-<index> artifacts), without waiting for the run's other legs.
+# Dispatch it with the same set, product, ci_gate, max_candidates and catch_up as the source run. The source run's
+# own publish legs still run later; the publisher updates an open pull request on the same branch in place
+# (scripts/lib/pull-request-publication.mjs), so they do not open duplicates.
+#
+# Same trust boundary as run.yml: no job here runs repository code. The product is fetched and packed here, by
+# this workflow's own prepare-product (as run.yml does), so nothing a source run's `run` job could have replaced is
+# executed with the token; the publication artifacts are untrusted data, checked by import-publication-handoff.mjs
+# and the publisher, exactly as in run.yml.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Source run of run.yml (its database id)
+        required: true
+      only:
+        description: Comma-separated set indexes to publish (their run legs must have finished)
+        required: true
+      set:
+        description: Set file under sets/ (without .json), as the source run
+        required: true
+      product:
+        description: Product snapshot under products/ (short sha), as the source run
+        required: true
+      ci_gate:
+        description: As the source run's ci_gate
+        default: 'false'
+      max_candidates:
+        description: As the source run's max_candidates
+        default: '3'
+      catch_up:
+        description: As the source run's catch_up
+        default: 'auto'
+permissions:
+  contents: read
+concurrency:
+  group: dovel-publish-from-run-${{ inputs.run_id }}
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the source run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          set -euo pipefail
+          path=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}" --jq .path)
+          if [ "$path" != ".github/workflows/run.yml" ]; then echo "::error::run ${RUN_ID} is not a run of run.yml (${path})"; exit 1; fi
+      - id: plan
+        env:
+          SET: ${{ inputs.set }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import json, os
+          entries = json.load(open(f"sets/{os.environ['SET']}.json"))
+          only = {int(x) for x in os.environ.get('ONLY', '').split(',') if x.strip()}
+          if not only: raise SystemExit('only: name the indexes to publish')
+          entries = [e for e in entries if e['index'] in only]
+          print('matrix=' + json.dumps(entries))
+          EOF
+
+  # As run.yml's prepare-product: this run's own product, packed by a job that runs no repository code.
+  prepare-product:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      sha256: ${{ steps.pack.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+      - name: Unpack the product snapshot
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/product"
+          # A snapshot from the private snapshot repository (branch snap-<sha>); the encrypted file is the fallback.
+          if git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product-clone" 2>/dev/null; then
+            rm -rf "$RUNNER_TEMP/product-clone/.git"; cp -r "$RUNNER_TEMP/product-clone/." "$RUNNER_TEMP/product/"; rm -rf "$RUNNER_TEMP/product-clone"
+          else
+            printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" \
+              -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+            rm -f "$RUNNER_TEMP/product.key"
+          fi
+      - id: pack
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/handoff"
+          tar -C "$RUNNER_TEMP/product" -czf "$RUNNER_TEMP/handoff/product.tar.gz" .
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff/product.tar.gz
+          retention-days: 1
+
+  # run.yml's publish job, step for step; only the publication hand-off comes from the source run.
+  publish:
+    needs: [plan, prepare-product]
+    name: publish ${{ matrix.index }} ${{ matrix.source }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        include: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - id: handoff
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: publication-${{ matrix.index }}
+          path: ${{ runner.temp }}/publication
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+      - id: requests
+        run: |
+          slug=$(printf '%02d' "${{ matrix.index }}")-$(echo "${{ matrix.source }}" | tr '/' '-')
+          echo "SLUG=$slug" >> "$GITHUB_ENV"
+          if [ -d "$RUNNER_TEMP/publication/$slug/requests" ] && ls "$RUNNER_TEMP/publication/$slug/requests" | grep -q '\.json$'; then
+            echo "any=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No publication requests from this leg."
+          fi
+      - uses: actions/download-artifact@v4
+        if: steps.requests.outputs.any == 'true'
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - name: Unpack the product
+        if: steps.requests.outputs.any == 'true'
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          # The product this job runs with the token is the one prepare-product packed, not a replacement.
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/product"
+          tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product"
+      - uses: actions/setup-node@v4
+        if: steps.requests.outputs.any == 'true'
+        with:
+          node-version: 24
+      - name: Install the product
+        if: steps.requests.outputs.any == 'true'
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
+          corepack pnpm build
+      - name: Import the hand-off as untrusted data
+        if: steps.requests.outputs.any == 'true'
+        working-directory: ${{ runner.temp }}/product
+        env:
+          MIRROR: ${{ matrix.mirror }}
+          CI_GATE: ${{ inputs.ci_gate }}
+        run: |
+          set -euo pipefail
+          # As dovel.yml's publish job: only checked requests reach the publisher.
+          mkdir -p "$RUNNER_TEMP/imported"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/import-publication-handoff.mjs \
+            "$RUNNER_TEMP/publication/$SLUG" "$RUNNER_TEMP/imported/$SLUG" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" \
+            --ci-gate "$CI_GATE" --report "$RUNNER_TEMP/imported-report.json"
+      - name: Publish the proposals
+        if: steps.requests.outputs.any == 'true'
+        env:
+          DOVEL_INPUT_GITHUB: ${{ secrets.MIRRORS_TOKEN }}
+          DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          MIRROR: ${{ matrix.mirror }}
+          CI_GATE: ${{ inputs.ci_gate }}
+          MAX_CANDIDATES: ${{ inputs.max_candidates }}
+          CATCH_UP: ${{ inputs.catch_up }}
+        run: |
+          # Not -e: what the publisher recorded is kept even when it fails.
+          set +e -uo pipefail
+          handoff="$RUNNER_TEMP/imported/$SLUG"
+          secrets="$(node -e '
+            const pairs = [["OPENROUTER_API_KEY", "DOVEL_INPUT_OPENROUTER"], ["GH_TOKEN", "DOVEL_INPUT_GITHUB"]];
+            process.stdout.write(JSON.stringify(Object.fromEntries(pairs.filter(([, from]) => process.env[from]).map(([to, from]) => [to, process.env[from]]))));
+          ')"
+          unset DOVEL_INPUT_OPENROUTER DOVEL_INPUT_GITHUB
+          progress=()
+          if [ -f "$handoff/repository-progress.json" ]; then progress=(--progress "$handoff/repository-progress.json"); fi
+          cd "$RUNNER_TEMP/product"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/publish-dovel-proposals.mjs "$handoff/requests" \
+            --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --ci-gate "$CI_GATE" --max-proposals "$( [ "${CATCH_UP:-auto}" = true ] && echo 5 || echo "${MAX_CANDIDATES:-3}" )" "${progress[@]}" \
+            --results-out "$handoff/publication-results.json" --secrets-stdin <<<"$secrets" 2>&1 | tee "$handoff/publish.log"
+          code=${PIPESTATUS[0]}
+          mkdir -p "$RUNNER_TEMP/published/$SLUG"
+          for file in repository-progress.json PROGRESS.md publication-results.json publish.log; do
+            if [ -f "$handoff/$file" ]; then cp "$handoff/$file" "$RUNNER_TEMP/published/$SLUG/"; fi
+          done
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.requests.outputs.any == 'true'
+        with:
+          name: published-${{ matrix.index }}
+          path: ${{ runner.temp }}/published
+          if-no-files-found: ignore
+          retention-days: 30
