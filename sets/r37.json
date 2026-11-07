@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "OpenRouterTeam/ai-sdk-provider",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-ai-sdk-provider",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "ueberdosis/hocuspocus",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-hocuspocus",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 3,
+    "source": "letta-ai/letta-code",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-letta-code",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "basecamp/lexxy",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-lexxy",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "getsentry/sentry-javascript",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-sentry-javascript",
+    "branch": "develop",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "liam-hq/liam",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-liam",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 7,
+    "source": "swagger-api/swagger-client",
+    "mirror": "dovel-pr17-validation/pr17r37-npm-swagger-client",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "plotly/plotly.py",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-plotly.py",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "PriorLabs/tabpfn-client",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-tabpfn-client",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "PrimeIntellect-ai/prime",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-prime",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 11,
+    "source": "Nixtla/neuralforecast",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-neuralforecast",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "ArcadeAI/arcade-mcp",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-arcade-mcp",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "mistralai/mistral-common",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-mistral-common",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "massive-com/mcp_massive",
+    "mirror": "dovel-pr17-validation/pr17r37-pypi-mcp_massive",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "gruntwork-io/cloud-nuke",
+    "mirror": "dovel-pr17-validation/pr17r37-go-cloud-nuke",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "surrealdb/surrealdb.go",
+    "mirror": "dovel-pr17-validation/pr17r37-go-surrealdb.go",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 17,
+    "source": "basecamp/thruster",
+    "mirror": "dovel-pr17-validation/pr17r37-go-thruster",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "zitadel/oidc",
+    "mirror": "dovel-pr17-validation/pr17r37-go-oidc",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "openfaas/faasd",
+    "mirror": "dovel-pr17-validation/pr17r37-go-faasd",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "a16z/jolt",
+    "mirror": "dovel-pr17-validation/pr17r37-cargo-jolt",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "portofcontext/pctx",
+    "mirror": "dovel-pr17-validation/pr17r37-cargo-pctx",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "tensorlakeai/tensorlake",
+    "mirror": "dovel-pr17-validation/pr17r37-cargo-tensorlake",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "tramlinehq/tramline",
+    "mirror": "dovel-pr17-validation/pr17r37-gem-tramline",
+    "branch": "main",
+    "ecosystem": "gem",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "Cysharp/ConsoleAppFramework",
+    "mirror": "dovel-pr17-validation/pr17r37-nuget-consoleappframework",
+    "branch": "master",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "Cysharp/ProcessX",
+    "mirror": "dovel-pr17-validation/pr17r37-nuget-processx",
+    "branch": "master",
+    "ecosystem": "nuget",
+    "runner": "2404"
+  }
+]
