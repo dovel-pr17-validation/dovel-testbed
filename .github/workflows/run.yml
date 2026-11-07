@@ -37,6 +37,9 @@ on:
       catch_up:
         description: First-run catch-up mode - 'auto' (batches), 'true' or 'false'
         default: 'auto'
+      second_chance:
+        description: Second-chance code fix of earlier runs' open pull requests whose own CI failed in jobs Dovel could not run ('true'; needs open_pr, ci_gate and ci_runner act)
+        default: 'false'
 permissions:
   contents: read
 concurrency:
@@ -150,8 +153,64 @@ jobs:
           path: ${{ runner.temp }}/handoff/repo.tar
           retention-days: 1
 
+  # The second-chance code fix's token side (scripts/lib/second-chance/scan.mjs, product's dovel-ci-repair.mjs scan
+  # --second-chance-only): holds MIRRORS_TOKEN and runs no repository code. It applies the CI verdicts of the mirror's
+  # open Dovel pull requests first (re-runs, readiness, closes: what a publish job's sweep does), then claims each one
+  # whose own CI failed the update, proven against the base branch's CI, only in jobs the earlier run left to that CI,
+  # and hands its request (the failing jobs' redacted log excerpts) to `run` as data. Its claims go to `publish` from
+  # this job's own artifact, never from `run`'s.
+  second-chance-scan:
+    needs: [plan, prepare-product]
+    if: inputs.second_chance == 'true' && inputs.open_pr == 'true' && inputs.ci_gate == 'true' && needs.plan.result == 'success' && needs.prepare-product.result == 'success'
+    name: second-chance scan ${{ matrix.index }} ${{ matrix.source }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        include: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Unpack and install the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          mkdir -p "$RUNNER_TEMP/product" && tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product"
+          cd "$RUNNER_TEMP/product"
+          for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
+          corepack pnpm build
+      - name: Sweep the CI verdicts, then scan and claim
+        env:
+          GH_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+          MIRROR: ${{ matrix.mirror }}
+        run: |
+          set -uo pipefail
+          out="$RUNNER_TEMP/second-chance"; mkdir -p "$out/requests"
+          cd "$RUNNER_TEMP/product"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-verdict.mjs --repo "$MIRROR" 2>&1 | tee "$out/verdicts.log" || true
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/dovel-ci-repair.mjs scan --claim --second-chance-only true \
+            --repo "$MIRROR" --out "$out/requests" --claims-out "$out/claims.txt" 2>&1 | tee "$out/scan.log" || echo "::warning::the second-chance scan failed"
+          if grep -rqF -- "$GH_TOKEN" "$out"; then echo "::error::the hand-off holds the token"; exit 92; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: second-chance-${{ matrix.index }}
+          path: ${{ runner.temp }}/second-chance
+          retention-days: 30
+
   run:
-    needs: [plan, prepare-product, prepare]
+    needs: [plan, prepare-product, prepare, second-chance-scan]
     if: always() && needs.plan.result == 'success' && needs.prepare-product.result == 'success'
     name: ${{ matrix.index }} ${{ matrix.source }}
     # The repository's own CI image: a set entry's "runner": "2604" runs on 26.04, any other on 24.04.
@@ -176,6 +235,13 @@ jobs:
         with:
           name: input-${{ matrix.index }}
           path: ${{ runner.temp }}/handoff
+      # The second-chance requests the token job wrote for this mirror, as data (none without second_chance).
+      - uses: actions/download-artifact@v4
+        if: inputs.second_chance == 'true'
+        continue-on-error: true
+        with:
+          name: second-chance-${{ matrix.index }}
+          path: ${{ runner.temp }}/second-chance
       - name: Unpack the product and the mirror
         env:
           PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
@@ -207,9 +273,15 @@ jobs:
           MAX_CANDIDATES: ${{ inputs.max_candidates }}
           CATCH_UP: ${{ inputs.catch_up }}
           SOURCE: ${{ matrix.source }}
+          SECOND_CHANCE: ${{ inputs.second_chance }}
         run: |
           set -uo pipefail
           output="$RUNNER_TEMP/out"; mkdir -p "$output"
+          # The second-chance requests ride on the CI repair round's input (the flow reads <input>/second-chance/).
+          second_chance=()
+          if [ "$SECOND_CHANCE" = true ] && [ -d "$RUNNER_TEMP/second-chance/requests/second-chance" ]; then
+            second_chance=(--ci-repair true --ci-repair-input "$RUNNER_TEMP/second-chance/requests")
+          fi
           # The runner's memory and disk each minute, in the job log, so a runner lost mid-run leaves its last state.
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') swap: $(free -m | awk 'NR==3{print $3"/"$2}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
           # As dovel-flow/action.yml does: the key reaches the flow over stdin, and every credential-shaped
@@ -232,7 +304,7 @@ jobs:
             --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates "${MAX_CANDIDATES:-3}" --catch-up "${CATCH_UP:-auto}" \
             --open-pr "$OPEN_PR" --ci-gate "$CI_GATE" --publication-out "$RUNNER_TEMP/publications" --skip-ci-verdict-sweep \
             --ci-runner "$CI_RUNNER" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" --act-jobs 2 --act-job-timeout-minutes 30 --job-deadline-at "$(( JOB_STARTED_AT + (330 - 15) * 60000 ))" \
-            --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
+            "${second_chance[@]+"${second_chance[@]}"}" --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
           printf '{"exitCode":%s,"source":"%s","mirror":"%s","runner":"github-hosted ubuntu-%s"}\n' "$code" "${{ matrix.source }}" "$MIRROR" "$(. /etc/os-release && echo "$VERSION_ID")" > "$output/run.json"
           tail -40 "$output/flow.log"
       - name: Keep the results (logs and receipts, not dependency trees)
@@ -270,7 +342,7 @@ jobs:
   # the flow enforces, reviews it again, then pushes and opens it. Every request is untrusted: it was written by
   # a job whose repository code ran as root.
   publish:
-    needs: [plan, prepare-product, run]
+    needs: [plan, prepare-product, run, second-chance-scan]
     if: always() && inputs.open_pr == 'true' && needs.plan.result == 'success' && needs.prepare-product.result == 'success'
     name: publish ${{ matrix.index }} ${{ matrix.source }}
     runs-on: ubuntu-24.04
@@ -293,7 +365,8 @@ jobs:
         run: |
           slug=$(printf '%02d' "${{ matrix.index }}")-$(echo "${{ matrix.source }}" | tr '/' '-')
           echo "SLUG=$slug" >> "$GITHUB_ENV"
-          if [ -d "$RUNNER_TEMP/publication/$slug/requests" ] && ls "$RUNNER_TEMP/publication/$slug/requests" | grep -q '\.json$'; then
+          # A second-chance outcome (requests/second-chance/*.json) counts too.
+          if [ -d "$RUNNER_TEMP/publication/$slug/requests" ] && find "$RUNNER_TEMP/publication/$slug/requests" -maxdepth 2 -name '*.json' | grep -q .; then
             echo "any=true" >> "$GITHUB_OUTPUT"
           else
             echo "No publication requests from this leg."
@@ -326,19 +399,27 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
           corepack pnpm build
+      # The claims the second-chance token job made: from its own artifact, never from `run`'s.
+      - uses: actions/download-artifact@v4
+        if: steps.requests.outputs.any == 'true' && inputs.second_chance == 'true'
+        continue-on-error: true
+        with:
+          name: second-chance-${{ matrix.index }}
+          path: ${{ runner.temp }}/second-chance
       - name: Import the hand-off as untrusted data
         if: steps.requests.outputs.any == 'true'
         working-directory: ${{ runner.temp }}/product
         env:
           MIRROR: ${{ matrix.mirror }}
           CI_GATE: ${{ inputs.ci_gate }}
+          SECOND_CHANCE: ${{ inputs.second_chance }}
         run: |
           set -euo pipefail
           # As dovel.yml's publish job: only checked requests reach the publisher.
           mkdir -p "$RUNNER_TEMP/imported"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/import-publication-handoff.mjs \
             "$RUNNER_TEMP/publication/$SLUG" "$RUNNER_TEMP/imported/$SLUG" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" \
-            --ci-gate "$CI_GATE" --report "$RUNNER_TEMP/imported-report.json"
+            --ci-gate "$CI_GATE" --ci-repair "$SECOND_CHANCE" --report "$RUNNER_TEMP/imported-report.json"
       - name: Publish the proposals
         if: steps.requests.outputs.any == 'true'
         env:
@@ -348,6 +429,7 @@ jobs:
           CI_GATE: ${{ inputs.ci_gate }}
           MAX_CANDIDATES: ${{ inputs.max_candidates }}
           CATCH_UP: ${{ inputs.catch_up }}
+          SECOND_CHANCE: ${{ inputs.second_chance }}
         run: |
           # Not -e: what the publisher recorded is kept even when it fails.
           set +e -uo pipefail
@@ -359,9 +441,16 @@ jobs:
           unset DOVEL_INPUT_OPENROUTER DOVEL_INPUT_GITHUB
           progress=()
           if [ -f "$handoff/repository-progress.json" ]; then progress=(--progress "$handoff/repository-progress.json"); fi
+          # The second-chance outcomes and the token job's claims (sc:<number>:<attempt> words only).
+          second_chance=()
+          if [ "$SECOND_CHANCE" = true ]; then
+            second_chance=(--ci-repair true)
+            claims="$(head -n 1 "$RUNNER_TEMP/second-chance/claims.txt" 2>/dev/null || true)"
+            if [[ "$claims" =~ ^sc:[0-9]+:[A-Za-z0-9-]+(\ sc:[0-9]+:[A-Za-z0-9-]+)*$ ]]; then second_chance+=(--ci-repair-claims "$claims"); fi
+          fi
           cd "$RUNNER_TEMP/product"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/publish-dovel-proposals.mjs "$handoff/requests" \
-            --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --ci-gate "$CI_GATE" --max-proposals "$( [ "${CATCH_UP:-auto}" = true ] && echo 5 || echo "${MAX_CANDIDATES:-3}" )" "${progress[@]}" \
+            --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --ci-gate "$CI_GATE" --max-proposals "$( [ "${CATCH_UP:-auto}" = true ] && echo 5 || echo "${MAX_CANDIDATES:-3}" )" "${progress[@]}" "${second_chance[@]+"${second_chance[@]}"}" \
             --results-out "$handoff/publication-results.json" --secrets-stdin <<<"$secrets" 2>&1 | tee "$handoff/publish.log"
           code=${PIPESTATUS[0]}
           mkdir -p "$RUNNER_TEMP/published/$SLUG"
