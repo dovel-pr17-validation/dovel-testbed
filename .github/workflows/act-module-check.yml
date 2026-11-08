@@ -2,7 +2,7 @@ name: act module check
 # Runs the product's act CI module (packages/part-a/src/replay/actCi) end to end on the act spike's
 # repositories: selectCiJobs chooses the jobs, runCiJob runs each on the unmodified upstream checkout and on a
 # no-op candidate (an empty commit), compareRuns judges. The product comes from the private snapshot repository
-# via a job that runs no repository code, as an artifact encrypted with PRODUCT_KEY (this repository's artifacts are
+# via a job that runs no repository code, as an artifact encrypted with HANDOFF_KEY (this repository's artifacts are
 # public); the jobs that run repository code hold no other secret, and decrypt it before any repository code runs.
 on:
   workflow_dispatch:
@@ -56,7 +56,7 @@ jobs:
     steps:
       - id: pack
         env:
-          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
           PRODUCT: ${{ inputs.product }}
           MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
         run: |
@@ -64,11 +64,11 @@ jobs:
           git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product"
           rm -rf "$RUNNER_TEMP/product/.git"
           mkdir -p "$RUNNER_TEMP/handoff"
-          # This repository is public, and so are its artifacts: only the ciphertext of the product is uploaded.
-          [ -n "${PRODUCT_KEY:-}" ] || { echo "::error::the PRODUCT_KEY secret is not set: the product hand-off is only uploaded encrypted"; exit 1; }
+          # This repository is public, and so are its artifacts: only the ciphertext of the product is uploaded (HANDOFF_KEY).
+          [ -n "${HANDOFF_KEY:-}" ] || { echo "::error::the HANDOFF_KEY secret is not set: the product hand-off is only uploaded encrypted"; exit 1; }
           trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
-          ( umask 077; printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/handoff.key" )
-          unset PRODUCT_KEY
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
           tar -C "$RUNNER_TEMP/product" -cz . | openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass "file:$RUNNER_TEMP/handoff.key" -out "$RUNNER_TEMP/handoff/product.tar.gz.enc"
           rm -f "$RUNNER_TEMP/handoff.key"
           echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz.enc" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
@@ -83,7 +83,7 @@ jobs:
     name: ${{ matrix.name }}
     runs-on: ubuntu-24.04
     timeout-minutes: 340
-    # No secret but PRODUCT_KEY, used only by the unpacking step before any repository code: this job runs the
+    # No secret but HANDOFF_KEY, used only by the unpacking step before any repository code: this job runs the
     # repositories' code (act host mode, as the runner user with sudo).
     permissions:
       contents: read
@@ -102,13 +102,13 @@ jobs:
       - name: Unpack the product
         env:
           PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
-          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
         run: |
           set -euo pipefail
           echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz.enc" | sha256sum -c --quiet
           trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
-          ( umask 077; printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/handoff.key" )
-          unset PRODUCT_KEY
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
           mkdir -p "$RUNNER_TEMP/product" && { openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/handoff.key" -in "$RUNNER_TEMP/handoff/product.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"; } && rm -rf "$RUNNER_TEMP/handoff"
           rm -f "$RUNNER_TEMP/handoff.key"
       - uses: actions/setup-node@v4
