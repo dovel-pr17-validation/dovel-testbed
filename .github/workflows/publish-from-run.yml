@@ -98,15 +98,23 @@ jobs:
             rm -f "$RUNNER_TEMP/product.key"
           fi
       - id: pack
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/handoff"
-          tar -C "$RUNNER_TEMP/product" -czf "$RUNNER_TEMP/handoff/product.tar.gz" .
-          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          # This repository is public, and so are its artifacts: only the ciphertext of the product is uploaded.
+          [ -n "${PRODUCT_KEY:-}" ] || { echo "::error::the PRODUCT_KEY secret is not set: the product hand-off is only uploaded encrypted"; exit 1; }
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset PRODUCT_KEY
+          tar -C "$RUNNER_TEMP/product" -cz . | openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass "file:$RUNNER_TEMP/handoff.key" -out "$RUNNER_TEMP/handoff/product.tar.gz.enc"
+          rm -f "$RUNNER_TEMP/handoff.key"
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz.enc" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         with:
           name: product
-          path: ${{ runner.temp }}/handoff/product.tar.gz
+          path: ${{ runner.temp }}/handoff/product.tar.gz.enc
           retention-days: 1
 
   # run.yml's publish job, step for step; only the publication hand-off comes from the source run.
@@ -150,12 +158,17 @@ jobs:
         if: steps.requests.outputs.any == 'true'
         env:
           PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
         run: |
           set -euo pipefail
           # The product this job runs with the token is the one prepare-product packed, not a replacement.
-          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz" | sha256sum -c --quiet
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz.enc" | sha256sum -c --quiet
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset PRODUCT_KEY
           mkdir -p "$RUNNER_TEMP/product"
-          tar -xzf "$RUNNER_TEMP/handoff/product.tar.gz" -C "$RUNNER_TEMP/product"
+          { openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/handoff.key" -in "$RUNNER_TEMP/handoff/product.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"; }
+          rm -f "$RUNNER_TEMP/handoff.key"
       - uses: actions/setup-node@v4
         if: steps.requests.outputs.any == 'true'
         with:
