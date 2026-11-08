@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "playcanvas/editor",
+    "mirror": "dovel-pr17-validation/pr17r46-npm-editor",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "placemark/placemark",
+    "mirror": "dovel-pr17-validation-2/pr17r46-npm-placemark",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "colorfy-software/react-native-modalfy",
+    "mirror": "dovel-pr17-validation/pr17r46-npm-react-native-modalfy",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "nowsecure/r2frida",
+    "mirror": "dovel-pr17-validation-2/pr17r46-npm-r2frida",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "MoonshotAI/checkpoint-engine",
+    "mirror": "dovel-pr17-validation/pr17r46-pypi-checkpoint-engine",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "trustedsec/hate_crack",
+    "mirror": "dovel-pr17-validation-2/pr17r46-pypi-hate_crack",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "BlenderKit/Blendkit",
+    "mirror": "dovel-pr17-validation/pr17r46-pypi-blendkit",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 8,
+    "source": "epoch8/airflow-exporter",
+    "mirror": "dovel-pr17-validation-2/pr17r46-pypi-airflow-exporter",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "jesse-ai/jesse",
+    "mirror": "dovel-pr17-validation/pr17r46-pypi-jesse",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "securade/hub",
+    "mirror": "dovel-pr17-validation-2/pr17r46-pypi-hub",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "ARPSyndicate/puncia",
+    "mirror": "dovel-pr17-validation/pr17r46-pypi-puncia",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "TimeCopilot/timecopilot",
+    "mirror": "dovel-pr17-validation-2/pr17r46-pypi-timecopilot",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "Skyscanner/cfripper",
+    "mirror": "dovel-pr17-validation/pr17r46-pypi-cfripper",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 14,
+    "source": "CodeGraphContext/CodeGraphContext",
+    "mirror": "dovel-pr17-validation-2/pr17r46-pypi-codegraphcontext",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "maxmind/geoipupdate",
+    "mirror": "dovel-pr17-validation/pr17r46-go-geoipupdate",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "stackql/stackql",
+    "mirror": "dovel-pr17-validation-2/pr17r46-go-stackql",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "projectsveltos/addon-controller",
+    "mirror": "dovel-pr17-validation/pr17r46-go-addon-controller",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "flamego/flamego",
+    "mirror": "dovel-pr17-validation-2/pr17r46-go-flamego",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "multiversx/mx-chain-go",
+    "mirror": "dovel-pr17-validation/pr17r46-go-mx-chain-go",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "connectrpc/vanguard-go",
+    "mirror": "dovel-pr17-validation-2/pr17r46-go-vanguard-go",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "Gthulhu/Gthulhu",
+    "mirror": "dovel-pr17-validation/pr17r46-go-gthulhu",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "nats-io/nats-top",
+    "mirror": "dovel-pr17-validation-2/pr17r46-go-nats-top",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "pterodactyl/wings",
+    "mirror": "dovel-pr17-validation/pr17r46-go-wings",
+    "branch": "develop",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "leomoon-studios/wiki-go",
+    "mirror": "dovel-pr17-validation-2/pr17r46-go-wiki-go",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 25,
+    "source": "gnolang/gno",
+    "mirror": "dovel-pr17-validation/pr17r46-go-gno",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  }
+]
