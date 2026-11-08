@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "inline-chat/inline",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-inline",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "i18next/i18next-cli",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-i18next-cli",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "23blocks-OS/ai-maestro",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-ai-maestro",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "BearStudio/start-ui-web",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-start-ui-web",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "home-assistant/frontend",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-frontend",
+    "branch": "dev",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "vatesfr/xen-orchestra",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-xen-orchestra",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 7,
+    "source": "itteco/iframely",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-iframely",
+    "branch": "dev",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "workadventure/workadventure",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-workadventure",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "statelyai/agent",
+    "mirror": "dovel-pr17-validation/pr17r42-npm-agent",
+    "branch": "next",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "nolabs-ai/deepfabric",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-deepfabric",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "dalibo/pg_activity",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-pg_activity",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "sixty-north/cosmic-ray",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-cosmic-ray",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "magicsword-io/LOLRMM",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-lolrmm",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "scrapinghub/scrapyrt",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-scrapyrt",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "developmentseed/lonboard",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-lonboard",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "rtCamp/Frappe-Manager",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-frappe-manager",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "instavm/coderunner",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-coderunner",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "albumentations-team/AlbumentationsX",
+    "mirror": "dovel-pr17-validation/pr17r42-pypi-albumentationsx",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "version-fox/vfox",
+    "mirror": "dovel-pr17-validation/pr17r42-go-vfox",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 20,
+    "source": "deviceinsight/kafkactl",
+    "mirror": "dovel-pr17-validation/pr17r42-go-kafkactl",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "SpecterOps/AzureHound",
+    "mirror": "dovel-pr17-validation/pr17r42-go-azurehound",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "welovemedia/ffmate",
+    "mirror": "dovel-pr17-validation/pr17r42-go-ffmate",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 23,
+    "source": "charmbracelet/ultraviolet",
+    "mirror": "dovel-pr17-validation/pr17r42-go-ultraviolet",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "mariadb-operator/mariadb-operator",
+    "mirror": "dovel-pr17-validation/pr17r42-go-mariadb-operator",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "palark/ovpn-admin",
+    "mirror": "dovel-pr17-validation/pr17r42-go-ovpn-admin",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  }
+]
