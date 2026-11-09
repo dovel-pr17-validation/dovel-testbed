@@ -35,10 +35,13 @@ on:
       agent_reasoning:
         description: "Agent-mode experiment: off, low, high or max (sets AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT); empty keeps the product's own"
         default: ''
+      agent_limits:
+        description: "Agent-mode experiment: wall-ms,tokens,turns (e.g. 2700000,1500000,60) for AUTOMATED_API_HARNESS_AGENT_MAX_WALL_MS/_MAX_TOKENS/_MAX_TURNS; empty keeps the product's own"
+        default: ''
 permissions:
   contents: read
 concurrency:
-  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.cases }}
+  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.agent_limits }}-${{ inputs.cases }}
   cancel-in-progress: false
 jobs:
   prepare-product:
@@ -195,6 +198,7 @@ jobs:
           DOVEL_AGENT_TOOLS: ${{ inputs.agent_tools }}
           DOVEL_AGENT_MODEL: ${{ inputs.agent_model }}
           DOVEL_AGENT_REASONING: ${{ inputs.agent_reasoning }}
+          DOVEL_AGENT_LIMITS: ${{ inputs.agent_limits }}
         run: |
           set -uo pipefail
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
@@ -212,6 +216,12 @@ jobs:
           fi
           case "${DOVEL_AGENT_REASONING:-}" in '') ;; off|low|high|max) export AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT="$DOVEL_AGENT_REASONING"; echo "migration agent reasoning: $DOVEL_AGENT_REASONING";; *) echo "::error::agent_reasoning must be off, low, high or max"; exit 1;; esac
           unset DOVEL_AGENT_MODEL DOVEL_AGENT_REASONING
+          if [ -n "${DOVEL_AGENT_LIMITS:-}" ]; then
+            [[ "$DOVEL_AGENT_LIMITS" =~ ^([0-9]{1,8}),([0-9]{1,8}),([0-9]{1,4})$ ]] || { echo "::error::agent_limits must be wall-ms,tokens,turns"; exit 1; }
+            export AUTOMATED_API_HARNESS_AGENT_MAX_WALL_MS="${BASH_REMATCH[1]}" AUTOMATED_API_HARNESS_AGENT_MAX_TOKENS="${BASH_REMATCH[2]}" AUTOMATED_API_HARNESS_AGENT_MAX_TURNS="${BASH_REMATCH[3]}"
+            echo "migration agent limits: wall ${BASH_REMATCH[1]} ms, tokens ${BASH_REMATCH[2]}, turns ${BASH_REMATCH[3]}"
+          fi
+          unset DOVEL_AGENT_LIMITS
           # Every credential-shaped variable is unset; the model key alone is left, and run-case.mjs hands it to the
           # flow over --secrets-stdin (never through the flow's environment).
           key="$DOVEL_INPUT_OPENROUTER"; unset DOVEL_INPUT_OPENROUTER
