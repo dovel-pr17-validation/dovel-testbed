@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "alineacms/alinea",
+    "mirror": "dovel-pr17-validation/pr17r51-npm-alinea",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "codaxy/cxjs",
+    "mirror": "dovel-pr17-validation-2/pr17r51-npm-cxjs",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "postalsys/imapflow",
+    "mirror": "dovel-pr17-validation/pr17r51-npm-imapflow",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "XeroAPI/xero-node",
+    "mirror": "dovel-pr17-validation-2/pr17r51-npm-xero-node",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "layerswap/layerswapapp",
+    "mirror": "dovel-pr17-validation/pr17r51-npm-layerswapapp",
+    "branch": "dev",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "sourcey/moxygen",
+    "mirror": "dovel-pr17-validation-2/pr17r51-npm-moxygen",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "mapbox/geojson-merge",
+    "mirror": "dovel-pr17-validation/pr17r51-npm-geojson-merge",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 8,
+    "source": "themesberg/flowbite-vue",
+    "mirror": "dovel-pr17-validation-2/pr17r51-npm-flowbite-vue",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "200ok-ch/organice",
+    "mirror": "dovel-pr17-validation/pr17r51-npm-organice",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "O-X-L/ansible-opnsense",
+    "mirror": "dovel-pr17-validation-2/pr17r51-pypi-ansible-opnsense",
+    "branch": "latest",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 11,
+    "source": "shcherbak-ai/contextgem",
+    "mirror": "dovel-pr17-validation/pr17r51-pypi-contextgem",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "langchain-ai/new-langgraph-project",
+    "mirror": "dovel-pr17-validation-2/pr17r51-pypi-new-langgraph-project",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "CTFd/ctfcli",
+    "mirror": "dovel-pr17-validation/pr17r51-pypi-ctfcli",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "gbionics/adam",
+    "mirror": "dovel-pr17-validation-2/pr17r51-pypi-adam",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "FalkorDB/code-graph",
+    "mirror": "dovel-pr17-validation/pr17r51-pypi-code-graph",
+    "branch": "staging",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "bootlin/snagboot",
+    "mirror": "dovel-pr17-validation-2/pr17r51-pypi-snagboot",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "run-llama/llama-agents",
+    "mirror": "dovel-pr17-validation/pr17r51-pypi-llama-agents",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "plangrid/flask-rebar",
+    "mirror": "dovel-pr17-validation-2/pr17r51-pypi-flask-rebar",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "linode/terraform-provider-linode",
+    "mirror": "dovel-pr17-validation/pr17r51-go-terraform-provider-linode",
+    "branch": "dev",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 20,
+    "source": "zeabur/zbpack",
+    "mirror": "dovel-pr17-validation-2/pr17r51-go-zbpack",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "projectdiscovery/pdtm",
+    "mirror": "dovel-pr17-validation/pr17r51-go-pdtm",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "bnb-chain/bsc",
+    "mirror": "dovel-pr17-validation-2/pr17r51-go-bsc",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 23,
+    "source": "parca-dev/parca-agent",
+    "mirror": "dovel-pr17-validation/pr17r51-go-parca-agent",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "projectdiscovery/aix",
+    "mirror": "dovel-pr17-validation-2/pr17r51-go-aix",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "MixinNetwork/mixin",
+    "mirror": "dovel-pr17-validation/pr17r51-go-mixin",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  }
+]

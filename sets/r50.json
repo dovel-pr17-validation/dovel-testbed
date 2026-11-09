@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "marmelab/FakeRest",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-fakerest",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "LottieFiles/dotlottie-web",
+    "mirror": "dovel-pr17-validation-2/pr17r50-npm-dotlottie-web",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "algolia/react-element-to-jsx-string",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-react-element-to-jsx-string",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "fastmail/Squire",
+    "mirror": "dovel-pr17-validation-2/pr17r50-npm-squire",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "Renumics/spotlight",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-spotlight",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "protectwise/troika",
+    "mirror": "dovel-pr17-validation-2/pr17r50-npm-troika",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "unlayer/react-email-editor",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-react-email-editor",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "getsentry/sentry-electron",
+    "mirror": "dovel-pr17-validation-2/pr17r50-npm-sentry-electron",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "searchkit/searchkit",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-searchkit",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "FSoft-AI4Code/CodeWiki",
+    "mirror": "dovel-pr17-validation-2/pr17r50-pypi-codewiki",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 11,
+    "source": "explosion/srsly",
+    "mirror": "dovel-pr17-validation/pr17r50-pypi-srsly",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "sdv-dev/SDGym",
+    "mirror": "dovel-pr17-validation-2/pr17r50-pypi-sdgym",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "sb-ai-lab/Py-Boost",
+    "mirror": "dovel-pr17-validation/pr17r50-pypi-py-boost",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "Knowledgator/GLiClass",
+    "mirror": "dovel-pr17-validation-2/pr17r50-pypi-gliclass",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "prusa3d/Prusa-Link",
+    "mirror": "dovel-pr17-validation/pr17r50-pypi-prusa-link",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "codeintegrity-ai/mutahunter",
+    "mirror": "dovel-pr17-validation-2/pr17r50-pypi-mutahunter",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "dreadnode/dyana",
+    "mirror": "dovel-pr17-validation/pr17r50-pypi-dyana",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "devitocodes/devito",
+    "mirror": "dovel-pr17-validation-2/pr17r50-pypi-devito",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "skeema/skeema",
+    "mirror": "dovel-pr17-validation/pr17r50-go-skeema",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "monzo/typhon",
+    "mirror": "dovel-pr17-validation-2/pr17r50-go-typhon",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "zilliztech/milvus-backup",
+    "mirror": "dovel-pr17-validation/pr17r50-go-milvus-backup",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "rad-security/kbom",
+    "mirror": "dovel-pr17-validation-2/pr17r50-go-kbom",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 23,
+    "source": "tuneinsight/lattigo",
+    "mirror": "dovel-pr17-validation/pr17r50-go-lattigo",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "toitlang/jaguar",
+    "mirror": "dovel-pr17-validation-2/pr17r50-go-jaguar",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "boostsecurityio/poutine",
+    "mirror": "dovel-pr17-validation/pr17r50-go-poutine",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  }
+]
