@@ -1,0 +1,34 @@
+[
+  {
+    "index": 3,
+    "source": "algolia/react-element-to-jsx-string",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-react-element-to-jsx-string",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "unlayer/react-email-editor",
+    "mirror": "dovel-pr17-validation/pr17r50-npm-react-email-editor",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "dreadnode/dyana",
+    "mirror": "dovel-pr17-validation/pr17r50-pypi-dyana",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "skeema/skeema",
+    "mirror": "dovel-pr17-validation/pr17r50-go-skeema",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  }
+]
