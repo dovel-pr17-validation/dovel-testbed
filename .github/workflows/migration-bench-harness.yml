@@ -26,6 +26,9 @@ on:
       cases:
         description: Comma-separated case ids to run instead of the whole tier (empty runs the tier)
         default: ''
+      agent_tools:
+        description: "Migration agent mode: 1 sets AUTOMATED_API_HARNESS_AGENT_TOOLS=1 (the Harness reads and edits with tools), 0 leaves it off"
+        default: '0'
 permissions:
   contents: read
 concurrency:
@@ -183,6 +186,7 @@ jobs:
           PRODUCT: ${{ inputs.product }}
           DOVEL_GUARD_COMMAND: ${{ steps.harness-guard.outputs.guard-command }}
           DOVEL_GUARD_LAUNCHER: ${{ steps.harness-guard.outputs.launcher }}
+          DOVEL_AGENT_TOOLS: ${{ inputs.agent_tools }}
         run: |
           set -uo pipefail
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
@@ -190,6 +194,9 @@ jobs:
           [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
           export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
           unset DOVEL_GUARD_COMMAND DOVEL_GUARD_LAUNCHER
+          # Agent mode (product: packages/runner/src/harness.ts agentToolsFromEnvironment accepts 1 or 0 only).
+          case "${DOVEL_AGENT_TOOLS:-0}" in 1) export AUTOMATED_API_HARNESS_AGENT_TOOLS=1; echo "migration agent mode: AUTOMATED_API_HARNESS_AGENT_TOOLS=1";; 0) ;; *) echo "::error::agent_tools must be 0 or 1"; exit 1;; esac
+          unset DOVEL_AGENT_TOOLS
           # Every credential-shaped variable is unset; the model key alone is left, and run-case.mjs hands it to the
           # flow over --secrets-stdin (never through the flow's environment).
           key="$DOVEL_INPUT_OPENROUTER"; unset DOVEL_INPUT_OPENROUTER
