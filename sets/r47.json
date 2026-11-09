@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "software-mansion/react-native-svg",
+    "mirror": "dovel-pr17-validation/pr17r47-npm-react-native-svg",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "Foblex/f-flow",
+    "mirror": "dovel-pr17-validation-2/pr17r47-npm-f-flow",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "11ty/is-land",
+    "mirror": "dovel-pr17-validation/pr17r47-npm-is-land",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "deeplay-io/nice-grpc",
+    "mirror": "dovel-pr17-validation-2/pr17r47-npm-nice-grpc",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "espressif/esptool-js",
+    "mirror": "dovel-pr17-validation/pr17r47-npm-esptool-js",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "strapi/design-system",
+    "mirror": "dovel-pr17-validation-2/pr17r47-npm-design-system",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "holepunchto/sodium-native",
+    "mirror": "dovel-pr17-validation/pr17r47-npm-sodium-native",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "0xsequence/sequence.js",
+    "mirror": "dovel-pr17-validation-2/pr17r47-npm-sequence.js",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "nuxt-hub/core",
+    "mirror": "dovel-pr17-validation/pr17r47-npm-core",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "groq/openbench",
+    "mirror": "dovel-pr17-validation-2/pr17r47-pypi-openbench",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "pasqal-io/Pulser",
+    "mirror": "dovel-pr17-validation/pr17r47-pypi-pulser",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "bopen/elevation",
+    "mirror": "dovel-pr17-validation-2/pr17r47-pypi-elevation",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "developmentseed/obstore",
+    "mirror": "dovel-pr17-validation/pr17r47-pypi-obstore",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "nephila/django-meta",
+    "mirror": "dovel-pr17-validation-2/pr17r47-pypi-django-meta",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "pfnet/plamo-translate-cli",
+    "mirror": "dovel-pr17-validation/pr17r47-pypi-plamo-translate-cli",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "realpython/pytest-mypy",
+    "mirror": "dovel-pr17-validation-2/pr17r47-pypi-pytest-mypy",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "schireson/pytest-alembic",
+    "mirror": "dovel-pr17-validation/pr17r47-pypi-pytest-alembic",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "basetenlabs/truss",
+    "mirror": "dovel-pr17-validation-2/pr17r47-pypi-truss",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "solworktech/md2pdf",
+    "mirror": "dovel-pr17-validation/pr17r47-go-md2pdf",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "bufbuild/protocompile",
+    "mirror": "dovel-pr17-validation-2/pr17r47-go-protocompile",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "percona/mongodb_exporter",
+    "mirror": "dovel-pr17-validation/pr17r47-go-mongodb_exporter",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "i-love-flamingo/flamingo",
+    "mirror": "dovel-pr17-validation-2/pr17r47-go-flamingo",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "regen-network/regen-ledger",
+    "mirror": "dovel-pr17-validation/pr17r47-go-regen-ledger",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "projectdiscovery/simplehttpserver",
+    "mirror": "dovel-pr17-validation-2/pr17r47-go-simplehttpserver",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "hybridgroup/go-haystack",
+    "mirror": "dovel-pr17-validation/pr17r47-go-go-haystack",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  }
+]
