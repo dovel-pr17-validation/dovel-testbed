@@ -166,10 +166,12 @@ jobs:
           host="$(node scripts/harness-egress-guard.mjs host)" || unavailable "the model endpoint cannot be guarded"
           sudo -n "$(command -v node)" scripts/harness-egress-guard.mjs configure --host "$host" --product "$PWD" \
             || unavailable "its setup failed (see above)"
-          /usr/lib/dovel-harness-egress/bin/dovel-harness-egress-guard verify "$host" >/dev/null || unavailable "its check failed right after setup"
+          # Where the product installs its entry points: /usr/lib/dovel-harness-egress/bin (2a20f086 and later), /usr/local/bin before.
+          bin=/usr/lib/dovel-harness-egress/bin; [ -x "$bin/dovel-harness-egress-guard" ] || bin=/usr/local/bin
+          "$bin/dovel-harness-egress-guard" verify "$host" >/dev/null || unavailable "its check failed right after setup"
           {
-            echo "guard-command=/usr/lib/dovel-harness-egress/bin/dovel-harness-egress-guard"
-            echo "launcher=/usr/lib/dovel-harness-egress/bin/dovel-harness-launch"
+            echo "guard-command=$bin/dovel-harness-egress-guard"
+            echo "launcher=$bin/dovel-harness-launch"
           } >> "$GITHUB_OUTPUT"
       - name: Run the case
         # Leaves 20 minutes of the job for keeping the results.
@@ -227,8 +229,10 @@ jobs:
           retention-days: 30
       # Last: the guard's account, rules, mounts and root's copies go.
       - name: Remove the migration agent's network guard
+        # (Products before 2a20f086 have no cleanup command: the runner is discarded with the guard on it.)
         if: always() && steps.harness-guard.outputs.guard-command != ''
         run: |
+          [ -x /usr/lib/dovel-harness-egress/bin/node ] || { echo "no cleanup command in this product"; exit 0; }
           sudo -n /usr/lib/dovel-harness-egress/bin/node /usr/lib/dovel-harness-egress/harness-egress-guard.mjs cleanup \
             || echo "::warning::the migration agent's network guard was not removed"
 
