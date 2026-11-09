@@ -29,10 +29,16 @@ on:
       agent_tools:
         description: "Migration agent mode: 1 sets AUTOMATED_API_HARNESS_AGENT_TOOLS=1 (the Harness reads and edits with tools), 0 leaves it off"
         default: '0'
+      agent_model:
+        description: "Agent-mode experiment: an OpenRouter model id for the migration agent only (sets AUTOMATED_API_HARNESS_AGENT_MODEL); empty keeps the product's own"
+        default: ''
+      agent_reasoning:
+        description: "Agent-mode experiment: off, low, high or max (sets AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT); empty keeps the product's own"
+        default: ''
 permissions:
   contents: read
 concurrency:
-  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}
+  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.cases }}
   cancel-in-progress: false
 jobs:
   prepare-product:
@@ -187,6 +193,8 @@ jobs:
           DOVEL_GUARD_COMMAND: ${{ steps.harness-guard.outputs.guard-command }}
           DOVEL_GUARD_LAUNCHER: ${{ steps.harness-guard.outputs.launcher }}
           DOVEL_AGENT_TOOLS: ${{ inputs.agent_tools }}
+          DOVEL_AGENT_MODEL: ${{ inputs.agent_model }}
+          DOVEL_AGENT_REASONING: ${{ inputs.agent_reasoning }}
         run: |
           set -uo pipefail
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
@@ -197,6 +205,13 @@ jobs:
           # Agent mode (product: packages/runner/src/harness.ts agentToolsFromEnvironment accepts 1 or 0 only).
           case "${DOVEL_AGENT_TOOLS:-0}" in 1) export AUTOMATED_API_HARNESS_AGENT_TOOLS=1; echo "migration agent mode: AUTOMATED_API_HARNESS_AGENT_TOOLS=1";; 0) ;; *) echo "::error::agent_tools must be 0 or 1"; exit 1;; esac
           unset DOVEL_AGENT_TOOLS
+          # Experiment arms: the agent's model and reasoning (validated; never anything but an id and an effort word).
+          if [ -n "${DOVEL_AGENT_MODEL:-}" ]; then
+            [[ "$DOVEL_AGENT_MODEL" =~ ^[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._:-]*$ ]] || { echo "::error::agent_model is not an OpenRouter model id"; exit 1; }
+            export AUTOMATED_API_HARNESS_AGENT_MODEL="$DOVEL_AGENT_MODEL"; echo "migration agent model: $DOVEL_AGENT_MODEL"
+          fi
+          case "${DOVEL_AGENT_REASONING:-}" in '') ;; off|low|high|max) export AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT="$DOVEL_AGENT_REASONING"; echo "migration agent reasoning: $DOVEL_AGENT_REASONING";; *) echo "::error::agent_reasoning must be off, low, high or max"; exit 1;; esac
+          unset DOVEL_AGENT_MODEL DOVEL_AGENT_REASONING
           # Every credential-shaped variable is unset; the model key alone is left, and run-case.mjs hands it to the
           # flow over --secrets-stdin (never through the flow's environment).
           key="$DOVEL_INPUT_OPENROUTER"; unset DOVEL_INPUT_OPENROUTER
