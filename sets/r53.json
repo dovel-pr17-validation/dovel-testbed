@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "zengm-games/zengm",
+    "mirror": "dovel-pr17-validation/pr17r53-npm-zengm",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "UI5/cli",
+    "mirror": "dovel-pr17-validation-2/pr17r53-npm-cli",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "freee/freee-mcp",
+    "mirror": "dovel-pr17-validation/pr17r53-npm-freee-mcp",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "expo/expo-github-action",
+    "mirror": "dovel-pr17-validation-2/pr17r53-npm-expo-github-action",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "epicweb-dev/epic-stack",
+    "mirror": "dovel-pr17-validation/pr17r53-npm-epic-stack",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "tinify/tinify-nodejs",
+    "mirror": "dovel-pr17-validation-2/pr17r53-npm-tinify-nodejs",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "tolgee/tolgee-js",
+    "mirror": "dovel-pr17-validation/pr17r53-npm-tolgee-js",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "LegendApp/legend-state",
+    "mirror": "dovel-pr17-validation-2/pr17r53-npm-legend-state",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "tldraw/obsidian-plugin",
+    "mirror": "dovel-pr17-validation/pr17r53-npm-obsidian-plugin",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "SakanaAI/treequest",
+    "mirror": "dovel-pr17-validation-2/pr17r53-pypi-treequest",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "GNS3/gns3-server",
+    "mirror": "dovel-pr17-validation/pr17r53-pypi-gns3-server",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "avast/pytest-docker",
+    "mirror": "dovel-pr17-validation-2/pr17r53-pypi-pytest-docker",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "mercadopago/sdk-python",
+    "mirror": "dovel-pr17-validation/pr17r53-pypi-sdk-python",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "codemagic-ci-cd/cli-tools",
+    "mirror": "dovel-pr17-validation-2/pr17r53-pypi-cli-tools",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "SynaLinks/synalinks",
+    "mirror": "dovel-pr17-validation/pr17r53-pypi-synalinks",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "ultralytics/flickr_scraper",
+    "mirror": "dovel-pr17-validation-2/pr17r53-pypi-flickr_scraper",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 17,
+    "source": "jd-opensource/OxyGent",
+    "mirror": "dovel-pr17-validation/pr17r53-pypi-oxygent",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "quarkslab/quokka",
+    "mirror": "dovel-pr17-validation-2/pr17r53-pypi-quokka",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "maxmind/geoip2-csv-converter",
+    "mirror": "dovel-pr17-validation/pr17r53-go-geoip2-csv-converter",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "grafana/sobek",
+    "mirror": "dovel-pr17-validation-2/pr17r53-go-sobek",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "grafana/dskit",
+    "mirror": "dovel-pr17-validation/pr17r53-go-dskit",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 22,
+    "source": "taleshape-com/shaper",
+    "mirror": "dovel-pr17-validation-2/pr17r53-go-shaper",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "akash-network/node",
+    "mirror": "dovel-pr17-validation/pr17r53-go-node",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "netlify/open-api",
+    "mirror": "dovel-pr17-validation-2/pr17r53-go-open-api",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "RedTeamPentesting/pretender",
+    "mirror": "dovel-pr17-validation/pr17r53-go-pretender",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  }
+]

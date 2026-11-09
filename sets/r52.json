@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "osmosis-labs/osmosis-frontend",
+    "mirror": "dovel-pr17-validation/pr17r52-npm-osmosis-frontend",
+    "branch": "stage",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "citizenfx/txAdmin",
+    "mirror": "dovel-pr17-validation-2/pr17r52-npm-txadmin",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "pyth-network/pyth-crosschain",
+    "mirror": "dovel-pr17-validation/pr17r52-npm-pyth-crosschain",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "EaseCation/cube-3d-text",
+    "mirror": "dovel-pr17-validation-2/pr17r52-npm-cube-3d-text",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "diplodoc-platform/diplodoc",
+    "mirror": "dovel-pr17-validation/pr17r52-npm-diplodoc",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "OpenWonderLabs/homebridge-switchbot",
+    "mirror": "dovel-pr17-validation-2/pr17r52-npm-homebridge-switchbot",
+    "branch": "latest",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "seek-oss/playroom",
+    "mirror": "dovel-pr17-validation/pr17r52-npm-playroom",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 8,
+    "source": "maxmind/GeoIP2-node",
+    "mirror": "dovel-pr17-validation-2/pr17r52-npm-geoip2-node",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "callstack/react-native-brownfield",
+    "mirror": "dovel-pr17-validation/pr17r52-npm-react-native-brownfield",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "overhangio/tutor",
+    "mirror": "dovel-pr17-validation-2/pr17r52-pypi-tutor",
+    "branch": "release",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "neuralinkcorp/datarepo",
+    "mirror": "dovel-pr17-validation/pr17r52-pypi-datarepo",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "dreadnode/rigging",
+    "mirror": "dovel-pr17-validation-2/pr17r52-pypi-rigging",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "airbytehq/PyAirbyte",
+    "mirror": "dovel-pr17-validation/pr17r52-pypi-pyairbyte",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "HumanSignal/label-studio-ml-backend",
+    "mirror": "dovel-pr17-validation-2/pr17r52-pypi-label-studio-ml-backend",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "SonySemiconductorSolutions/mct-model-optimization",
+    "mirror": "dovel-pr17-validation/pr17r52-pypi-mct-model-optimization",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "GitHubSecurityLab/seclab-taskflow-agent",
+    "mirror": "dovel-pr17-validation-2/pr17r52-pypi-seclab-taskflow-agent",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 17,
+    "source": "readthedocs/sphinx-autoapi",
+    "mirror": "dovel-pr17-validation/pr17r52-pypi-sphinx-autoapi",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "enthought/traits",
+    "mirror": "dovel-pr17-validation-2/pr17r52-pypi-traits",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "platform-engineering-labs/formae",
+    "mirror": "dovel-pr17-validation/pr17r52-go-formae",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "teslamotors/vehicle-command",
+    "mirror": "dovel-pr17-validation-2/pr17r52-go-vehicle-command",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "crytic/medusa",
+    "mirror": "dovel-pr17-validation/pr17r52-go-medusa",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "neuvector/neuvector",
+    "mirror": "dovel-pr17-validation-2/pr17r52-go-neuvector",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "replicatedhq/troubleshoot",
+    "mirror": "dovel-pr17-validation/pr17r52-go-troubleshoot",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "blevesearch/vellum",
+    "mirror": "dovel-pr17-validation-2/pr17r52-go-vellum",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "postfinance/kubenurse",
+    "mirror": "dovel-pr17-validation/pr17r52-go-kubenurse",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  }
+]
