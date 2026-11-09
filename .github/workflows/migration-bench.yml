@@ -1,0 +1,235 @@
+name: Migration benchmark
+# The product's migration benchmark (docs/migration/BENCHMARK.md, template docs/migration/benchmark.workflow.yml) on
+# this public testbed: one case per job, each on its own GitHub-hosted Ubuntu 24.04 runner, then the product's
+# scorer (scripts/migration-bench/score.mjs) over all of them.
+#
+# The product hand-off is run.yml's: `prepare-product` (no repository code) clones the snapshot branch snap-<sha>
+# of the private snapshot repository with MIRRORS_TOKEN (products/<sha>.tar.gz.enc + PRODUCT_KEY as the fallback)
+# and uploads it ONLY encrypted with HANDOFF_KEY; every other job decrypts it in its first unpacking step. The `case`
+# job (repository code, act) holds no GitHub token, only OPENROUTER_API_KEY, handed to the flow over stdin
+# (bench/run-case-stdin.mjs). Artifacts: each case's documents and log (no product, no checkout), and the score.
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: Product snapshot (short sha; branch snap-<sha> of the snapshot repository)
+        required: true
+      tier:
+        description: smoke, full or held-out
+        default: smoke
+      cases:
+        description: Comma-separated case ids to run instead of the whole tier (empty runs the tier)
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: migration-bench-${{ inputs.product }}-${{ inputs.tier }}
+  cancel-in-progress: false
+jobs:
+  prepare-product:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      sha256: ${{ steps.pack.outputs.sha256 }}
+      cases: ${{ steps.list.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+          persist-credentials: false
+      - name: Unpack the product snapshot
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/product"
+          if git clone -q --depth 1 --branch "snap-$PRODUCT" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product-clone" 2>/dev/null; then
+            rm -rf "$RUNNER_TEMP/product-clone/.git"; cp -r "$RUNNER_TEMP/product-clone/." "$RUNNER_TEMP/product/"; rm -rf "$RUNNER_TEMP/product-clone"
+          else
+            printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" \
+              -in "testbed/products/$PRODUCT.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+            rm -f "$RUNNER_TEMP/product.key"
+          fi
+      # Case ids only (no product text) go into the job output.
+      - id: list
+        env:
+          DOVEL_TIER: ${{ inputs.tier }}
+          DOVEL_CASES: ${{ inputs.cases }}
+        run: |
+          set -euo pipefail
+          cases=$(node -e 'const fs=require("fs"),d=process.argv[1];
+            const only=(process.env.DOVEL_CASES||"").split(",").map(s=>s.trim()).filter(Boolean);
+            const all=fs.readdirSync(d).filter(f=>f.endsWith(".json")).map(f=>JSON.parse(fs.readFileSync(`${d}/${f}`,"utf8")));
+            const ids=all.filter(c=>only.length?only.includes(c.id):c.tier===process.env.DOVEL_TIER).map(c=>c.id).sort();
+            if(!ids.every(id=>/^[a-z0-9][a-z0-9._-]*$/.test(id))) throw new Error("bad case id");
+            if(ids.length===0) throw new Error("no cases");
+            process.stdout.write(JSON.stringify(ids))' "$RUNNER_TEMP/product/scripts/migration-bench/cases")
+          echo "cases=$cases" >> "$GITHUB_OUTPUT"
+          echo "$cases"
+      - id: pack
+        env:
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/handoff"
+          # This repository is public, and so are its artifacts: only the ciphertext of the product is uploaded (HANDOFF_KEY).
+          [ -n "${HANDOFF_KEY:-}" ] || { echo "::error::the HANDOFF_KEY secret is not set: the product hand-off is only uploaded encrypted"; exit 1; }
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
+          tar -C "$RUNNER_TEMP/product" -cz . | openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass "file:$RUNNER_TEMP/handoff.key" -out "$RUNNER_TEMP/handoff/product.tar.gz.enc"
+          rm -f "$RUNNER_TEMP/handoff.key"
+          [ "$(head -c 8 "$RUNNER_TEMP/handoff/product.tar.gz.enc")" = "Salted__" ] || { echo "::error::the hand-off is not ciphertext"; exit 1; }
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz.enc" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff/product.tar.gz.enc
+          retention-days: 1
+
+  case:
+    needs: prepare-product
+    name: ${{ matrix.case }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        case: ${{ fromJSON(needs.prepare-product.outputs.cases) }}
+    steps:
+      - run: echo "JOB_STARTED_AT=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - name: Unpack the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz.enc" | sha256sum -c --quiet
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
+          mkdir -p "$RUNNER_TEMP/product"
+          { openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/handoff.key" -in "$RUNNER_TEMP/handoff/product.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"; }
+          rm -f "$RUNNER_TEMP/handoff.key"
+          rm -rf "$RUNNER_TEMP/handoff"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
+          corepack pnpm build
+      - name: Run the case
+        # Leaves 20 minutes of the job for keeping the results.
+        timeout-minutes: 275
+        env:
+          DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          DOVEL_CASE: ${{ matrix.case }}
+          PRODUCT: ${{ inputs.product }}
+        run: |
+          set -uo pipefail
+          ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
+          # As run.yml: the key reaches the flow over stdin, and every credential-shaped variable is unset first.
+          secrets="$(node -e '
+            const pairs = [["OPENROUTER_API_KEY", "DOVEL_INPUT_OPENROUTER"]];
+            process.stdout.write(JSON.stringify(Object.fromEntries(pairs.filter(([, from]) => process.env[from]).map(([to, from]) => [to, process.env[from]]))));
+          ')"
+          unset DOVEL_INPUT_OPENROUTER
+          shopt -s nocasematch
+          for variable in $(compgen -e); do
+            if [[ "$variable" =~ (token|secret|password|credential|api[_-]?key|private[_-]?key) && "$variable" != TIKTOKEN_CACHE_DIR ]]; then unset "$variable"; fi
+          done
+          shopt -u nocasematch
+          export TMPDIR="$RUNNER_TEMP/dovel-tmp"; mkdir -p "$TMPDIR"
+          node "$GITHUB_WORKSPACE/testbed/bench/run-case-stdin.mjs" "$RUNNER_TEMP/product" "$RUNNER_TEMP/product/scripts/migration-bench/cases/$DOVEL_CASE.json" \
+            --out "$RUNNER_TEMP/bench" --product-sha "$PRODUCT" --ci-runner act <<<"$secrets" && code=0 || code=$?
+          echo "run-case exit $code"
+          grep -m1 -o 'migration agent [^;]*' "$RUNNER_TEMP/bench/$DOVEL_CASE/flow.log" || echo "no models: line in flow.log"
+          tail -60 "$RUNNER_TEMP/bench/$DOVEL_CASE/flow.log" || true
+      - name: Keep the case's documents and log (not the checkout, not dependency trees)
+        if: always()
+        env:
+          DOVEL_CASE: ${{ matrix.case }}
+        run: |
+          src="$RUNNER_TEMP/bench/$DOVEL_CASE"; keep="$RUNNER_TEMP/keep/$DOVEL_CASE"; mkdir -p "$keep"
+          [ -d "$src" ] || { echo "no case directory"; exit 0; }
+          sudo chown -R "$(id -u)" "$src" 2>/dev/null || true
+          chmod -R u+w "$src" 2>/dev/null || true
+          for item in case-run.json flow.log output publication; do [ -e "$src/$item" ] && cp -r "$src/$item" "$keep/"; done
+          find "$keep" -type d \( -name node_modules -o -name target -o -name .gradle -o -name .venv -o -name gomodcache -o -name .pnpm-store -o -name workspace -o -name checkout \) -prune -exec rm -rf {} + 2>/dev/null || true
+          du -sh "$keep"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bench-${{ matrix.case }}
+          path: ${{ runner.temp }}/keep
+          if-no-files-found: ignore
+          retention-days: 30
+
+  score:
+    needs: [prepare-product, case]
+    if: always() && needs.prepare-product.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - name: Unpack the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz.enc" | sha256sum -c --quiet
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
+          mkdir -p "$RUNNER_TEMP/product"
+          { openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/handoff.key" -in "$RUNNER_TEMP/handoff/product.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"; }
+          rm -f "$RUNNER_TEMP/handoff.key"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: corepack pnpm install --frozen-lockfile && corepack pnpm build
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bench-*
+          path: ${{ runner.temp }}/bench
+          merge-multiple: true
+      - name: Score
+        working-directory: ${{ runner.temp }}/product
+        run: |
+          set -uo pipefail
+          mkdir -p "$RUNNER_TEMP/score"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/score.mjs "$RUNNER_TEMP/bench" > "$RUNNER_TEMP/score/score.txt" 2>&1; echo "score.mjs exit $?"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/score.mjs "$RUNNER_TEMP/bench" --json > "$RUNNER_TEMP/score/score.json" 2> "$RUNNER_TEMP/score/score-json.err"; echo "score.mjs --json exit $?"
+          cat "$RUNNER_TEMP/score/score.txt"
+          { echo '## Migration benchmark'; echo; echo '```'; cat "$RUNNER_TEMP/score/score.txt"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bench-score
+          path: ${{ runner.temp }}/score
