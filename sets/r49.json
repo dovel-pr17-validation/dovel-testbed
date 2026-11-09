@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "WeCodePixels/theia-sticky-sidebar",
+    "mirror": "dovel-pr17-validation/pr17r49-npm-theia-sticky-sidebar",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "better-auth/better-fetch",
+    "mirror": "dovel-pr17-validation-2/pr17r49-npm-better-fetch",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "margelo/react-native-quick-crypto",
+    "mirror": "dovel-pr17-validation/pr17r49-npm-react-native-quick-crypto",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "plaid/react-plaid-link",
+    "mirror": "dovel-pr17-validation-2/pr17r49-npm-react-plaid-link",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "embedly/player.js",
+    "mirror": "dovel-pr17-validation/pr17r49-npm-player.js",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "jumpserver/luna",
+    "mirror": "dovel-pr17-validation-2/pr17r49-npm-luna",
+    "branch": "dev",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "postalsys/postal-mime",
+    "mirror": "dovel-pr17-validation/pr17r49-npm-postal-mime",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 8,
+    "source": "httptoolkit/brotli-wasm",
+    "mirror": "dovel-pr17-validation-2/pr17r49-npm-brotli-wasm",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "getsentry/spotlight",
+    "mirror": "dovel-pr17-validation/pr17r49-npm-spotlight",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "Nike-Inc/koheesio",
+    "mirror": "dovel-pr17-validation-2/pr17r49-pypi-koheesio",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "MagicStack/httptools",
+    "mirror": "dovel-pr17-validation/pr17r49-pypi-httptools",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "simple-login/app",
+    "mirror": "dovel-pr17-validation-2/pr17r49-pypi-app",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "datalab-to/pdftext",
+    "mirror": "dovel-pr17-validation/pr17r49-pypi-pdftext",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "cloudinary/pycloudinary",
+    "mirror": "dovel-pr17-validation-2/pr17r49-pypi-pycloudinary",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "explosion/spacy-llm",
+    "mirror": "dovel-pr17-validation/pr17r49-pypi-spacy-llm",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "Kozea/Radicale",
+    "mirror": "dovel-pr17-validation-2/pr17r49-pypi-radicale",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 17,
+    "source": "gbionics/amp-rsl-rl",
+    "mirror": "dovel-pr17-validation/pr17r49-pypi-amp-rsl-rl",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "xorq-labs/xorq",
+    "mirror": "dovel-pr17-validation-2/pr17r49-pypi-xorq",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "akamai/cli",
+    "mirror": "dovel-pr17-validation/pr17r49-go-cli",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "timescale/timescaledb-tune",
+    "mirror": "dovel-pr17-validation-2/pr17r49-go-timescaledb-tune",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "luno/workflow",
+    "mirror": "dovel-pr17-validation/pr17r49-go-workflow",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 22,
+    "source": "superfly/ltx",
+    "mirror": "dovel-pr17-validation-2/pr17r49-go-ltx",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "ionos-cloud/cluster-api-provider-proxmox",
+    "mirror": "dovel-pr17-validation/pr17r49-go-cluster-api-provider-proxmox",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "klippa-app/go-pdfium",
+    "mirror": "dovel-pr17-validation-2/pr17r49-go-go-pdfium",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "AfterShip/clickhouse-sql-parser",
+    "mirror": "dovel-pr17-validation/pr17r49-go-clickhouse-sql-parser",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  }
+]
