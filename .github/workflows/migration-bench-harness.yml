@@ -1,0 +1,283 @@
+name: Migration benchmark (Harness, network-guarded)
+# The product's migration benchmark (docs/migration/BENCHMARK.md, template docs/migration/benchmark.workflow.yml) on
+# this public testbed: one case per job, each on its own GitHub-hosted Ubuntu 24.04 runner, then the product's
+# scorer (scripts/migration-bench/score.mjs) over all of them.
+#
+# The product hand-off is run.yml's: `prepare-product` (no repository code) clones the snapshot branch snap-<sha>
+# of the private snapshot repository with MIRRORS_TOKEN (products/<sha>.tar.gz.enc + PRODUCT_KEY as the fallback)
+# and uploads it ONLY encrypted with HANDOFF_KEY; every other job decrypts it in its first unpacking step. The `case`
+# job (repository code, act) holds no GitHub token, only OPENROUTER_API_KEY, handed to the flow over stdin
+# (bench/run-case-stdin.mjs). Artifacts: each case's documents and log (no product, no checkout), and the score.
+#
+# This variant (migration-bench-harness.yml; migration-bench.yml stays the one-file-fallback baseline) sets up the
+# product's network guard for the migration agent before each case, exactly as dovel-flow/action.yml's "Guard the
+# migration agent's network" step with harness-network-guard=true (the case job fails if it cannot be set up), so the
+# flow runs the DeepSeek (cordis) Harness, network-guarded, instead of the bounded single call. The case runs the
+# product's own scripts/migration-bench/run-case.mjs (--secrets-stdin, --product-sha) with the FULL product sha.
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: Product commit, FULL 40-hex sha (branch snap-<first 8> of the snapshot repository)
+        required: true
+      tier:
+        description: smoke, full or held-out
+        default: smoke
+      cases:
+        description: Comma-separated case ids to run instead of the whole tier (empty runs the tier)
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}
+  cancel-in-progress: false
+jobs:
+  prepare-product:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      sha256: ${{ steps.pack.outputs.sha256 }}
+      cases: ${{ steps.list.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+          persist-credentials: false
+      - name: Unpack the product snapshot
+        env:
+          PRODUCT_KEY: ${{ secrets.PRODUCT_KEY }}
+          PRODUCT: ${{ inputs.product }}
+          MIRRORS_TOKEN: ${{ secrets.MIRRORS_TOKEN }}
+        run: |
+          set -euo pipefail
+          [[ "$PRODUCT" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::product must be the full 40-hex commit"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/product"
+          if git clone -q --depth 1 --branch "snap-${PRODUCT:0:8}" "https://x-access-token:${MIRRORS_TOKEN}@github.com/dovel-pr17-validation/dovel-product-snapshots.git" "$RUNNER_TEMP/product-clone" 2>/dev/null; then
+            rm -rf "$RUNNER_TEMP/product-clone/.git"; cp -r "$RUNNER_TEMP/product-clone/." "$RUNNER_TEMP/product/"; rm -rf "$RUNNER_TEMP/product-clone"
+          else
+            printf '%s' "$PRODUCT_KEY" > "$RUNNER_TEMP/product.key"
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/product.key" \
+              -in "testbed/products/${PRODUCT:0:8}.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"
+            rm -f "$RUNNER_TEMP/product.key"
+          fi
+      # Case ids only (no product text) go into the job output.
+      - id: list
+        env:
+          DOVEL_TIER: ${{ inputs.tier }}
+          DOVEL_CASES: ${{ inputs.cases }}
+        run: |
+          set -euo pipefail
+          cases=$(node -e 'const fs=require("fs"),d=process.argv[1];
+            const only=(process.env.DOVEL_CASES||"").split(",").map(s=>s.trim()).filter(Boolean);
+            const all=fs.readdirSync(d).filter(f=>f.endsWith(".json")).map(f=>JSON.parse(fs.readFileSync(`${d}/${f}`,"utf8")));
+            const ids=all.filter(c=>only.length?only.includes(c.id):c.tier===process.env.DOVEL_TIER).map(c=>c.id).sort();
+            if(!ids.every(id=>/^[a-z0-9][a-z0-9._-]*$/.test(id))) throw new Error("bad case id");
+            if(ids.length===0) throw new Error("no cases");
+            process.stdout.write(JSON.stringify(ids))' "$RUNNER_TEMP/product/scripts/migration-bench/cases")
+          echo "cases=$cases" >> "$GITHUB_OUTPUT"
+          echo "$cases"
+      - id: pack
+        env:
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/handoff"
+          # This repository is public, and so are its artifacts: only the ciphertext of the product is uploaded (HANDOFF_KEY).
+          [ -n "${HANDOFF_KEY:-}" ] || { echo "::error::the HANDOFF_KEY secret is not set: the product hand-off is only uploaded encrypted"; exit 1; }
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
+          tar -C "$RUNNER_TEMP/product" -cz . | openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass "file:$RUNNER_TEMP/handoff.key" -out "$RUNNER_TEMP/handoff/product.tar.gz.enc"
+          rm -f "$RUNNER_TEMP/handoff.key"
+          [ "$(head -c 8 "$RUNNER_TEMP/handoff/product.tar.gz.enc")" = "Salted__" ] || { echo "::error::the hand-off is not ciphertext"; exit 1; }
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/handoff/product.tar.gz.enc" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff/product.tar.gz.enc
+          retention-days: 1
+
+  case:
+    needs: prepare-product
+    name: ${{ matrix.case }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        case: ${{ fromJSON(needs.prepare-product.outputs.cases) }}
+    steps:
+      - run: echo "JOB_STARTED_AT=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          path: testbed
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - name: Unpack the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz.enc" | sha256sum -c --quiet
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
+          mkdir -p "$RUNNER_TEMP/product"
+          { openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/handoff.key" -in "$RUNNER_TEMP/handoff/product.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"; }
+          rm -f "$RUNNER_TEMP/handoff.key"
+          rm -rf "$RUNNER_TEMP/handoff"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
+          corepack pnpm build
+      # As dovel-flow/action.yml "Guard the migration agent's network" with harness-network-guard: 'true'.
+      - name: Guard the migration agent's network
+        id: harness-guard
+        working-directory: ${{ runner.temp }}/product
+        env:
+          DOVEL_HARNESS_NETWORK_GUARD: 'true'
+          DOVEL_HAS_DEEPSEEK: 'false'
+        run: |
+          set -uo pipefail
+          unavailable() {
+            if [ "$DOVEL_HARNESS_NETWORK_GUARD" = true ]; then
+              echo "::error::harness-network-guard is 'true' but the guard cannot be set up: $1"
+              exit 1
+            fi
+            echo "::notice::The migration agent runs without its network guard ($1): each migration is one bounded model call."
+            exit 0
+          }
+          [ "${RUNNER_OS:-}" = Linux ] || unavailable "the runner is ${RUNNER_OS:-unknown}, not Linux"
+          sudo -n true 2>/dev/null || unavailable "the runner has no passwordless sudo"
+          host="$(node scripts/harness-egress-guard.mjs host)" || unavailable "the model endpoint cannot be guarded"
+          sudo -n "$(command -v node)" scripts/harness-egress-guard.mjs configure --host "$host" --product "$PWD" \
+            || unavailable "its setup failed (see above)"
+          /usr/lib/dovel-harness-egress/bin/dovel-harness-egress-guard verify "$host" >/dev/null || unavailable "its check failed right after setup"
+          {
+            echo "guard-command=/usr/lib/dovel-harness-egress/bin/dovel-harness-egress-guard"
+            echo "launcher=/usr/lib/dovel-harness-egress/bin/dovel-harness-launch"
+          } >> "$GITHUB_OUTPUT"
+      - name: Run the case
+        # Leaves 20 minutes of the job for keeping the results.
+        timeout-minutes: 275
+        working-directory: ${{ runner.temp }}/product
+        env:
+          DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          DOVEL_CASE: ${{ matrix.case }}
+          PRODUCT: ${{ inputs.product }}
+          DOVEL_GUARD_COMMAND: ${{ steps.harness-guard.outputs.guard-command }}
+          DOVEL_GUARD_LAUNCHER: ${{ steps.harness-guard.outputs.launcher }}
+        run: |
+          set -uo pipefail
+          ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
+          # As action.yml's flow step: the guard the step above set up and proved, for the flow to check again.
+          [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
+          export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
+          unset DOVEL_GUARD_COMMAND DOVEL_GUARD_LAUNCHER
+          # Every credential-shaped variable is unset; the model key alone is left, and run-case.mjs hands it to the
+          # flow over --secrets-stdin (never through the flow's environment).
+          key="$DOVEL_INPUT_OPENROUTER"; unset DOVEL_INPUT_OPENROUTER
+          shopt -s nocasematch
+          for variable in $(compgen -e); do
+            if [[ "$variable" =~ (token|secret|password|credential|api[_-]?key|private[_-]?key) && "$variable" != TIKTOKEN_CACHE_DIR ]]; then unset "$variable"; fi
+          done
+          shopt -u nocasematch
+          export OPENROUTER_API_KEY="$key"; unset key
+          export TMPDIR="$RUNNER_TEMP/dovel-tmp"; mkdir -p "$TMPDIR"
+          node scripts/migration-bench/run-case.mjs "scripts/migration-bench/cases/$DOVEL_CASE.json" \
+            --out "$RUNNER_TEMP/bench" --product-sha "$PRODUCT" --ci-runner act </dev/null && code=0 || code=$?
+          unset OPENROUTER_API_KEY
+          echo "run-case exit $code"
+          models="$(grep -m1 'models:' "$RUNNER_TEMP/bench/$DOVEL_CASE/flow.log" || true)"
+          echo "${models:-no models: line in flow.log}"
+          case "$models" in *"network-guarded"*) ;; *) echo "::warning::the migration agent was not the network-guarded Harness: ${models:-no models line}";; esac
+          tail -60 "$RUNNER_TEMP/bench/$DOVEL_CASE/flow.log" || true
+      - name: Keep the case's documents and log (not the checkout, not dependency trees)
+        if: always()
+        env:
+          DOVEL_CASE: ${{ matrix.case }}
+        run: |
+          src="$RUNNER_TEMP/bench/$DOVEL_CASE"; keep="$RUNNER_TEMP/keep/$DOVEL_CASE"; mkdir -p "$keep"
+          [ -d "$src" ] || { echo "no case directory"; exit 0; }
+          sudo chown -R "$(id -u)" "$src" 2>/dev/null || true
+          chmod -R u+w "$src" 2>/dev/null || true
+          for item in case-run.json flow.log output publication; do [ -e "$src/$item" ] && cp -r "$src/$item" "$keep/"; done
+          find "$keep" -type d \( -name node_modules -o -name target -o -name .gradle -o -name .venv -o -name gomodcache -o -name .pnpm-store -o -name workspace -o -name checkout \) -prune -exec rm -rf {} + 2>/dev/null || true
+          du -sh "$keep"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bench-${{ matrix.case }}
+          path: ${{ runner.temp }}/keep
+          if-no-files-found: ignore
+          retention-days: 30
+      # Last: the guard's account, rules, mounts and root's copies go.
+      - name: Remove the migration agent's network guard
+        if: always() && steps.harness-guard.outputs.guard-command != ''
+        run: |
+          sudo -n /usr/lib/dovel-harness-egress/bin/node /usr/lib/dovel-harness-egress/harness-egress-guard.mjs cleanup \
+            || echo "::warning::the migration agent's network guard was not removed"
+
+  score:
+    needs: [prepare-product, case]
+    if: always() && needs.prepare-product.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: product
+          path: ${{ runner.temp }}/handoff
+      - name: Unpack the product
+        env:
+          PRODUCT_SHA256: ${{ needs.prepare-product.outputs.sha256 }}
+          HANDOFF_KEY: ${{ secrets.HANDOFF_KEY }}
+        run: |
+          set -euo pipefail
+          echo "$PRODUCT_SHA256  $RUNNER_TEMP/handoff/product.tar.gz.enc" | sha256sum -c --quiet
+          trap 'rm -f "$RUNNER_TEMP/handoff.key"' EXIT
+          ( umask 077; printf '%s' "$HANDOFF_KEY" > "$RUNNER_TEMP/handoff.key" )
+          unset HANDOFF_KEY
+          mkdir -p "$RUNNER_TEMP/product"
+          { openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "file:$RUNNER_TEMP/handoff.key" -in "$RUNNER_TEMP/handoff/product.tar.gz.enc" | tar -xz -C "$RUNNER_TEMP/product"; }
+          rm -f "$RUNNER_TEMP/handoff.key"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the product
+        working-directory: ${{ runner.temp }}/product
+        env:
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+        run: corepack pnpm install --frozen-lockfile && corepack pnpm build
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bench-*
+          path: ${{ runner.temp }}/bench
+          merge-multiple: true
+      - name: Score
+        working-directory: ${{ runner.temp }}/product
+        run: |
+          set -uo pipefail
+          mkdir -p "$RUNNER_TEMP/score"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/score.mjs "$RUNNER_TEMP/bench" > "$RUNNER_TEMP/score/score.txt" 2>&1; echo "score.mjs exit $?"
+          node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/score.mjs "$RUNNER_TEMP/bench" --json > "$RUNNER_TEMP/score/score.json" 2> "$RUNNER_TEMP/score/score-json.err"; echo "score.mjs --json exit $?"
+          cat "$RUNNER_TEMP/score/score.txt"
+          { echo '## Migration benchmark'; echo; echo '```'; cat "$RUNNER_TEMP/score/score.txt"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bench-score
+          path: ${{ runner.temp }}/score
