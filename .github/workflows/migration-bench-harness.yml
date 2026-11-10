@@ -50,7 +50,9 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.runs }}-${{ inputs.replay_fix }}-${{ inputs.agent_loop }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.agent_limits }}-${{ inputs.cases }}
+  # One group per run: a long `cases` list made the group name too long for GitHub ("workflow file issue"); runs are
+  # dispatched deliberately, so no two need to be serialized by their inputs.
+  group: migration-bench-harness-${{ github.run_id }}
   cancel-in-progress: false
 jobs:
   prepare-product:
