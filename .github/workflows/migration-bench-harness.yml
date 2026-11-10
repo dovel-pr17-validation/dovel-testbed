@@ -21,8 +21,14 @@ on:
         description: Product commit, FULL 40-hex sha (branch snap-<first 8> of the snapshot repository)
         required: true
       tier:
-        description: smoke, full or held-out
-        default: smoke
+        description: bench (the admitted cases) or candidate
+        default: bench
+      runs:
+        description: Runs per case (pass@1 and pass@3 are scored over them)
+        default: '3'
+      replay_fix:
+        description: "Admission: 1 replays each case's known-good fix in the model's place (no model key, no model call; scripts/migration-bench/admit.mjs decides), 0 runs the migration agent"
+        default: '0'
       cases:
         description: Comma-separated case ids to run instead of the whole tier (empty runs the tier)
         default: ''
@@ -41,7 +47,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.agent_limits }}-${{ inputs.cases }}
+  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.runs }}-${{ inputs.replay_fix }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.agent_limits }}-${{ inputs.cases }}
   cancel-in-progress: false
 jobs:
   prepare-product:
@@ -50,6 +56,7 @@ jobs:
     outputs:
       sha256: ${{ steps.pack.outputs.sha256 }}
       cases: ${{ steps.list.outputs.cases }}
+      runs: ${{ steps.list.outputs.runs }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -77,8 +84,11 @@ jobs:
         env:
           DOVEL_TIER: ${{ inputs.tier }}
           DOVEL_CASES: ${{ inputs.cases }}
+          DOVEL_RUNS: ${{ inputs.runs }}
         run: |
           set -euo pipefail
+          [[ "$DOVEL_RUNS" =~ ^[1-9]$ ]] || { echo "::error::runs must be 1-9"; exit 1; }
+          echo "runs=$(seq -s, 1 "$DOVEL_RUNS" | sed 's/^/[/; s/$/]/')" >> "$GITHUB_OUTPUT"
           cases=$(node -e 'const fs=require("fs"),d=process.argv[1];
             const only=(process.env.DOVEL_CASES||"").split(",").map(s=>s.trim()).filter(Boolean);
             const all=fs.readdirSync(d).filter(f=>f.endsWith(".json")).map(f=>JSON.parse(fs.readFileSync(`${d}/${f}`,"utf8")));
@@ -111,16 +121,17 @@ jobs:
 
   case:
     needs: prepare-product
-    name: ${{ matrix.case }}
+    name: ${{ matrix.case }} @${{ matrix.run }}
     runs-on: ubuntu-24.04
     timeout-minutes: 300
     permissions:
       contents: read
     strategy:
       fail-fast: false
-      max-parallel: 6
+      max-parallel: 15
       matrix:
         case: ${{ fromJSON(needs.prepare-product.outputs.cases) }}
+        run: ${{ fromJSON(needs.prepare-product.outputs.runs) }}
     steps:
       - run: echo "JOB_STARTED_AT=$(date +%s%3N)" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
@@ -159,6 +170,8 @@ jobs:
       # As dovel-flow/action.yml "Guard the migration agent's network" with harness-network-guard: 'true'.
       - name: Guard the migration agent's network
         id: harness-guard
+        # A replay of the known-good fix calls no model: no agent to guard.
+        if: inputs.replay_fix != '1'
         working-directory: ${{ runner.temp }}/product
         env:
           DOVEL_HARNESS_NETWORK_GUARD: 'true'
@@ -211,12 +224,18 @@ jobs:
           DOVEL_AGENT_MODEL: ${{ inputs.agent_model }}
           DOVEL_AGENT_REASONING: ${{ inputs.agent_reasoning }}
           DOVEL_AGENT_LIMITS: ${{ inputs.agent_limits }}
+          DOVEL_REPLAY_FIX: ${{ inputs.replay_fix }}
+          DOVEL_RUN: ${{ matrix.run }}
         run: |
           set -uo pipefail
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
+          # Admission: the known-good fix stands for the model's edit; no model key reaches the flow, no model is called.
+          replay=(); if [ "${DOVEL_REPLAY_FIX:-0}" = 1 ]; then replay=(--replay-fix); unset DOVEL_INPUT_OPENROUTER; echo "replaying the case's known-good fix (no model)"; fi
           # As action.yml's flow step: the guard the step above set up and proved, for the flow to check again.
-          [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
-          export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
+          if [ "${#replay[@]}" -eq 0 ]; then
+            [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
+            export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
+          fi
           unset DOVEL_GUARD_COMMAND DOVEL_GUARD_LAUNCHER
           # As action.yml's flow step: the validation sandbox the step above set up (run_check needs it).
           if [ -n "${DOVEL_VALIDATION_SANDBOX_ENTRY:-}" ]; then export AUTOMATED_API_VALIDATION_SANDBOX="$DOVEL_VALIDATION_SANDBOX_ENTRY"; echo "validation sandbox: $DOVEL_VALIDATION_SANDBOX_ENTRY"; fi
@@ -239,28 +258,30 @@ jobs:
           unset DOVEL_AGENT_LIMITS
           # Every credential-shaped variable is unset; the model key alone is left, and run-case.mjs hands it to the
           # flow over --secrets-stdin (never through the flow's environment).
-          key="$DOVEL_INPUT_OPENROUTER"; unset DOVEL_INPUT_OPENROUTER
+          key="${DOVEL_INPUT_OPENROUTER:-}"; unset DOVEL_INPUT_OPENROUTER
           shopt -s nocasematch
           for variable in $(compgen -e); do
             if [[ "$variable" =~ (token|secret|password|credential|api[_-]?key|private[_-]?key) && "$variable" != TIKTOKEN_CACHE_DIR ]]; then unset "$variable"; fi
           done
           shopt -u nocasematch
-          export OPENROUTER_API_KEY="$key"; unset key
+          if [ -n "$key" ]; then export OPENROUTER_API_KEY="$key"; fi; unset key
           export TMPDIR="$RUNNER_TEMP/dovel-tmp"; mkdir -p "$TMPDIR"
           node scripts/migration-bench/run-case.mjs "scripts/migration-bench/cases/$DOVEL_CASE.json" \
-            --out "$RUNNER_TEMP/bench" --product-sha "$PRODUCT" --ci-runner act </dev/null && code=0 || code=$?
+            --out "$RUNNER_TEMP/bench/run-$DOVEL_RUN" --product-sha "$PRODUCT" --ci-runner act "${replay[@]}" </dev/null && code=0 || code=$?
           unset OPENROUTER_API_KEY
           echo "run-case exit $code"
-          models="$(grep -m1 'models:' "$RUNNER_TEMP/bench/$DOVEL_CASE/flow.log" || true)"
+          models="$(grep -m1 'models:' "$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE/flow.log" || true)"
           echo "${models:-no models: line in flow.log}"
-          case "$models" in *"network-guarded"*) ;; *) echo "::warning::the migration agent was not the network-guarded Harness: ${models:-no models line}";; esac
-          tail -60 "$RUNNER_TEMP/bench/$DOVEL_CASE/flow.log" || true
+          [ "${#replay[@]}" -gt 0 ] || case "$models" in *"network-guarded"*) ;; *) echo "::warning::the migration agent was not the network-guarded Harness: ${models:-no models line}";; esac
+          tail -60 "$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE/flow.log" || true
       - name: Keep the case's documents and log (not the checkout, not dependency trees)
         if: always()
         env:
           DOVEL_CASE: ${{ matrix.case }}
+          DOVEL_RUN: ${{ matrix.run }}
         run: |
-          src="$RUNNER_TEMP/bench/$DOVEL_CASE"; keep="$RUNNER_TEMP/keep/$DOVEL_CASE"; mkdir -p "$keep"
+          # One directory per run, <case>@<run>: the scorer aggregates the runs of a case.
+          src="$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE"; keep="$RUNNER_TEMP/keep/$DOVEL_CASE@$DOVEL_RUN"; mkdir -p "$keep"
           [ -d "$src" ] || { echo "no case directory"; exit 0; }
           sudo chown -R "$(id -u)" "$src" 2>/dev/null || true
           chmod -R u+w "$src" 2>/dev/null || true
@@ -270,7 +291,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: bench-${{ matrix.case }}
+          name: bench-${{ matrix.case }}-${{ matrix.run }}
           path: ${{ runner.temp }}/keep
           if-no-files-found: ignore
           retention-days: 30
@@ -326,8 +347,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/score"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/score.mjs "$RUNNER_TEMP/bench" > "$RUNNER_TEMP/score/score.txt" 2>&1; echo "score.mjs exit $?"
           node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/score.mjs "$RUNNER_TEMP/bench" --json > "$RUNNER_TEMP/score/score.json" 2> "$RUNNER_TEMP/score/score-json.err"; echo "score.mjs --json exit $?"
+          # Each case's admission (scripts/migration-bench/admit.mjs): decided by a replay_fix run, recorded on every run.
+          if [ -f scripts/migration-bench/admit.mjs ]; then
+            node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/admit.mjs "$RUNNER_TEMP/bench" --cases scripts/migration-bench/cases > "$RUNNER_TEMP/score/admission.txt" 2>&1
+            node --import ./packages/part-a/node_modules/tsx/dist/loader.mjs scripts/migration-bench/admit.mjs "$RUNNER_TEMP/bench" --cases scripts/migration-bench/cases --json > "$RUNNER_TEMP/score/admission.json" 2>> "$RUNNER_TEMP/score/admission.txt"
+            cat "$RUNNER_TEMP/score/admission.txt"
+          fi
           cat "$RUNNER_TEMP/score/score.txt"
-          { echo '## Migration benchmark'; echo; echo '```'; cat "$RUNNER_TEMP/score/score.txt"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          { echo '## Migration benchmark'; echo; echo '```'; cat "$RUNNER_TEMP/score/score.txt"; echo '```'; echo '## Admission'; echo '```'; cat "$RUNNER_TEMP/score/admission.txt" 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: bench-score
