@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "holepunchto/hyperbeam",
+    "mirror": "dovel-pr17-validation/pr17r54-npm-hyperbeam",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "marmelab/json-graphql-server",
+    "mirror": "dovel-pr17-validation-2/pr17r54-npm-json-graphql-server",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "nordcraftengine/nordcraft",
+    "mirror": "dovel-pr17-validation/pr17r54-npm-nordcraft",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "reearth/resium",
+    "mirror": "dovel-pr17-validation-2/pr17r54-npm-resium",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "channel-io/bezier-react",
+    "mirror": "dovel-pr17-validation/pr17r54-npm-bezier-react",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "once-ui-system/core",
+    "mirror": "dovel-pr17-validation-2/pr17r54-npm-core",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 7,
+    "source": "humaans/next-img",
+    "mirror": "dovel-pr17-validation/pr17r54-npm-next-img",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "typesense/typesense-instantsearch-adapter",
+    "mirror": "dovel-pr17-validation-2/pr17r54-npm-typesense-instantsearch-adapter",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "symfony/webpack-encore",
+    "mirror": "dovel-pr17-validation/pr17r54-npm-webpack-encore",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "explosion/wasabi",
+    "mirror": "dovel-pr17-validation-2/pr17r54-pypi-wasabi",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "langchain-ai/memory-agent",
+    "mirror": "dovel-pr17-validation/pr17r54-pypi-memory-agent",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "pikvm/kvmd",
+    "mirror": "dovel-pr17-validation-2/pr17r54-pypi-kvmd",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "avito-tech/aqueduct",
+    "mirror": "dovel-pr17-validation/pr17r54-pypi-aqueduct",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "healthchainai/HealthChain",
+    "mirror": "dovel-pr17-validation-2/pr17r54-pypi-healthchain",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "frappe/wiki",
+    "mirror": "dovel-pr17-validation/pr17r54-pypi-wiki",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "readthedocs/ethical-ad-server",
+    "mirror": "dovel-pr17-validation-2/pr17r54-pypi-ethical-ad-server",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 17,
+    "source": "Kozea/Pyphen",
+    "mirror": "dovel-pr17-validation/pr17r54-pypi-pyphen",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "nephila/djangocms-blog",
+    "mirror": "dovel-pr17-validation-2/pr17r54-pypi-djangocms-blog",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "DeepSourceCorp/globstar",
+    "mirror": "dovel-pr17-validation/pr17r54-go-globstar",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "emqx/emqx-operator",
+    "mirror": "dovel-pr17-validation-2/pr17r54-go-emqx-operator",
+    "branch": "main-2.3",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "s4wave/spacewave",
+    "mirror": "dovel-pr17-validation/pr17r54-go-spacewave",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "ozontech/file.d",
+    "mirror": "dovel-pr17-validation-2/pr17r54-go-file.d",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "projectdiscovery/proxify",
+    "mirror": "dovel-pr17-validation/pr17r54-go-proxify",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "Edgenesis/shifu",
+    "mirror": "dovel-pr17-validation-2/pr17r54-go-shifu",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "minio/warp",
+    "mirror": "dovel-pr17-validation/pr17r54-go-warp",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  }
+]

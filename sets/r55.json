@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "causaly/zod-validation-error",
+    "mirror": "dovel-pr17-validation/pr17r55-npm-zod-validation-error",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "software-mansion/react-native-gesture-handler",
+    "mirror": "dovel-pr17-validation-2/pr17r55-npm-react-native-gesture-handler",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "increments/qiita-cli",
+    "mirror": "dovel-pr17-validation/pr17r55-npm-qiita-cli",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "DesignLiquido/delegua",
+    "mirror": "dovel-pr17-validation-2/pr17r55-npm-delegua",
+    "branch": "principal",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "act-security-labs/iam-lens",
+    "mirror": "dovel-pr17-validation/pr17r55-npm-iam-lens",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "localstack/aws-cdk-local",
+    "mirror": "dovel-pr17-validation-2/pr17r55-npm-aws-cdk-local",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "mapbox/earcut",
+    "mirror": "dovel-pr17-validation/pr17r55-npm-earcut",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "onebeyond/rascal",
+    "mirror": "dovel-pr17-validation-2/pr17r55-npm-rascal",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "BiancoRoyal/node-red-contrib-modbus",
+    "mirror": "dovel-pr17-validation/pr17r55-npm-node-red-contrib-modbus",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "poly-hammer/character-dna-addon",
+    "mirror": "dovel-pr17-validation-2/pr17r55-pypi-character-dna-addon",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "ShipBit/wingman-ai",
+    "mirror": "dovel-pr17-validation/pr17r55-pypi-wingman-ai",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "KRLabsOrg/verbatim-rag",
+    "mirror": "dovel-pr17-validation-2/pr17r55-pypi-verbatim-rag",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "macrosynergy/macrosynergy",
+    "mirror": "dovel-pr17-validation/pr17r55-pypi-macrosynergy",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "NetSPI/gcpwn",
+    "mirror": "dovel-pr17-validation-2/pr17r55-pypi-gcpwn",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "maxmind/MaxMind-DB-Reader-python",
+    "mirror": "dovel-pr17-validation/pr17r55-pypi-maxmind-db-reader-python",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "HexRaysSA/ida-cyberchef",
+    "mirror": "dovel-pr17-validation-2/pr17r55-pypi-ida-cyberchef",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "thinkst/opencanary",
+    "mirror": "dovel-pr17-validation/pr17r55-pypi-opencanary",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "CelestoAI/agentor",
+    "mirror": "dovel-pr17-validation-2/pr17r55-pypi-agentor",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "syself/cluster-api-provider-hetzner",
+    "mirror": "dovel-pr17-validation/pr17r55-go-cluster-api-provider-hetzner",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "Trendyol/go-pq-cdc",
+    "mirror": "dovel-pr17-validation-2/pr17r55-go-go-pq-cdc",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "cronitorio/cronitor-cli",
+    "mirror": "dovel-pr17-validation/pr17r55-go-cronitor-cli",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 22,
+    "source": "interlynk-io/sbomqs",
+    "mirror": "dovel-pr17-validation-2/pr17r55-go-sbomqs",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "tetratelabs/func-e",
+    "mirror": "dovel-pr17-validation/pr17r55-go-func-e",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "Telmate/proxmox-api-go",
+    "mirror": "dovel-pr17-validation-2/pr17r55-go-proxmox-api-go",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "kayac/ecspresso",
+    "mirror": "dovel-pr17-validation/pr17r55-go-ecspresso",
+    "branch": "v2",
+    "ecosystem": "go",
+    "runner": "2604"
+  }
+]
