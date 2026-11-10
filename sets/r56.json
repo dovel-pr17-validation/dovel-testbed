@@ -1,0 +1,10 @@
+[
+  {
+    "index": 1,
+    "source": "osmosis-labs/osmosis-frontend",
+    "mirror": "dovel-pr17-validation/pr17r56-npm-osmosis-frontend",
+    "branch": "stage",
+    "ecosystem": "npm",
+    "runner": "2604"
+  }
+]
