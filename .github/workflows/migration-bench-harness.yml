@@ -32,6 +32,9 @@ on:
       cases:
         description: Comma-separated case ids to run instead of the whole tier (empty runs the tier)
         default: ''
+      agent_loop:
+        description: "1 runs the migration agent loop (AUTOMATED_API_AGENT_LOOP=1: in-process OpenRouter loop, bash/edit/submit in the validation sandbox; no network guard needed); 0 leaves it off. Not with agent_tools=1"
+        default: '0'
       agent_tools:
         description: "Migration agent mode: 1 sets AUTOMATED_API_HARNESS_AGENT_TOOLS=1 (the Harness reads and edits with tools), 0 leaves it off"
         default: '0'
@@ -39,15 +42,15 @@ on:
         description: "Agent-mode experiment: an OpenRouter model id for the migration agent only (sets AUTOMATED_API_HARNESS_AGENT_MODEL); empty keeps the product's own"
         default: ''
       agent_reasoning:
-        description: "Agent-mode experiment: off, low, high or max (sets AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT); empty keeps the product's own"
+        description: "Agent-mode experiment: off, low, medium, high or max (sets AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT, which the agent loop reads too; medium is the loop's only); empty keeps the product's own"
         default: ''
       agent_limits:
-        description: "Agent-mode experiment: wall-ms,tokens,turns (e.g. 2700000,1500000,60) for AUTOMATED_API_HARNESS_AGENT_MAX_WALL_MS/_MAX_TOKENS/_MAX_TURNS; empty keeps the product's own"
+        description: "Agent-mode experiment: wall-ms,tokens,turns (e.g. 2700000,1500000,60) for AUTOMATED_API_HARNESS_AGENT_MAX_WALL_MS/_MAX_TOKENS/_MAX_TURNS (the agent loop: wall-ms and turns as AUTOMATED_API_AGENT_LOOP_MAX_WALL_MS/_MAX_STEPS); empty keeps the product's own"
         default: ''
 permissions:
   contents: read
 concurrency:
-  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.runs }}-${{ inputs.replay_fix }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.agent_limits }}-${{ inputs.cases }}
+  group: migration-bench-harness-${{ inputs.product }}-${{ inputs.tier }}-${{ inputs.runs }}-${{ inputs.replay_fix }}-${{ inputs.agent_loop }}-${{ inputs.agent_tools }}-${{ inputs.agent_model }}-${{ inputs.agent_reasoning }}-${{ inputs.agent_limits }}-${{ inputs.cases }}
   cancel-in-progress: false
 jobs:
   prepare-product:
@@ -170,8 +173,9 @@ jobs:
       # As dovel-flow/action.yml "Guard the migration agent's network" with harness-network-guard: 'true'.
       - name: Guard the migration agent's network
         id: harness-guard
-        # A replay of the known-good fix calls no model: no agent to guard.
-        if: inputs.replay_fix != '1'
+        # A replay of the known-good fix calls no model, and the agent loop holds the key in Dovel's own process (its
+        # commands run in the validation sandbox): no Harness child to guard.
+        if: inputs.replay_fix != '1' && inputs.agent_loop != '1'
         working-directory: ${{ runner.temp }}/product
         env:
           DOVEL_HARNESS_NETWORK_GUARD: 'true'
@@ -221,6 +225,7 @@ jobs:
           DOVEL_GUARD_LAUNCHER: ${{ steps.harness-guard.outputs.launcher }}
           DOVEL_VALIDATION_SANDBOX_ENTRY: ${{ steps.validation-sandbox.outputs.entry }}
           DOVEL_AGENT_TOOLS: ${{ inputs.agent_tools }}
+          DOVEL_AGENT_LOOP: ${{ inputs.agent_loop }}
           DOVEL_AGENT_MODEL: ${{ inputs.agent_model }}
           DOVEL_AGENT_REASONING: ${{ inputs.agent_reasoning }}
           DOVEL_AGENT_LIMITS: ${{ inputs.agent_limits }}
@@ -231,8 +236,16 @@ jobs:
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
           # Admission: the known-good fix stands for the model's edit; no model key reaches the flow, no model is called.
           replay=(); if [ "${DOVEL_REPLAY_FIX:-0}" = 1 ]; then replay=(--replay-fix); unset DOVEL_INPUT_OPENROUTER; echo "replaying the case's known-good fix (no model)"; fi
+          # The migration agent loop: in Dovel's own process, its commands in the validation sandbox (no guard).
+          case "${DOVEL_AGENT_LOOP:-0}" in
+            1) [ "${DOVEL_AGENT_TOOLS:-0}" = 0 ] || { echo "::error::agent_loop and agent_tools are two different agents: set one"; exit 1; }
+               [ -n "${DOVEL_VALIDATION_SANDBOX_ENTRY:-}" ] || { echo "::error::the agent loop runs only in the validation sandbox, and this product has none"; exit 1; }
+               export AUTOMATED_API_AGENT_LOOP=1; echo "migration agent: the agent loop (AUTOMATED_API_AGENT_LOOP=1)";;
+            0) ;;
+            *) echo "::error::agent_loop must be 0 or 1"; exit 1;;
+          esac
           # As action.yml's flow step: the guard the step above set up and proved, for the flow to check again.
-          if [ "${#replay[@]}" -eq 0 ]; then
+          if [ "${#replay[@]}" -eq 0 ] && [ "${DOVEL_AGENT_LOOP:-0}" != 1 ]; then
             [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
             export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
           fi
@@ -248,11 +261,12 @@ jobs:
             [[ "$DOVEL_AGENT_MODEL" =~ ^[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._:-]*$ ]] || { echo "::error::agent_model is not an OpenRouter model id"; exit 1; }
             export AUTOMATED_API_HARNESS_AGENT_MODEL="$DOVEL_AGENT_MODEL"; echo "migration agent model: $DOVEL_AGENT_MODEL"
           fi
-          case "${DOVEL_AGENT_REASONING:-}" in '') ;; off|low|high|max) export AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT="$DOVEL_AGENT_REASONING"; echo "migration agent reasoning: $DOVEL_AGENT_REASONING";; *) echo "::error::agent_reasoning must be off, low, high or max"; exit 1;; esac
+          case "${DOVEL_AGENT_REASONING:-}" in '') ;; off|low|medium|high|max) export AUTOMATED_API_HARNESS_AGENT_REASONING_EFFORT="$DOVEL_AGENT_REASONING"; echo "migration agent reasoning: $DOVEL_AGENT_REASONING";; *) echo "::error::agent_reasoning must be off, low, medium, high or max"; exit 1;; esac
           unset DOVEL_AGENT_MODEL DOVEL_AGENT_REASONING
           if [ -n "${DOVEL_AGENT_LIMITS:-}" ]; then
             [[ "$DOVEL_AGENT_LIMITS" =~ ^([0-9]{1,8}),([0-9]{1,8}),([0-9]{1,4})$ ]] || { echo "::error::agent_limits must be wall-ms,tokens,turns"; exit 1; }
             export AUTOMATED_API_HARNESS_AGENT_MAX_WALL_MS="${BASH_REMATCH[1]}" AUTOMATED_API_HARNESS_AGENT_MAX_TOKENS="${BASH_REMATCH[2]}" AUTOMATED_API_HARNESS_AGENT_MAX_TURNS="${BASH_REMATCH[3]}"
+            [ "${DOVEL_AGENT_LOOP:-0}" != 1 ] || export AUTOMATED_API_AGENT_LOOP_MAX_WALL_MS="${BASH_REMATCH[1]}" AUTOMATED_API_AGENT_LOOP_MAX_STEPS="${BASH_REMATCH[3]}"
             echo "migration agent limits: wall ${BASH_REMATCH[1]} ms, tokens ${BASH_REMATCH[2]}, turns ${BASH_REMATCH[3]}"
           fi
           unset DOVEL_AGENT_LIMITS
@@ -272,8 +286,16 @@ jobs:
           echo "run-case exit $code"
           models="$(grep -m1 'models:' "$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE/flow.log" || true)"
           echo "${models:-no models: line in flow.log}"
-          [ "${#replay[@]}" -gt 0 ] || case "$models" in *"network-guarded"*) ;; *) echo "::warning::the migration agent was not the network-guarded Harness: ${models:-no models line}";; esac
+          # The run measures the agent it was asked for, or it fails (never a quiet measurement of another one).
+          if [ "${#replay[@]}" -gt 0 ]; then
+            case "$models" in *"known-good fix replayed"*) ;; *) echo "::error::the known-good fix was not replayed through the agent loop: ${models:-no models line}"; wrong_agent=1;; esac
+          elif [ "${DOVEL_AGENT_LOOP:-0}" = 1 ]; then
+            case "$models" in *"migration agent agent loop"*) ;; *) echo "::error::the migration agent was not the agent loop: ${models:-no models line}"; wrong_agent=1;; esac
+          else
+            case "$models" in *"network-guarded"*) ;; *) echo "::warning::the migration agent was not the network-guarded Harness: ${models:-no models line}";; esac
+          fi
           tail -60 "$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE/flow.log" || true
+          [ -z "${wrong_agent:-}" ] || exit 1
       - name: Keep the case's documents and log (not the checkout, not dependency trees)
         if: always()
         env:
