@@ -185,6 +185,17 @@ jobs:
             echo "guard-command=$bin/dovel-harness-egress-guard"
             echo "launcher=$bin/dovel-harness-launch"
           } >> "$GITHUB_OUTPUT"
+      # As dovel-flow/action.yml "Sandbox the validation of model-edited code": production sets it up before any
+      # repository code runs, and the migration agent's run_check is offered only with it. A product without it skips.
+      - name: Sandbox the validation of model-edited code
+        id: validation-sandbox
+        working-directory: ${{ runner.temp }}/product
+        run: |
+          set -uo pipefail
+          [ -f scripts/validation-sandbox.mjs ] || { echo "::notice::this product has no validation sandbox"; exit 0; }
+          sudo -n "$(command -v node)" scripts/validation-sandbox.mjs configure --node "$(command -v node)" || { echo "::error::validation sandbox setup failed"; exit 1; }
+          /usr/lib/dovel-validate-sandbox/bin/dovel-validate verify >/dev/null || { echo "::error::validation sandbox check failed"; exit 1; }
+          echo "entry=/usr/lib/dovel-validate-sandbox/bin/dovel-validate" >> "$GITHUB_OUTPUT"
       - name: Run the case
         # Leaves 20 minutes of the job for keeping the results.
         timeout-minutes: 275
@@ -195,6 +206,7 @@ jobs:
           PRODUCT: ${{ inputs.product }}
           DOVEL_GUARD_COMMAND: ${{ steps.harness-guard.outputs.guard-command }}
           DOVEL_GUARD_LAUNCHER: ${{ steps.harness-guard.outputs.launcher }}
+          DOVEL_VALIDATION_SANDBOX_ENTRY: ${{ steps.validation-sandbox.outputs.entry }}
           DOVEL_AGENT_TOOLS: ${{ inputs.agent_tools }}
           DOVEL_AGENT_MODEL: ${{ inputs.agent_model }}
           DOVEL_AGENT_REASONING: ${{ inputs.agent_reasoning }}
@@ -206,6 +218,9 @@ jobs:
           [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
           export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
           unset DOVEL_GUARD_COMMAND DOVEL_GUARD_LAUNCHER
+          # As action.yml's flow step: the validation sandbox the step above set up (run_check needs it).
+          if [ -n "${DOVEL_VALIDATION_SANDBOX_ENTRY:-}" ]; then export AUTOMATED_API_VALIDATION_SANDBOX="$DOVEL_VALIDATION_SANDBOX_ENTRY"; echo "validation sandbox: $DOVEL_VALIDATION_SANDBOX_ENTRY"; fi
+          unset DOVEL_VALIDATION_SANDBOX_ENTRY
           # Agent mode (product: packages/runner/src/harness.ts agentToolsFromEnvironment accepts 1 or 0 only).
           case "${DOVEL_AGENT_TOOLS:-0}" in 1) export AUTOMATED_API_HARNESS_AGENT_TOOLS=1; echo "migration agent mode: AUTOMATED_API_HARNESS_AGENT_TOOLS=1";; 0) ;; *) echo "::error::agent_tools must be 0 or 1"; exit 1;; esac
           unset DOVEL_AGENT_TOOLS
