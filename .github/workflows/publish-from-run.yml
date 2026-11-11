@@ -200,6 +200,7 @@ jobs:
         env:
           DOVEL_INPUT_GITHUB: ${{ secrets.MIRRORS_TOKEN }}
           DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          DOVEL_INPUT_ANTHROPIC: ${{ secrets.ANTHROPIC_API_KEY }}
           MIRROR: ${{ matrix.mirror }}
           CI_GATE: ${{ inputs.ci_gate }}
           MAX_CANDIDATES: ${{ inputs.max_candidates }}
@@ -209,10 +210,10 @@ jobs:
           set +e -uo pipefail
           handoff="$RUNNER_TEMP/imported/$SLUG"
           secrets="$(node -e '
-            const pairs = [["OPENROUTER_API_KEY", "DOVEL_INPUT_OPENROUTER"], ["GH_TOKEN", "DOVEL_INPUT_GITHUB"]];
+            const pairs = [["OPENROUTER_API_KEY", "DOVEL_INPUT_OPENROUTER"], ["ANTHROPIC_API_KEY", "DOVEL_INPUT_ANTHROPIC"], ["GH_TOKEN", "DOVEL_INPUT_GITHUB"]];
             process.stdout.write(JSON.stringify(Object.fromEntries(pairs.filter(([, from]) => process.env[from]).map(([to, from]) => [to, process.env[from]]))));
           ')"
-          unset DOVEL_INPUT_OPENROUTER DOVEL_INPUT_GITHUB
+          unset DOVEL_INPUT_OPENROUTER DOVEL_INPUT_ANTHROPIC DOVEL_INPUT_GITHUB
           progress=()
           if [ -f "$handoff/repository-progress.json" ]; then progress=(--progress "$handoff/repository-progress.json"); fi
           cd "$RUNNER_TEMP/product"
