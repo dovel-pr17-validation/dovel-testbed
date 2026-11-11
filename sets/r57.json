@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "darkroomengineering/satus",
+    "mirror": "dovel-pr17-validation/pr17r57-npm-satus",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "convex/better-auth",
+    "mirror": "dovel-pr17-validation-2/pr17r57-npm-better-auth",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "nestjs/throttler",
+    "mirror": "dovel-pr17-validation/pr17r57-npm-throttler",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "VictoriaMetrics/victorialogs-datasource",
+    "mirror": "dovel-pr17-validation-2/pr17r57-npm-victorialogs-datasource",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "ocoda/event-sourcing",
+    "mirror": "dovel-pr17-validation/pr17r57-npm-event-sourcing",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "paralleldrive/riteway",
+    "mirror": "dovel-pr17-validation-2/pr17r57-npm-riteway",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "swimlane/ngx-ui",
+    "mirror": "dovel-pr17-validation/pr17r57-npm-ngx-ui",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "lobehub/lobe-tts",
+    "mirror": "dovel-pr17-validation-2/pr17r57-npm-lobe-tts",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "dotenvx/dotenv-expand",
+    "mirror": "dovel-pr17-validation/pr17r57-npm-dotenv-expand",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "adafruit/circup",
+    "mirror": "dovel-pr17-validation-2/pr17r57-pypi-circup",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "opensanctions/followthemoney",
+    "mirror": "dovel-pr17-validation/pr17r57-pypi-followthemoney",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 12,
+    "source": "HumanSignal/label-studio-sdk",
+    "mirror": "dovel-pr17-validation-2/pr17r57-pypi-label-studio-sdk",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 13,
+    "source": "Juniper/junos-mcp-server",
+    "mirror": "dovel-pr17-validation/pr17r57-pypi-junos-mcp-server",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "scrapinghub/shub",
+    "mirror": "dovel-pr17-validation-2/pr17r57-pypi-shub",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 15,
+    "source": "opensanctions/yente",
+    "mirror": "dovel-pr17-validation/pr17r57-pypi-yente",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "nephila/giturlparse",
+    "mirror": "dovel-pr17-validation-2/pr17r57-pypi-giturlparse",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "ESSS/conda-devenv",
+    "mirror": "dovel-pr17-validation/pr17r57-pypi-conda-devenv",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "developmentseed/morecantile",
+    "mirror": "dovel-pr17-validation-2/pr17r57-pypi-morecantile",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "cybozu-go/sabakan",
+    "mirror": "dovel-pr17-validation/pr17r57-go-sabakan",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "mattermost/mattermost-plugin-jira",
+    "mirror": "dovel-pr17-validation-2/pr17r57-go-mattermost-plugin-jira",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "projectdiscovery/retryabledns",
+    "mirror": "dovel-pr17-validation/pr17r57-go-retryabledns",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "celestiaorg/nmt",
+    "mirror": "dovel-pr17-validation-2/pr17r57-go-nmt",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 23,
+    "source": "formancehq/numscript",
+    "mirror": "dovel-pr17-validation/pr17r57-go-numscript",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "grafana/cog",
+    "mirror": "dovel-pr17-validation-2/pr17r57-go-cog",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 25,
+    "source": "grafana/carbon-relay-ng",
+    "mirror": "dovel-pr17-validation/pr17r57-go-carbon-relay-ng",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  }
+]
