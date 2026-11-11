@@ -187,6 +187,7 @@ jobs:
         working-directory: ${{ runner.temp }}/product
         env:
           DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
+          DOVEL_INPUT_ANTHROPIC: ${{ secrets.ANTHROPIC_API_KEY }}
           DOVEL_CASE: ${{ matrix.case }}
           PRODUCT: ${{ inputs.product }}
           DOVEL_VALIDATION_SANDBOX_ENTRY: ${{ steps.validation-sandbox.outputs.entry }}
@@ -201,7 +202,7 @@ jobs:
           set -uo pipefail
           ( while sleep 60; do echo "[resources $(date -u +%H:%M:%S)] mem: $(free -m | awk 'NR==2{print $3"/"$2" MiB used, "$7" avail"}') disk: $(df -m / | awk 'NR==2{print $4" MiB free"}')"; done ) &
           # Admission: the known-good fix stands for the model's edit; no model key reaches the flow, no model is called.
-          replay=(); if [ "${DOVEL_REPLAY_FIX:-0}" = 1 ]; then replay=(--replay-fix); unset DOVEL_INPUT_OPENROUTER; echo "replaying the case's known-good fix (no model)"; fi
+          replay=(); if [ "${DOVEL_REPLAY_FIX:-0}" = 1 ]; then replay=(--replay-fix); unset DOVEL_INPUT_OPENROUTER DOVEL_INPUT_ANTHROPIC; echo "replaying the case's known-good fix (no model)"; fi
           # The migration agent loop: in Dovel's own process, its commands in the validation sandbox (no guard).
           case "${DOVEL_AGENT_LOOP:-0}" in
             1) [ "${DOVEL_AGENT_TOOLS:-0}" = 0 ] || { echo "::error::agent_loop and agent_tools are two different agents: set one"; exit 1; }
@@ -233,16 +234,18 @@ jobs:
           # Every credential-shaped variable is unset; the model key alone is left, and run-case.mjs hands it to the
           # flow over --secrets-stdin (never through the flow's environment).
           key="${DOVEL_INPUT_OPENROUTER:-}"; unset DOVEL_INPUT_OPENROUTER
+          akey="${DOVEL_INPUT_ANTHROPIC:-}"; unset DOVEL_INPUT_ANTHROPIC
           shopt -s nocasematch
           for variable in $(compgen -e); do
             if [[ "$variable" =~ (token|secret|password|credential|api[_-]?key|private[_-]?key) && "$variable" != TIKTOKEN_CACHE_DIR ]]; then unset "$variable"; fi
           done
           shopt -u nocasematch
           if [ -n "$key" ]; then export OPENROUTER_API_KEY="$key"; fi; unset key
+          if [ -n "$akey" ]; then export ANTHROPIC_API_KEY="$akey"; fi; unset akey
           export TMPDIR="$RUNNER_TEMP/dovel-tmp"; mkdir -p "$TMPDIR"
           node scripts/migration-bench/run-case.mjs "scripts/migration-bench/cases/$DOVEL_CASE.json" \
             --out "$RUNNER_TEMP/bench/run-$DOVEL_RUN" --product-sha "$PRODUCT" --ci-runner act "${replay[@]}" </dev/null && code=0 || code=$?
-          unset OPENROUTER_API_KEY
+          unset OPENROUTER_API_KEY ANTHROPIC_API_KEY
           echo "run-case exit $code"
           models="$(grep -m1 'models:' "$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE/flow.log" || true)"
           echo "${models:-no models: line in flow.log}"
