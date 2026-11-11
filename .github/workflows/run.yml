@@ -292,6 +292,17 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
           corepack pnpm build
+      # As dovel-flow/action.yml "Sandbox the validation of model-edited code": before any repository code runs. The
+      # migration agent works only in it; a product without it (or a runner where it cannot be set up) attempts no migration.
+      - name: Sandbox the validation of model-edited code
+        id: validation-sandbox
+        working-directory: ${{ runner.temp }}/product
+        run: |
+          set -uo pipefail
+          [ -f scripts/validation-sandbox.mjs ] || { echo "::notice::this product has no validation sandbox"; exit 0; }
+          sudo -n "$(command -v node)" scripts/validation-sandbox.mjs configure --node "$(command -v node)" || { echo "::warning::validation sandbox setup failed: no migration is attempted in this job"; exit 0; }
+          /usr/lib/dovel-validate-sandbox/bin/dovel-validate verify >/dev/null || { echo "::warning::validation sandbox check failed: no migration is attempted in this job"; exit 0; }
+          echo "entry=/usr/lib/dovel-validate-sandbox/bin/dovel-validate" >> "$GITHUB_OUTPUT"
       - name: Run the Dovel flow
         env:
           DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
@@ -303,9 +314,14 @@ jobs:
           CATCH_UP: ${{ inputs.catch_up }}
           SOURCE: ${{ matrix.source }}
           SECOND_CHANCE: ${{ inputs.second_chance }}
+          DOVEL_VALIDATION_SANDBOX_ENTRY: ${{ steps.validation-sandbox.outputs.entry }}
         run: |
           set -uo pipefail
           output="$RUNNER_TEMP/out"; mkdir -p "$output"
+          # As action.yml's flow step: the validation sandbox the step above set up, required by the flow (fail closed).
+          sandbox=()
+          if [ -n "${DOVEL_VALIDATION_SANDBOX_ENTRY:-}" ]; then export AUTOMATED_API_VALIDATION_SANDBOX="$DOVEL_VALIDATION_SANDBOX_ENTRY"; sandbox=(--validation-sandbox required); echo "validation sandbox: $DOVEL_VALIDATION_SANDBOX_ENTRY"; fi
+          unset DOVEL_VALIDATION_SANDBOX_ENTRY
           # The second-chance requests ride on the CI repair round's input (the flow reads <input>/second-chance/).
           second_chance=()
           if [ "$SECOND_CHANCE" = true ] && [ -d "$RUNNER_TEMP/second-chance/requests/second-chance" ]; then
@@ -333,7 +349,7 @@ jobs:
             --repository "$RUNNER_TEMP/repo" --owner "${MIRROR%%/*}" --name "${MIRROR#*/}" --max-candidates "${MAX_CANDIDATES:-3}" --catch-up "${CATCH_UP:-auto}" \
             --open-pr "$OPEN_PR" --ci-gate "$CI_GATE" --publication-out "$RUNNER_TEMP/publications" --skip-ci-verdict-sweep \
             --ci-runner "$CI_RUNNER" --ci-repository "$SOURCE" --act-cache-dir "$RUNNER_TEMP/act-cache" --act-jobs 2 --act-job-timeout-minutes 30 --job-deadline-at "$(( JOB_STARTED_AT + (330 - 15) * 60000 ))" \
-            "${second_chance[@]+"${second_chance[@]}"}" --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
+            "${second_chance[@]+"${second_chance[@]}"}" "${sandbox[@]+"${sandbox[@]}"}" --output-dir "$output" --secrets-stdin <<<"$secrets" > "$output/flow.log" 2>&1 && code=0 || code=$?
           printf '{"exitCode":%s,"source":"%s","mirror":"%s","runner":"github-hosted ubuntu-%s"}\n' "$code" "${{ matrix.source }}" "$MIRROR" "$(. /etc/os-release && echo "$VERSION_ID")" > "$output/run.json"
           tail -40 "$output/flow.log"
       - name: Keep the results (logs and receipts, not dependency trees)
