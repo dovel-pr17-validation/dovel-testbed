@@ -1,4 +1,4 @@
-name: Migration benchmark (Harness, network-guarded)
+name: Migration benchmark
 # The product's migration benchmark (docs/migration/BENCHMARK.md, template docs/migration/benchmark.workflow.yml) on
 # this public testbed: one case per job, each on its own GitHub-hosted Ubuntu 24.04 runner, then the product's
 # scorer (scripts/migration-bench/score.mjs) over all of them.
@@ -9,10 +9,8 @@ name: Migration benchmark (Harness, network-guarded)
 # job (repository code, act) holds no GitHub token, only OPENROUTER_API_KEY, handed to the flow over stdin
 # (bench/run-case-stdin.mjs). Artifacts: each case's documents and log (no product, no checkout), and the score.
 #
-# This variant (migration-bench-harness.yml; migration-bench.yml stays the one-file-fallback baseline) sets up the
-# product's network guard for the migration agent before each case, exactly as dovel-flow/action.yml's "Guard the
-# migration agent's network" step with harness-network-guard=true (the case job fails if it cannot be set up), so the
-# flow runs the DeepSeek (cordis) Harness, network-guarded, instead of the bounded single call. The case runs the
+# The migration agent is the product's agent loop (in Dovel's own process, its commands in the validation sandbox set
+# up below); the product no longer has a Harness child or its network guard. The case runs the
 # product's own scripts/migration-bench/run-case.mjs (--secrets-stdin, --product-sha) with the FULL product sha.
 on:
   workflow_dispatch:
@@ -172,38 +170,6 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do corepack pnpm install --frozen-lockfile && break; [ "$attempt" -lt 3 ] || exit 1; sleep $((attempt * 15)); done
           corepack pnpm build
-      # As dovel-flow/action.yml "Guard the migration agent's network" with harness-network-guard: 'true'.
-      - name: Guard the migration agent's network
-        id: harness-guard
-        # A replay of the known-good fix calls no model, and the agent loop holds the key in Dovel's own process (its
-        # commands run in the validation sandbox): no Harness child to guard.
-        if: inputs.replay_fix != '1' && inputs.agent_loop != '1'
-        working-directory: ${{ runner.temp }}/product
-        env:
-          DOVEL_HARNESS_NETWORK_GUARD: 'true'
-          DOVEL_HAS_DEEPSEEK: 'false'
-        run: |
-          set -uo pipefail
-          unavailable() {
-            if [ "$DOVEL_HARNESS_NETWORK_GUARD" = true ]; then
-              echo "::error::harness-network-guard is 'true' but the guard cannot be set up: $1"
-              exit 1
-            fi
-            echo "::notice::The migration agent runs without its network guard ($1): each migration is one bounded model call."
-            exit 0
-          }
-          [ "${RUNNER_OS:-}" = Linux ] || unavailable "the runner is ${RUNNER_OS:-unknown}, not Linux"
-          sudo -n true 2>/dev/null || unavailable "the runner has no passwordless sudo"
-          host="$(node scripts/harness-egress-guard.mjs host)" || unavailable "the model endpoint cannot be guarded"
-          sudo -n "$(command -v node)" scripts/harness-egress-guard.mjs configure --host "$host" --product "$PWD" \
-            || unavailable "its setup failed (see above)"
-          # Where the product installs its entry points: /usr/lib/dovel-harness-egress/bin (2a20f086 and later), /usr/local/bin before.
-          bin=/usr/lib/dovel-harness-egress/bin; [ -x "$bin/dovel-harness-egress-guard" ] || bin=/usr/local/bin
-          "$bin/dovel-harness-egress-guard" verify "$host" >/dev/null || unavailable "its check failed right after setup"
-          {
-            echo "guard-command=$bin/dovel-harness-egress-guard"
-            echo "launcher=$bin/dovel-harness-launch"
-          } >> "$GITHUB_OUTPUT"
       # As dovel-flow/action.yml "Sandbox the validation of model-edited code": production sets it up before any
       # repository code runs, and the migration agent's run_check is offered only with it. A product without it skips.
       - name: Sandbox the validation of model-edited code
@@ -223,8 +189,6 @@ jobs:
           DOVEL_INPUT_OPENROUTER: ${{ secrets.OPENROUTER_API_KEY }}
           DOVEL_CASE: ${{ matrix.case }}
           PRODUCT: ${{ inputs.product }}
-          DOVEL_GUARD_COMMAND: ${{ steps.harness-guard.outputs.guard-command }}
-          DOVEL_GUARD_LAUNCHER: ${{ steps.harness-guard.outputs.launcher }}
           DOVEL_VALIDATION_SANDBOX_ENTRY: ${{ steps.validation-sandbox.outputs.entry }}
           DOVEL_AGENT_TOOLS: ${{ inputs.agent_tools }}
           DOVEL_AGENT_LOOP: ${{ inputs.agent_loop }}
@@ -246,12 +210,6 @@ jobs:
             0) ;;
             *) echo "::error::agent_loop must be 0 or 1"; exit 1;;
           esac
-          # As action.yml's flow step: the guard the step above set up and proved, for the flow to check again.
-          if [ "${#replay[@]}" -eq 0 ] && [ "${DOVEL_AGENT_LOOP:-0}" != 1 ]; then
-            [ -n "${DOVEL_GUARD_COMMAND:-}" ] && [ -n "${DOVEL_GUARD_LAUNCHER:-}" ] || { echo "::error::no network guard: refusing to measure the bounded single call"; exit 1; }
-            export AUTOMATED_API_NETWORK_GUARD_COMMAND="$DOVEL_GUARD_COMMAND" AUTOMATED_API_HARNESS_LAUNCHER="$DOVEL_GUARD_LAUNCHER"
-          fi
-          unset DOVEL_GUARD_COMMAND DOVEL_GUARD_LAUNCHER
           # As action.yml's flow step: the validation sandbox the step above set up (run_check needs it).
           if [ -n "${DOVEL_VALIDATION_SANDBOX_ENTRY:-}" ]; then export AUTOMATED_API_VALIDATION_SANDBOX="$DOVEL_VALIDATION_SANDBOX_ENTRY"; echo "validation sandbox: $DOVEL_VALIDATION_SANDBOX_ENTRY"; fi
           unset DOVEL_VALIDATION_SANDBOX_ENTRY
@@ -293,8 +251,6 @@ jobs:
             case "$models" in *"known-good fix replayed"*) ;; *) echo "::error::the known-good fix was not replayed through the agent loop: ${models:-no models line}"; wrong_agent=1;; esac
           elif [ "${DOVEL_AGENT_LOOP:-0}" = 1 ]; then
             case "$models" in *"migration agent agent loop"*) ;; *) echo "::error::the migration agent was not the agent loop: ${models:-no models line}"; wrong_agent=1;; esac
-          else
-            case "$models" in *"network-guarded"*) ;; *) echo "::warning::the migration agent was not the network-guarded Harness: ${models:-no models line}";; esac
           fi
           tail -60 "$RUNNER_TEMP/bench/run-$DOVEL_RUN/$DOVEL_CASE/flow.log" || true
           [ -z "${wrong_agent:-}" ] || exit 1
@@ -319,14 +275,6 @@ jobs:
           path: ${{ runner.temp }}/keep
           if-no-files-found: ignore
           retention-days: 30
-      # Last: the guard's account, rules, mounts and root's copies go.
-      - name: Remove the migration agent's network guard
-        # (Products before 2a20f086 have no cleanup command: the runner is discarded with the guard on it.)
-        if: always() && steps.harness-guard.outputs.guard-command != ''
-        run: |
-          [ -x /usr/lib/dovel-harness-egress/bin/node ] || { echo "no cleanup command in this product"; exit 0; }
-          sudo -n /usr/lib/dovel-harness-egress/bin/node /usr/lib/dovel-harness-egress/harness-egress-guard.mjs cleanup \
-            || echo "::warning::the migration agent's network guard was not removed"
 
   score:
     needs: [prepare-product, case]
