@@ -1,0 +1,282 @@
+[
+  {
+    "index": 2,
+    "source": "Elindorath/eslint-plugin",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-eslint-plugin",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "latest",
+    "only": "npm:eslint-plugin-n@18.5.0",
+    "releases_before": "2026-11-08T17:40:35.000Z"
+  },
+  {
+    "index": 3,
+    "source": "trim21/userscript-metadata-webpack-plugin",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-userscript-metadata-webpack-plugin",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:eslint-plugin-unicorn@79.0.0",
+    "releases_before": "2026-11-02T18:13:37.000Z"
+  },
+  {
+    "index": 4,
+    "source": "tivac/xstate-component-tree",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-xstate-component-tree",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:eslint-plugin-unicorn@79.0.0",
+    "releases_before": "2026-11-03T19:50:26.000Z"
+  },
+  {
+    "index": 5,
+    "source": "bangumi/wiki-parser",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-wiki-parser",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:eslint-plugin-unicorn@79.0.0",
+    "releases_before": "2026-11-02T21:24:34.000Z"
+  },
+  {
+    "index": 6,
+    "source": "DavidAnson/markdownlint-cli2-action",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-markdownlint-cli2-action",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:eslint-plugin-unicorn@79.0.0",
+    "releases_before": "2026-11-03T09:03:07.000Z"
+  },
+  {
+    "index": 7,
+    "source": "keldaanCommunity/pokemonAutoChess",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-pokemonautochess",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:firebase-admin@14.5.0",
+    "releases_before": "2026-11-03T17:11:31.000Z"
+  },
+  {
+    "index": 8,
+    "source": "wireapp/wire-webapp",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-wire-webapp",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404",
+    "only": "npm:@faker-js/faker@10.6.0",
+    "releases_before": "2026-09-15T10:09:41.000Z"
+  },
+  {
+    "index": 10,
+    "source": "Praneel7015/gslawfirm",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-gslawfirm",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:@hookform/resolvers@6.0.2",
+    "releases_before": "2026-11-03T02:38:28.000Z"
+  },
+  {
+    "index": 11,
+    "source": "sensslen/Cgf.ProPresenter.NurseryMessages",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-cgf.propresenter.nurserymessages",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:i18next@27.1.0",
+    "releases_before": "2026-11-09T21:05:53.000Z"
+  },
+  {
+    "index": 12,
+    "source": "livekit/client-sdk-js",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-client-sdk-js",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:happy-dom@21.0.4",
+    "releases_before": "2026-10-28T08:06:30.000Z"
+  },
+  {
+    "index": 13,
+    "source": "StackExchange/Stacks-Editor",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-stacks-editor",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:jest-environment-jsdom@30.5.2",
+    "releases_before": "2026-11-03T16:44:03.000Z"
+  },
+  {
+    "index": 14,
+    "source": "ResilienceWeb/resilience-web",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-resilience-web",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "latest",
+    "only": "npm:msw@3.0.3",
+    "releases_before": "2026-10-26T05:40:57.000Z"
+  },
+  {
+    "index": 15,
+    "source": "tf2pickup-org/tf2pickup",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-tf2pickup",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:mongodb@7.8.0",
+    "releases_before": "2026-11-10T13:05:18.000Z"
+  },
+  {
+    "index": 16,
+    "source": "opencollective/contributors-svg",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-contributors-svg",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:lru-cache@11.5.3",
+    "releases_before": "2026-10-03T19:40:55.000Z"
+  },
+  {
+    "index": 17,
+    "source": "MattyBalaam/shorpin",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-shorpin",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:msw@3.0.3",
+    "releases_before": "2026-10-25T04:09:26.000Z"
+  },
+  {
+    "index": 18,
+    "source": "faxforagents/zapier-integration",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-zapier-integration",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:nock@15.0.5",
+    "releases_before": "2026-11-08T02:10:32.000Z"
+  },
+  {
+    "index": 20,
+    "source": "Windsland52/MaaEvidenceKit",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-maaevidencekit",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:@sentry/node@11.10.0",
+    "releases_before": "2026-10-31T17:24:07.000Z"
+  },
+  {
+    "index": 21,
+    "source": "kitware-resonant/resonant-oauth-client",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-resonant-oauth-client",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:msw@3.0.3",
+    "releases_before": "2026-10-16T02:34:19.000Z"
+  },
+  {
+    "index": 22,
+    "source": "toolforge/video2commons",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-video2commons",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:msw@3.0.3",
+    "releases_before": "2026-11-02T08:13:23.000Z"
+  },
+  {
+    "index": 24,
+    "source": "sei-protocol/seidroid",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-seidroid",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:@types/node@26.6.6",
+    "releases_before": "2026-11-09T14:45:46.000Z"
+  },
+  {
+    "index": 25,
+    "source": "xdzczk/smartflowsocial-blossom",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-smartflowsocial-blossom",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:redis@6.3.1",
+    "releases_before": "2026-11-04T13:55:43.000Z"
+  },
+  {
+    "index": 26,
+    "source": "rossvideo/st2138-tester",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-st2138-tester",
+    "branch": "dev",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:typescript@7.0.2",
+    "releases_before": "2026-11-10T16:39:46.000Z"
+  },
+  {
+    "index": 27,
+    "source": "SignalK/nmea0183-utilities",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-nmea0183-utilities",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:@types/chai@5.2.3",
+    "releases_before": "2026-10-25T15:22:50.000Z"
+  },
+  {
+    "index": 28,
+    "source": "jansierens-maker/brewbindr",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-brewbindr",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:typescript@7.0.2",
+    "releases_before": "2026-11-05T21:21:28.000Z"
+  },
+  {
+    "index": 29,
+    "source": "gesteves/isp-outage-tracker",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-isp-outage-tracker",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:typescript@7.0.2",
+    "releases_before": "2026-11-08T17:55:07.000Z"
+  },
+  {
+    "index": 30,
+    "source": "elevow/table",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-table",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:typescript@6.0.3",
+    "releases_before": "2026-11-10T04:22:06.000Z"
+  },
+  {
+    "index": 31,
+    "source": "coffeelint/coffeelint",
+    "mirror": "dovel-pr17-validation/pr17r59-npm-coffeelint",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:yargs@18.2.0",
+    "releases_before": "2026-10-12T19:53:59.000Z"
+  },
+  {
+    "index": 32,
+    "source": "tghcastro/capital-care-v2",
+    "mirror": "dovel-pr17-validation-2/pr17r59-npm-capital-care-v2",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604",
+    "only": "npm:zod@4.6.7",
+    "releases_before": "2026-11-10T14:30:09.000Z"
+  }
+]
