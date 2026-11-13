@@ -1,0 +1,194 @@
+[
+  {
+    "index": 1,
+    "source": "itchio/itch",
+    "mirror": "dovel-pr17-validation/pr17r64-npm-itch",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "livekit-examples/meet",
+    "mirror": "dovel-pr17-validation-2/pr17r64-npm-meet",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 3,
+    "source": "CloudSnorkel/cdk-github-runners",
+    "mirror": "dovel-pr17-validation/pr17r64-npm-cdk-github-runners",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "cloudamqp/amqp-client.js",
+    "mirror": "dovel-pr17-validation-2/pr17r64-npm-amqp-client.js",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "directus/rstore",
+    "mirror": "dovel-pr17-validation/pr17r64-npm-rstore",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "goreleaser/goreleaser-action",
+    "mirror": "dovel-pr17-validation-2/pr17r64-npm-goreleaser-action",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "software-mansion-labs/private-mind",
+    "mirror": "dovel-pr17-validation/pr17r64-npm-private-mind",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "posit-dev/shinylive",
+    "mirror": "dovel-pr17-validation-2/pr17r64-npm-shinylive",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "Quiet-Signals-Lab/RAG-Assistant-for-Zotero",
+    "mirror": "dovel-pr17-validation/pr17r64-pypi-rag-assistant-for-zotero",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "civai-technologies/cursor-agent",
+    "mirror": "dovel-pr17-validation-2/pr17r64-pypi-cursor-agent",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 11,
+    "source": "obdasystems/eddy",
+    "mirror": "dovel-pr17-validation/pr17r64-pypi-eddy",
+    "branch": "develop",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "facefusion/facefusion-labs",
+    "mirror": "dovel-pr17-validation-2/pr17r64-pypi-facefusion-labs",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "UnipiTechnology/evok",
+    "mirror": "dovel-pr17-validation/pr17r64-pypi-evok",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 14,
+    "source": "MerginMaps/geodiff",
+    "mirror": "dovel-pr17-validation-2/pr17r64-pypi-geodiff",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "ydb-platform/ydb-python-sdk",
+    "mirror": "dovel-pr17-validation/pr17r64-pypi-ydb-python-sdk",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "netbox-community/netbox-operator",
+    "mirror": "dovel-pr17-validation-2/pr17r64-go-netbox-operator",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "grafana/rollout-operator",
+    "mirror": "dovel-pr17-validation/pr17r64-go-rollout-operator",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "projectdiscovery/dsl",
+    "mirror": "dovel-pr17-validation-2/pr17r64-go-dsl",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "projectdiscovery/openrisk",
+    "mirror": "dovel-pr17-validation/pr17r64-go-openrisk",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "rocket-pool/smartnode",
+    "mirror": "dovel-pr17-validation-2/pr17r64-go-smartnode",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 22,
+    "source": "evenfurther/pathfinding",
+    "mirror": "dovel-pr17-validation-2/pr17r64-cargo-pathfinding",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "jstime/jstime",
+    "mirror": "dovel-pr17-validation/pr17r64-cargo-jstime",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "RedisLabsModules/redismodule-rs",
+    "mirror": "dovel-pr17-validation-2/pr17r64-cargo-redismodule-rs",
+    "branch": "master",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "uutils/findutils",
+    "mirror": "dovel-pr17-validation/pr17r64-cargo-findutils",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  }
+]

@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "langchain-ai/social-media-agent",
+    "mirror": "dovel-pr17-validation/pr17r63-npm-social-media-agent",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 2,
+    "source": "tardis-dev/tardis-node",
+    "mirror": "dovel-pr17-validation-2/pr17r63-npm-tardis-node",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 3,
+    "source": "bufbuild/protobuf-es",
+    "mirror": "dovel-pr17-validation/pr17r63-npm-protobuf-es",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 4,
+    "source": "jetkvm/cloud-api",
+    "mirror": "dovel-pr17-validation-2/pr17r63-npm-cloud-api",
+    "branch": "dev",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 5,
+    "source": "lifinance/widget",
+    "mirror": "dovel-pr17-validation/pr17r63-npm-widget",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 6,
+    "source": "lobehub/lobe-ui",
+    "mirror": "dovel-pr17-validation-2/pr17r63-npm-lobe-ui",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 7,
+    "source": "mapbox/node-pre-gyp",
+    "mirror": "dovel-pr17-validation/pr17r63-npm-node-pre-gyp",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "ava-labs/avalanchejs",
+    "mirror": "dovel-pr17-validation-2/pr17r63-npm-avalanchejs",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2604"
+  },
+  {
+    "index": 9,
+    "source": "getappmap/appmap-python",
+    "mirror": "dovel-pr17-validation/pr17r63-pypi-appmap-python",
+    "branch": "master",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 10,
+    "source": "AikidoSec/firewall-python",
+    "mirror": "dovel-pr17-validation-2/pr17r63-pypi-firewall-python",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "StackGuardian/tirith",
+    "mirror": "dovel-pr17-validation/pr17r63-pypi-tirith",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "innate-inc/innate-os",
+    "mirror": "dovel-pr17-validation-2/pr17r63-pypi-innate-os",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "mloda-ai/mloda",
+    "mirror": "dovel-pr17-validation/pr17r63-pypi-mloda",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "multiversx/mx-sdk-py-cli",
+    "mirror": "dovel-pr17-validation-2/pr17r63-pypi-mx-sdk-py-cli",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "Quansight-Labs/ndindex",
+    "mirror": "dovel-pr17-validation/pr17r63-pypi-ndindex",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2604"
+  },
+  {
+    "index": 16,
+    "source": "maxmind/mmdbwriter",
+    "mirror": "dovel-pr17-validation-2/pr17r63-go-mmdbwriter",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "grafana/smtprelay",
+    "mirror": "dovel-pr17-validation/pr17r63-go-smtprelay",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 18,
+    "source": "mattermost/mattermost-plugin-zoom",
+    "mirror": "dovel-pr17-validation-2/pr17r63-go-mattermost-plugin-zoom",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 19,
+    "source": "render-oss/render-mcp-server",
+    "mirror": "dovel-pr17-validation/pr17r63-go-render-mcp-server",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 20,
+    "source": "shpyrd-io/shpyrd",
+    "mirror": "dovel-pr17-validation-2/pr17r63-go-shpyrd",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2604"
+  },
+  {
+    "index": 21,
+    "source": "bluewave-labs/capture",
+    "mirror": "dovel-pr17-validation/pr17r63-go-capture",
+    "branch": "develop",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "ratatui/mousefood",
+    "mirror": "dovel-pr17-validation-2/pr17r63-cargo-mousefood",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  },
+  {
+    "index": 23,
+    "source": "It4innovations/hyperqueue",
+    "mirror": "dovel-pr17-validation/pr17r63-cargo-hyperqueue",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2604"
+  },
+  {
+    "index": 24,
+    "source": "nyx-space/hifitime",
+    "mirror": "dovel-pr17-validation-2/pr17r63-cargo-hifitime",
+    "branch": "master",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "ret2shell/ret2shell",
+    "mirror": "dovel-pr17-validation/pr17r63-cargo-ret2shell",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  }
+]
