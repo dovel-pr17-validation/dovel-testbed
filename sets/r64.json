@@ -160,6 +160,14 @@
     "runner": "2604"
   },
   {
+    "index": 21,
+    "source": "pingcap/kvproto",
+    "mirror": "dovel-pr17-validation/pr17r64-go-kvproto",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
     "index": 22,
     "source": "evenfurther/pathfinding",
     "mirror": "dovel-pr17-validation-2/pr17r64-cargo-pathfinding",
