@@ -121,8 +121,8 @@
   },
   {
     "index": 16,
-    "source": "getarcaneapp/arcane",
-    "mirror": "dovel-pr17-validation-2/pr17r65-go-arcane",
+    "source": "HuskerMinion/techo5",
+    "mirror": "dovel-pr17-validation-2/pr17r65-go-techo5",
     "branch": "main",
     "ecosystem": "go",
     "runner": "2404"
