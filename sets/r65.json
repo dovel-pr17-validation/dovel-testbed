@@ -1,0 +1,202 @@
+[
+  {
+    "index": 1,
+    "source": "google-labs-code/stitch-skills",
+    "mirror": "dovel-pr17-validation/pr17r65-npm-stitch-skills",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 2,
+    "source": "ChromeDevTools/chrome-devtools-mcp",
+    "mirror": "dovel-pr17-validation-2/pr17r65-npm-chrome-devtools-mcp",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 3,
+    "source": "motion-canvas/motion-canvas",
+    "mirror": "dovel-pr17-validation/pr17r65-npm-motion-canvas",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 4,
+    "source": "GoogleChrome/modern-web-guidance-src",
+    "mirror": "dovel-pr17-validation-2/pr17r65-npm-modern-web-guidance-src",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 5,
+    "source": "s0ld13rr/pentestcode",
+    "mirror": "dovel-pr17-validation/pr17r65-npm-pentestcode",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 6,
+    "source": "elie222/rakazo",
+    "mirror": "dovel-pr17-validation-2/pr17r65-npm-rakazo",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 7,
+    "source": "nestjs/nest",
+    "mirror": "dovel-pr17-validation/pr17r65-npm-nest",
+    "branch": "master",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 8,
+    "source": "angular/angular",
+    "mirror": "dovel-pr17-validation-2/pr17r65-npm-angular",
+    "branch": "main",
+    "ecosystem": "npm",
+    "runner": "2404"
+  },
+  {
+    "index": 9,
+    "source": "mvanhorn/last30days-skill",
+    "mirror": "dovel-pr17-validation/pr17r65-pypi-last30days-skill",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 10,
+    "source": "NVIDIA/SkillEvaluator",
+    "mirror": "dovel-pr17-validation-2/pr17r65-pypi-SkillEvaluator",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 11,
+    "source": "openai/whisper",
+    "mirror": "dovel-pr17-validation/pr17r65-pypi-whisper",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 12,
+    "source": "davila7/claude-code-templates",
+    "mirror": "dovel-pr17-validation-2/pr17r65-pypi-claude-code-templates",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 13,
+    "source": "ifixai-ai/iFixAi",
+    "mirror": "dovel-pr17-validation/pr17r65-pypi-iFixAi",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 14,
+    "source": "vstorm-co/agenticos",
+    "mirror": "dovel-pr17-validation-2/pr17r65-pypi-agenticos",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 15,
+    "source": "HKUDS/Vibe-Trading",
+    "mirror": "dovel-pr17-validation/pr17r65-pypi-Vibe-Trading",
+    "branch": "main",
+    "ecosystem": "pypi",
+    "runner": "2404"
+  },
+  {
+    "index": 16,
+    "source": "getarcaneapp/arcane",
+    "mirror": "dovel-pr17-validation-2/pr17r65-go-arcane",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 17,
+    "source": "alibaba/open-code-review",
+    "mirror": "dovel-pr17-validation/pr17r65-go-open-code-review",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 18,
+    "source": "Asymptote-Labs/agent-beacon",
+    "mirror": "dovel-pr17-validation-2/pr17r65-go-agent-beacon",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 19,
+    "source": "kubescape/kubescape",
+    "mirror": "dovel-pr17-validation/pr17r65-go-kubescape",
+    "branch": "master",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 20,
+    "source": "agent-substrate/substrate",
+    "mirror": "dovel-pr17-validation-2/pr17r65-go-substrate",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 21,
+    "source": "docker/compose",
+    "mirror": "dovel-pr17-validation/pr17r65-go-compose",
+    "branch": "main",
+    "ecosystem": "go",
+    "runner": "2404"
+  },
+  {
+    "index": 22,
+    "source": "ModernRelay/omnigraph",
+    "mirror": "dovel-pr17-validation-2/pr17r65-cargo-omnigraph",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 23,
+    "source": "lance-format/lance",
+    "mirror": "dovel-pr17-validation/pr17r65-cargo-lance",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 24,
+    "source": "martin-olivier/airgorah",
+    "mirror": "dovel-pr17-validation-2/pr17r65-cargo-airgorah",
+    "branch": "main",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  },
+  {
+    "index": 25,
+    "source": "sharkdp/bat",
+    "mirror": "dovel-pr17-validation/pr17r65-cargo-bat",
+    "branch": "master",
+    "ecosystem": "cargo",
+    "runner": "2404"
+  }
+]
