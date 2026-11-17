@@ -10,7 +10,7 @@
   {
     "index": 2,
     "source": "ChromeDevTools/chrome-devtools-mcp",
-    "mirror": "dovel-pr17-validation-2/pr17r65-npm-chrome-devtools-mcp",
+    "mirror": "dovel-pr17-validation/pr17r65-npm-chrome-devtools-mcp",
     "branch": "main",
     "ecosystem": "npm",
     "runner": "2404"
@@ -26,7 +26,7 @@
   {
     "index": 4,
     "source": "GoogleChrome/modern-web-guidance-src",
-    "mirror": "dovel-pr17-validation-2/pr17r65-npm-modern-web-guidance-src",
+    "mirror": "dovel-pr17-validation/pr17r65-npm-modern-web-guidance-src",
     "branch": "main",
     "ecosystem": "npm",
     "runner": "2404"
@@ -90,7 +90,7 @@
   {
     "index": 12,
     "source": "davila7/claude-code-templates",
-    "mirror": "dovel-pr17-validation-2/pr17r65-pypi-claude-code-templates",
+    "mirror": "dovel-pr17-validation/pr17r65-pypi-claude-code-templates",
     "branch": "main",
     "ecosystem": "pypi",
     "runner": "2404"
@@ -122,7 +122,7 @@
   {
     "index": 16,
     "source": "HuskerMinion/techo5",
-    "mirror": "dovel-pr17-validation-2/pr17r65-go-techo5",
+    "mirror": "dovel-pr17-validation/pr17r65-go-techo5",
     "branch": "main",
     "ecosystem": "go",
     "runner": "2404"
@@ -138,7 +138,7 @@
   {
     "index": 18,
     "source": "Asymptote-Labs/agent-beacon",
-    "mirror": "dovel-pr17-validation-2/pr17r65-go-agent-beacon",
+    "mirror": "dovel-pr17-validation/pr17r65-go-agent-beacon",
     "branch": "main",
     "ecosystem": "go",
     "runner": "2404"
@@ -154,7 +154,7 @@
   {
     "index": 20,
     "source": "agent-substrate/substrate",
-    "mirror": "dovel-pr17-validation-2/pr17r65-go-substrate",
+    "mirror": "dovel-pr17-validation/pr17r65-go-substrate",
     "branch": "main",
     "ecosystem": "go",
     "runner": "2404"
